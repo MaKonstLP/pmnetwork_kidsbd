@@ -3,21 +3,27 @@ footer{
     border-top: 1px solid rgba(176,176,176, .25);
     position: relative;
     z-index: 10;
-    margin: 0px 35px;
 
     @include for-pad{
-        margin: 0px 30px;
+        
     }
 
     @include for-mobile{
-        margin: 0px 15px;
+        
     }
 
     .footer_wrap{
         padding: 30px 0px;
+        padding-top: 19px;
+        background: radial-gradient(110.28% 287.99% at -3.85% 0%, #3D9CC5 0%, #192A68 100%), linear-gradient(101.68deg, #FF372F -6.81%, #883186 101.8%), #29EDB2;
 
+        @include for-pad{
+            height: 85px;
+            padding-top: 2px;
+        }
         @include for-mobile{
-            padding: 20px 0px;
+            padding-top: 10px;
+            padding-bottom: 25px;
         }
 
         .footer_row{
@@ -30,36 +36,78 @@ footer{
 
             .footer_block{
 
+
+
+                .for_form_footer{
+
+                    &:before{
+                        content: url("/images/confetti.svg")
+                    }
+                }
+
                 &._left{
                     display: flex;
-                    align-items: center;                  
+                    align-items: center;
+
+                    @include for-mobile{
+                        padding-right: 7px;
+                    }                  
                 }
 
                 &._right{
                     display: flex;
                     flex-direction: column;
-                    align-items: flex-end;
+                    align-items: flex-start;
+                    margin-right: 39px;
+                    margin-top: 6px;
+
+                    @include for-pad{
+                    margin-right: 13px;
+                    margin-top: 14px;
+                    }
 
                     @include for-mobile{
                         align-items: center;
-                        margin-bottom: 20px;
+                        margin-bottom: 10px;
                     }
                 }
 
                 .footer_logo{
-                    margin-right: 22px;
+                    margin-right: 36px;
+                    display: flex;
+
+                    @include for-pad{
+                            margin-right: 19px;
+                    }
+
+                    .logo_text{
+                    font-size: 29px;
+                    line-height: 21px;
+
+                    @include for-pad{
+                        line-height: 22px;
+                    }
+                    }
+
+
 
                     @include for-mobile{
                         display: none;
                     }
 
                     .footer_logo_img{
-                        width: 135px;
-                        height: 57px;
-                        background-image: url(/img/svadba_logo.svg);
+                        width: 50px;
+                        height: 50px;
+                        background-image: url(/images/logo_img.svg);
                         background-size: contain;
                         filter: hue-rotate(0deg);
                         transition: filter 0.2s ease;
+                        margin-left: 31px;
+                        margin-right: 2px;
+
+                        @include for-pad{
+                            margin-left: 8px;
+                        }
                     }
                     &:hover .footer_logo_img{
                         filter: hue-rotate(25deg);
@@ -67,9 +115,36 @@ footer{
                 }
 
                 .footer_info{
-                    font-size: 12px;
-                    font-size: 500;
-                    line-height: 15px;
+                    padding-top: 4px;
+
+                    @include for-pad{
+                    }
+
+                	.footer_copy{
+                    font-family: Lato;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 12px;
+					line-height: 14px;
+					color: #D2FCFF;
+
+                    @include for-mobile{
+                        line-height: 14px;
+                    }
+					}
+
+					.footer_pc{
+
+						
+							font-family: Lato;
+							font-style: normal;
+							font-weight: normal;
+							font-size: 12px;
+							line-height: 20px;
+							color: #FFFFFF;
+							border-bottom: 1px solid #FFFFFF30;
+						
+					}
 
                     @include for-mobile{
                         text-align: center;
@@ -78,15 +153,34 @@ footer{
 
                 .footer_phone{                       
                     padding: 0px 0px 0px 25px;
-                    background-image: url(/img/phone_icon.svg);
                     background-position: 0px 50%;
                     background-repeat: no-repeat;
-                    margin-bottom: 6px;
+                    margin-bottom: 3px;
+
+                    @include for-pad{
+                  
+                    padding-left: 10px;
+                    }
+
+                    @include for-mobile{
+                    padding: 1px 0 0 38px;
+                    margin-bottom: 4px;
+                    }
 
                     p{
-                        font-weight: 600;
-                        font-size: 24px;
-                        line-height: 29px;
+                        font-family: Lato;
+						font-style: normal;
+						font-weight: bold;
+						font-size: 24px;
+						line-height: 32px;
+						text-align: right;
+						color: #D2FCFF;
+
+                        @include for-pad{
+
+                        font-size: 20px;
+                        line-height: 24px;
+                        }
 
                         @include for-mobile{
                             font-size: 20px;
@@ -96,35 +190,79 @@ footer{
                 }
 
                 .footer_phone_button{
-                    text-align: right;
-                    margin-top: -2px;
-                    width: fit-content;
-                    cursor: pointer;
-                    padding: 0px 0px 0px 30px;
-                    position: relative;
+                    font-family: Lato;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 16px;
+					line-height: 24px;
+					color: #FFFFFF;
+                    margin-left: 44px;
+                    display: flex;
 
-                    &:after,
-                    &:before{
-                        content: '';
-                        position: absolute;
-                        top: 4px;
-                        left: 0px;
-                        width: 17px;
-                        height: 17px;
-                        border: 2px solid $clrPagination;
-                        border-radius: 50%;
+                    @include for-pad{
+                        margin: 0;
+                    }
+                    @include for-mobile{
+                        margin-left: 42px;
                     }
 
-                    &:before{
-                        left: 9px;
+                    .confetti{
+                    width: 24px;
+                    height: 24px;
+                    margin-top: 0px;
+                    margin-right: 7px;
+
+                    @include for-pad{
+                        margin-right: 4px;  
+                    }
+                    @include for-mobile{
+                        margin-right: 3px;
+                    }
                     }
 
+                    
+                    // &:before{
+                    //     content: url("/images/confetti.svg");
+                    //     top: 4px;
+                    //     left: 0px;
+                    //     width: 24px;
+                    //     height: 24px;
+                    //     margin-right: 4px;
+                    // }
+
+                    // &:before{
+                    //     left: 9px;
+                    // }
+                    ._link{
+                        border-bottom: 1px dashed #ffffff50;
+
+                        @include for-mobile{
+                        border: none;
+                        }
+                    }
                     & > p{
                         display: inline;
                         text-align: right;
-                        line-height: 25px;
-                        font-size: 14px;
+                        line-height: 23px;
+                        font-size: 16px;
                         font-weight: 500;
+
+                        @include for-mobile{
+                        line-height: 20px;
+                        font-size: 14px;
+
+                            &::after {
+                              content: '';
+                              position: absolute;
+                              bottom: 77px;
+                              left: 29px;
+                              right: 0;
+                              height: 1px;
+                              border-bottom: 1px dashed #ffffff50;
+                              width: 125px;
+                              margin: auto;
+                            }
+                        }
                     }
                 }
             }

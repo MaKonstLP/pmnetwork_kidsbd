@@ -9,8 +9,8 @@ export default class Main{
 
 		$('body').on('click', '[data-open-popup-form]', function(){
 			$('.popup_wrap').addClass('_active');
-			ym(64598434,'reachGoal','header_button');
-			gtag('event', 'header_button');
+			//ym(64598434,'reachGoal','header_button');
+			//gtag('event', 'header_button');
 		});
 
 		$('body').on('click', '[data-close-popup]', function(){
@@ -20,7 +20,42 @@ export default class Main{
 		$('.header_burger').on('click', function(){
 			$('.header_menu').toggleClass('_active');
 			$('.header_burger').toggleClass('_active');
+			// $('.city_mobile').toggleClass('_active');
 		});
+
+		$('body').on('click', '.city', function(){
+			
+			let cityList = $('.city_select_search_wrapper._hide')[0];
+			
+			if(cityList!=undefined){
+				
+				$('.city_select_search_wrapper').removeClass('_hide');
+				$('[data-city-dropdown]').addClass('_active');
+				$('.header_menu').toggleClass('_active');
+				$('.header_burger').toggleClass('_active');
+			}
+			else {
+				
+				$('.city_select_search_wrapper').addClass('_hide');
+				$('[data-city-dropdown]').removeClass('_active');
+			}
+		});
+
+		$('.back_to_header_menu').on('click', function(){
+			$('.city_select_search_wrapper').addClass('_hide');
+			$('[data-city-dropdown]').removeClass('_active');
+			$('.header_menu').toggleClass('_active');
+			$('.header_burger').toggleClass('_active');
+
+		});
+
+	$(document).on('click', function(e) {
+  if (!$(e.target).closest(".city_select_wrapper").length && !$(e.target).closest(".city").length) {
+    $('.city_select_search_wrapper').addClass('_hide'); // скрываем его
+	$('[data-city-dropdown]').removeClass('_active');
+  }
+  e.stopPropagation();
+});
 
 	}
 }

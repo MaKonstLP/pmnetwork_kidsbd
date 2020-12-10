@@ -1,97 +1,184 @@
 <div data-page-type="item">
 
-    <div class="content_block" data-listing-title>
-        {{ this.render('//components/generic/item_title.twig', {'seo':seo}) | raw }}
-    </div>
-
     <div class="content_block" data-page-type="item">
         <div class="object_head">
-
-            <div class="object_meta">
-                <div class="object_meta_item">
-                    <p class="object_meta_title">Банкетное меню</p>
-                    <p class="object_meta_value">от <span class="rur">{{item.price}} <span class="norur">руб.</span></span></p>
-                </div>
-                <div class="object_meta_block">
-                    <div class="object_meta_item">
-                        <p class="object_meta_title">Вместимость на банкет:</p>
-                        <p class="object_meta_value">до <span>{{item.capacity}} персон</span></p>
-                    </div>
-
-                    {% if item.capacity_reception %}
-                        <div class="object_meta_item">
-                            <p class="object_meta_title">на фуршет:</p>
-                            <p class="object_meta_value">до <span>{{item.capacity_reception}} персон</span></p>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
 
             <div class="object_gallery" data-gallery data-id="{{item.id}}">
                 <div class="swiper-container item_top_slider">
                     <div class="swiper-wrapper">
                         {% for image in item.images %}
                             <div class="swiper-slide">
-                                <a href="{{image.waterpath}}=s0" data-lightbox="top_slider"><img src="{{image.subpath}}=w710-h472-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}"/></a>
+                                <a href="{{image.waterpath}}=s0" data-lightbox="top_slider"><img src="{{image.subpath}}=w956-h546-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" id="first_img" /></a>
                             </div>
                         {% endfor %}
                     </div>
+                    
                     <div class="swiper-button-next swiper-button-white"></div>
+                    
                     <div class="swiper-button-prev swiper-button-white"></div>
+
                 </div>
+                <div class="swiper-pagination"></div>
                 <div class="swiper-container item_thumb_slider">
                     <div class="swiper-wrapper">
-                        {% for image in item.images %}
+                     
+                        {% if item.images[0] %}
                             <div class="swiper-slide object_thumb">
-                                <img src="{{image.subpath}}=w138-h92-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}"/>
+                                <img src="{{item.images[0].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}"/>
                             </div>
-                        {% endfor %}
+                        {% endif %}
+                        {% if item.images[1] %}
+                            <div class="swiper-slide object_thumb">
+                                <img src="{{item.images[1].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}"/>
+                            </div>
+                        {% endif %}
+                        {% if item.images[2] %}
+                            <div class="swiper-slide object_thumb">
+                                <img src="{{item.images[2].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}"/>
+                            </div>
+                        {% endif %}
+                        {% if item.images[3] %}
+                            <div class="swiper-slide object_thumb">
+                                <img src="{{item.images[3].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}"/>
+                            </div>
+                        {% endif %}
+                        
                     </div>
                 </div>
+                <div class="see_all_foto">
+                   {% if item.images %}<a href="{{item.images[0].waterpath}}" data-lightbox="top_slider"><p>Посмотреть фотографии</p></a>{% endif %}
+                </div>
             </div>
+    </div>
+    </div>   
+    <div class="see_all_foto _mobile">
+                   {% if item.images %}<a href="{{item.images[0].waterpath}}" data-lightbox="top_slider"><p>Посмотреть фотографии</p></a>{% endif %}
+    </div>     
+  <div class="content_block _item_title" data-listing-title>
+        {{ this.render('//components/generic/item_title.twig', {'seo':seo}) | raw }}
+    </div>
+<div class="content_block _item">
+        <div class="object_head _forMobile">
 
-            <div class="object_book">
-                <p class="object_book_text">Узнать об актуальных акциях и забронировать можно по телефону:</p>
+            <div class="object_meta">
+                <div class="object_meta_item">
+                    <p class="object_meta_title">Банкетное меню:</p>
+                    <p class="object_meta_value">от <span class="rur">{{item.price}} <span class="norur">руб.</span></span></p>
+                </div>
+                <div class="object_meta_block">
+                    <div class="object_meta_item _item_marg">
+                        <p class="object_meta_title">Вместимость на банкет:</p>
+                        <p class="object_meta_value">до <span>{{item.capacity}} персон</span></p>
+                    </div>
+
+                    {% if item.capacity_reception %}
+                        <div class="object_meta_item _furshet">
+                            <p class="object_meta_title">на фуршет:</p>
+                            <p class="object_meta_value">до <span>{{item.capacity_reception}} персон</span></p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="object_book">
+                <p class="object_book_text">Телефон</p>
                 <div class="object_book_hidden">
                     <p class="object_book_phone">
-                        <span class="object_fake_phone">+7 xxx xxx-xx-xx</span>
+                        <span class="object_fake_phone">+7 (xxx) xxx-xx-xx</span>
                         <a href="tel:{{item.restaurant_phone}}" class="object_real_phone">{{item.restaurant_phone}}</a>
                     </p>
-                    <div class="object_book_hidden_button" data-action="show_phone" data-commission="{{item.restaurant_commission}}">Показать номер</div>
+                    <div class="object_book_hidden_button" data-action="show_phone" data-commission="{{item.restaurant_commission}}">Показать телефон</div>
                 </div>
-                {% if item.restaurant_commission %}
+                <!-- {% if item.restaurant_commission %}
                     <p class="object_book_action">Забронируй {{item.name}} и получи приятный подарок!</p>
-                {% endif %}
-                <div class="object_book_button _button" data-book-button>Оставить заявку на зал</div>
+                {% endif %} -->
+                <!-- <div class="object_book_button _button" data-book-button>Оставить заявку на зал</div> -->
             </div>
+            </div>
+            <div class="item_description">
+                {% if item.description != "" %}
+            <p>{{item.description  }}</p>
+            <button>Подробнее о площадке</button>
+            {% endif %}
+            <p id="mobile_but_all">Понтон на воде 400 м² с белым шатром 260 м². Вмещает до 180 постояльцев банкетной рассадкой. На территории понтона размещаются 2 маленькие веранды, которые уже входят в стоимость аренды, а на свободных от шатра углах устроилась мягкая мебель. Шатер оборудован барной стойкой со светодиодной подсветкой, необходимым для вечернего освещения количеством люстр, а на каждой стальной дуге вывешены световые 
+а на свободных от шатра углах устроилась мягкая мебель. Шатер оборудован барной стойкой со светодиодной подсветкой, необходимым для вечернего освещения количеством люстр, а на каждой стальной дуге вывешены световые «Пары фоновом режиме.</p>
+            <button class="mobile_button_text" id="butt_on">Подробнее о площадке</button>
+            <div class="mobil_but_off" id="butt_off"><span>Скрыть текст</span></div>
+            </div>
+        </div>
+    </div>
+          <div class="map_contein">
+                <div class="map" id="map_on">
+                    <div id="map" data-mapDotX="{{item.restaurant_latitude}}" data-mapDotY="{{item.restaurant_longitude}}" data-balloon="{{seo.address}}" data-hint="{{seo.h1}}">
 
-            <div class="object_parameters">
+                    </div>
+                </div>
+            </div>   
+<div class="content_block _item">
+        <div class="object_head _forMobileHide">
+            <label for="button_see_all"><span>Показать полностью</span></label>
+            <input type="checkbox" id="button_see_all">
+            <div class="object_parameters" id="open_for_mobile">
+               <div class="object_block"> 
+                <div class="object_parameters_list ">
+                    <p class="object_parameters_title">Тип ресторана</p>
 
-                {% if item.restaurant_own_alcohol != 'Нельзя свой алкоголь' or item.restaurant_firework %}
-                    <div class="object_parameters_list _marked">
-                        <p class="object_parameters_title">Разрешены</p>
+                    {% if item.type_name %}
+                        <p class="object_parameters_item">{{item.type_name}} кухня</p>
+                    {% endif %}
+                </div>
 
-                        {% if item.restaurant_own_alcohol != 'Нельзя свой алкоголь' %}
+                <div class="object_parameters_list ">
+                    <p class="object_parameters_title">Расположение</p>
+
+                    
+                        <p class="object_parameters_item">За городом</p>
+                    
+                </div>
+
+                <div class="object_parameters_list _marked">
+                    <p class="object_parameters_title ">Алкоголь</p>
+
+                         {% if item.restaurant_own_alcohol != 'Нельзя свой алкоголь' %}
                             <p class="object_parameters_item">{{item.restaurant_own_alcohol}}</p>
                         {% endif %}
+                        {% if item.restaurant_alcohol == 1 %}
+                            <p class="object_parameters_item">В наличии</p>
+                        {% endif %}
 
+
+                </div>
+                    <div class="object_parameters_list _marked">
+                        <p class="object_parameters_title">За дополнительную плату</p>
+                        <div class="parametrs">
                         {% if item.restaurant_firework %}
                             <p class="object_parameters_item">Запуск фейерверка</p>
                         {% endif %}
+                        {% set array = item.restaurant_extra_services|split(',') %} 
+                            {% for element in array %}
+                                <p class="object_parameters_item" id="extra_services_ notarray">{{ element }}</p> 
+                            {% endfor %}
 
-                        {% if item.restaurant_payment %}
+                   <!--      {% if item.restaurant_payment %}
                             <div class="object_parameters_list _mobile">
                                 <p class="object_parameters_title">Оплата</p>
                                 <p class="object_parameters_item">{{item.restaurant_payment}}</p>
                             </div>
-                        {% endif %}
+                        {% endif %} -->
+                    </div>
+                    </div>
+                </div>               
+                <div class="object_block">
+                    <div class="object_parameters_list">
 
+                    {% if item.restaurant_payment %}
+                    <div class="object_parameters_list _bottom">
+                        <p class="object_parameters_title">Оплата</p>
+                        <p class="object_parameters_item">{{item.restaurant_payment}}</p>
                     </div>
                 {% endif %}
-
                 <div class="object_parameters_list _marked">
-                    <p class="object_parameters_title">Что на территории</p>
-
+                    
+                    <p class="object_parameters_title">Особенности</p>
+                    <div class="parametrs _right">
                     {% if item.restaurant_cuisine %}
                         <p class="object_parameters_item">{{item.restaurant_cuisine}} кухня</p>
                     {% endif %}
@@ -103,42 +190,29 @@
                             <p class="object_parameters_item">{{special}}</p>
                         {% endfor %}
                     {% endif %}
-                </div>
-
-                {% if item.restaurant_payment %}
-                    <div class="object_parameters_list" data-mobile-hide>
-                        <p class="object_parameters_title">Оплата</p>
-                        <p class="object_parameters_item">{{item.restaurant_payment}}</p>
                     </div>
-                {% endif %}
+                </div>
+                </div>    
+                
                 
             </div>
 
         </div>
-    </div>
-
-    <div class="map">
-        <div id="map" data-mapDotX="{{item.restaurant_latitude}}" data-mapDotY="{{item.restaurant_longitude}}" data-balloon="{{seo.address}}" data-hint="{{seo.h1}}">
-
-        </div>
-    </div>
-
-    <div class="content_block">
-
-        {% if item.description != '' %}
-            <div class="object_description">
-                {{item.description}}
-            </div>
-        {% endif %}
-
-        {{ this.render('//components/generic/form.twig', {'type' : 'item'}) | raw }}
 
     </div>
 
+<div class="item_other_rooms">
+    <div class="object_gallery">
     {{ this.render('//components/generic/other_widjet.twig', {'items':other_rooms, 'restaurant_name':item.restaurant_name}) | raw }}
-
-    {{ this.render('//components/generic/similar_rooms.twig', {'items':similar_rooms}) | raw }}
-
+    </div>
 </div>
-
-<script defer src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<div class="content_block _item_form">
+    {{ this.render('//components/generic/form.twig', {'type' : 'item'}) | raw }}
+    </div>
+<div class="item_similar_rooms">
+    {{ this.render('//components/generic/similar_rooms.twig', {'items':similar_rooms}) | raw }}
+</div>
+<div class="item_callback">
+    {{ this.render('//components/generic/callback.twig', {'type' : 'item'}) | raw }}
+</div>
+</div>

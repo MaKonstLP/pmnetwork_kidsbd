@@ -2,9 +2,143 @@
 	width: 100%;
 	height: 500px;
 	margin: 40px 0px 60px;
+	display: none;
+
+	&.active{
+		display: block;
+	}
 
 	#map{
 		width: 100%;
 		height: 100%;
 	}
+}
+.balloon_wrapper{
+	background: #ffffff;
+    width: 398px;
+    height: 136px;
+    padding: 16px 16px 24px 16px;
+    margin-left: 329px;
+
+    @include for-mobile{
+    	margin-left: 0px;
+		width: 100%;
+  	    height: auto;
+    }
+
+
+
+    img{
+    	width: 126px;
+    	height: 96px;
+    }
+    .balloon_link{
+    	display: none;
+    }
+    .balloon_content{
+    	display: flex;
+    	justify-content: space-between;
+    	flex-flow:row;
+
+    	@include for-mobile{
+    		flex-flow:column;
+    	}
+        a{
+
+    	@include for-mobile{
+    		margin: auto;
+    		}	
+    	}
+
+    	.balloon_text{
+    		width: 60.754%;
+
+    		@include for-mobile{
+    			width: 76%;
+    			margin: auto;
+    		}
+    	}
+
+    	.balloon_header{
+    		font-family: Lato;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 14px;
+			line-height: 20px;
+			color: #2C3044;
+
+    	}
+    	.balloon_address{
+    		font-family: Lato;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 12px;
+			line-height: 18px;
+			color: #797C88;
+
+    	}
+    }
+    .close{
+    	width: 24px;
+    	height: 24px;
+    	position: absolute;
+    	top: 4px;
+    	left: 700px;
+    	img{
+    		width: 100%;
+    		height: auto;
+    	}
+    }
+
+    &:before{
+    	content: url("/images/Polygon_map.svg");
+    	position: absolute;
+   		top: -14px;
+   		left: 344px;
+    }
+}
+    .ymaps-2-1-77-b-cluster-content{
+
+    	.balloon_wrapper{
+    		margin-left: 0;
+    	}
+
+    	._all{
+    		display: none;
+    	}
+    }
+.ymaps-2-1-77-islets_balloon_layout_panel{
+
+	@include for-mobile{
+		width: 288px;
+	    top: -403px;
+	    height: 200px;
+	    margin: auto;
+	}
+}
+.ymaps-2-1-77-gototech{
+
+	@include for-mobile{
+		position: absolute;
+	    top: 183px;
+	    left: 0;
+	}
+}
+.ymaps-2-1-77-copyright__link{
+
+	@include for-mobile{
+		display: none;
+	}
+}
+.ymaps-2-1-77-gotoymaps{
+
+	@include for-mobile{
+		margin-top: 206px;
+	}
+}
+.balloon_single_address{
+
+    .balloon_wrapper{
+        margin-left: 0;
+    }
 }

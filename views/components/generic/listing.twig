@@ -1,42 +1,148 @@
+{% set i = 0 %}
 {% for item in items %}
-	<a href="/catalog/{{item.id}}/" class="item swiper-slide {{type}}">
-        <div class="item_img">
-            <img src="{{item.images[0].subpath}}" loading="lazy" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name}) | replace({"**room_name**" : item.name}) }}"/>
-            {% if item.images[1] %}
-                <img class="item_img_subimg" loading="lazy" src="{{item.images[1].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/>
-            {% endif %}
+
+<div class="swiper-slide">
+
+<!-- Новая верстка -->
+
+<div class="item-block" id="{{item.id}}"> 
+
+    <div class="carusel">
+    <div class="img_conteiner">
+        <div class="price-position">        
+            <div class="price">
+             {% if item.price %}
+                            <div class="item_meta_item">
+                                <span class="item_meta_text">от <span class="rur">{{item.price}} <span class="norur">руб.</span></span>/чел.</span>
+                            </div>
+                            <div class="vector_price">
+                            </div>
+
+             {% endif %}
+         </div>
         </div>
-        <div class="item_info">
-            <div class="item_info_top">
-                <p class="item_name">{{item.name}}</p>
+    
+       
 
-                {% if type != 'other' %}
-                    <p class="item_parent_name">{{item.restaurant_name}}</p>
-                    <p class="item_address">{{item.restaurant_address}}</p>
-                {% endif %}
-                    
-                <div class="item_meta">
 
-                    {% if item.price %}
-                        <div class="item_meta_item">
-                            <span class="item_meta_label">Стоимость: </span><span class="item_meta_text">от <span class="rur">{{item.price}} <span class="norur">руб.</span></span>/чел.</span>
-                        </div>
-                    {% endif %}
-
-                    {% if item.capacity %}
-                        <div class="item_meta_item">
-                            <span class="item_meta_label">Вместимость: </span><span class="item_meta_text">{{item.capacity}} чел.</span>
-                        </div>
-                    {% endif %}
+  {% if type != 'other' %}
+    <div class="object_gallery">
+                  <div class="items_list_listing swiper-container listing_slider" data-listing-wrapper>
+                <div class="items_list swiper-wrapper listing_slider" data-listing-list>
+                            {% if item.images[0] %}
+                            <div class="swiper-slide">
+                              <a href="/catalog/{{item.id}}/" class="item-img">  <img src="{{item.images[0].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on" data-images /></a>
+                            </div>
+                            {% endif %}
+                            {% if item.images[1] %}
+                            <div class="swiper-slide">
+                                <a href="/catalog/{{item.id}}/" class="item-img"><img src="{{item.images[1].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on"/></a>
+                            </div>
+                            {% endif %}
+                            {% if item.images[2] %}
+                            <div class="swiper-slide">
+                               <a href="/catalog/{{item.id}}/" class="item-img"> <img src="{{item.images[2].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on"/></a>
+                            </div>
+                            {% endif %}
                 </div>
+                <div class="listing_widget_controll _listing">
+                    <div class="listing_widget_arrow  _listing_prev"></div>
+                    <div class="listing_widget_arrow  _listing_next"></div>
+                </div>                  
             </div>
-        </div>
-        <div class="item_flags">
-            {% if item.restaurant_commission == 2 %}
-                <div class="item_flag _gift">
-                    <p>Подарок за бронирование</p>
-                </div>
+          </div>
+
+      {% else %}
+              <div class="photo_items">
+         <a href="/catalog/{{item.id}}/" class="item-img"> <img src="{{item.images[0].subpath}}" class="block tab" loading="lazy" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name}) | replace({"**room_name**" : item.name}) }}" /></a>
+         
+            {% if item.images[1] %}
+                <a href="/catalog/{{item.id}}/" class="item-img"><img class="item_img_subimg tab" loading="lazy" src="{{item.images[1].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/></a>
             {% endif %}
+            {% if item.images[2] %}
+                <a href="/catalog/{{item.id}}/" class="item-img"><img class="item_img_subimg tab" loading="lazy" src="{{item.images[2].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/></a>
+            {% endif %}
+            </div>
+
+{% endif %}
+
+          
+    </div> 
+
+    </div>
+       
+     
+ 
+
+    <div class="item-info">
+         <div class="name">
+         <a href="/catalog/{{item.id}}/"><p class="item_name">{{item.name}}</p></a>
         </div>
-    </a>
+
+        <div class="address">
+                    
+                    <a  data-latitude="{{item.restaurant_latitude}}" data-longitude="{{item.restaurant_longitude}}" data-name="{{item.name}}" data-address="{{item.restaurant_address}}" data-url="/catalog/{{item.id}}/" class="address_map"><p class="item_address"><span>{{item.restaurant_address}}</span></p></a>
+                    
+        </div>
+      <div class="forMobile_items">
+        <div class="capacity">
+         {% if item.capacity %}
+                        <div class="item_meta_item">
+                            <span class="item_meta_label">Вместимость: </span><span class="item_meta_text">{{item.capacity}} человек</span>
+                        </div>
+         {% endif %}
+         </div>
+
+         <div class="restaurant_payment">
+
+         {% if item.restaurant_payment %}
+                        <div class="item_meta_item">
+                            <span class="item_meta_label">Способы оплаты: </span><span class="item_meta_text">{{item.restaurant_payment}}</span>
+                        </div>
+         {% endif %}
+         </div> 
+
+         <div class="restaurant_parking">      
+
+         {% if item.restaurant_parking %}            
+                        <div class="item_meta_item">
+                            <span class="item_meta_label">Парковка: </span><span class="item_meta_text">{{item.restaurant_parking}}</span>
+                        </div>
+         {% endif %}
+
+         </div>
+
+         <div class="restaurant_own_alcohol">
+
+         {% if item.restaurant_own_alcohol %} 
+
+                        <div class="item_meta_item">
+                            <span class="item_meta_label">Свой алкоголь: </span><span class="item_meta_text">{{item.restaurant_own_alcohol}}</span>
+                        </div>
+         {% endif %}
+         </div>
+
+         <div class="restaurant_cuisine">
+         
+         {% if item.restaurant_cuisine %}                
+
+                        <div class="item_meta_item">
+                            <span class="item_meta_label">Кухня: </span><span class="item_meta_text">{{item.restaurant_cuisine}}</span>
+                        </div>
+         {% endif %}
+         </div>
+      </div> 
+      <div class="price_type_other">
+          {% if item.price %}
+                            <div class="item_meta_item">
+                                <span class="item_meta_text">от <span class="rur">{{item.price}} <span class="norur">руб.</span></span>/чел.</span>
+                            </div>
+
+             {% endif %}
+      </div>
+    </div>
+</div>
+{% set i = i+1 %}
+</div>
 {% endfor %}
+

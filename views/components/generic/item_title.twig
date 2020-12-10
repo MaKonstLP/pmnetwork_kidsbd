@@ -1,10 +1,14 @@
 <div class="breadcrumbs">
-	{% for link,name in seo.breadcrumbs %}
-		<a class="breadcrumbs_item" href="{{link}}">{{name}}</a>
-	{% endfor %}
+	<div class="breadcrumbs_listing">
+            <ul class="breadcrumb_ul">
+            	{% for link,name in seo.breadcrumbs %}
+                <li><a href="{{link}}">{{name}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
 </div>
-<div class="title">
+<div class="title _item">
 	<h1>{{seo.h1}}</h1>
-	<div class="title_desc"><p>{{seo.desc}}</p></div>
-	<div class="title_address" data-title-address><p><span>{{seo.address}}</span></p></div>
+	<!-- <div class="title_desc"><p>{{seo.desc}}</p></div> -->
+	<div class="address" data-title-address><p><span>{{seo.address}}</span></p></div>
 </div>

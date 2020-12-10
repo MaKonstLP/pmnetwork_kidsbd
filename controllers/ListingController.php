@@ -23,7 +23,7 @@ use common\models\Seo;
 
 class ListingController extends Controller
 {
-	protected $per_page = 24;
+	protected $per_page = 30;
 
 	public $filter_model,
 		   $slices_model,

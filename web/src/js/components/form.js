@@ -2,10 +2,12 @@ import Animation from './animation.js';
 //import modal from './modal';
 import {status, json} from './utilities';
 import Inputmask from 'inputmask';
+
 var animation = new Animation;
 
 export default class Form {
 	constructor(form) {
+		let self = this;
 		this.$form = $(form);
 		this.$formWrap = this.$form.parents('.form_wrapper');
 		this.$submitButton = this.$form.find('input[type="submit"]');
@@ -16,7 +18,54 @@ export default class Form {
 	    });
 	    im_phone.mask($(this.$form).find('[name="phone"]'));
 
-		this.bind();
+		this.bind();	
+		this.$form.find('.input_wrapper').on('click' , function(){
+			console.log(1221);
+			let parent = $(this).closest('.input_wrapper');
+			parent.find('.qs-num').on('click' , function(){
+			setTimeout(function() {
+			let valueVisible = parent.find('.addCalendar').val();
+			let valueHidInp = parent.find('[data-form-hidden-input]').val();
+			let valueHidInpTwo = parent.find('[data-form-hidden-input-two]').val();
+			if(valueVisible == ''){
+				parent.find('.addCalendar').val(valueHidInp);
+
+			}
+			else if(valueHidInp != '' && valueHidInpTwo != '' ){
+				parent.find('.addCalendar').val(valueHidInp + '-' + valueHidInpTwo);
+				parent.find('[data-form-hidden-input]').addClass('_hide');
+			}
+			else if(valueHidInp != '' && valueHidInpTwo ==''){
+				parent.find('.addCalendar').val(valueHidInp);
+			}
+			else {parent.find('.addCalendar').val('');}
+			},50);
+		})
+		})
+		this.$form.find('[data-form-hidden-input]').on('click' , function(){
+			let parent = $(this).closest('.input_wrapper');
+			$(this).removeClass('_active');
+			parent.find('[data-form-hidden-input-two]').addClass('_active');
+
+		})
+		this.$form.find('[data-form-hidden-input-two]').on('click' , function(){
+			let parent = $(this).closest('.input_wrapper');
+			$(this).removeClass('_active');
+			parent.find('[data-form-hidden-input]').addClass('_active');
+			parent.find('[data-form-hidden-input]').addClass('_hide');
+
+		})
+
+
+		// this.$form.find('[data-form-hidden-input]').on('click' , function(){
+		// 	let parent = $(this).closest('.input_wrapper');
+		// 	let hiddenValue = parent.find('[data-form-hidden-input]').val();
+		// 	console.log(hiddenValue);
+		// 	let visibleValue = parent.find('.addCalendar').val();
+		// 	parent.find('.addCalendar').val(visibleValue + "-" + hiddenValue);
+
+		// 	parent.find('[data-form-hidden-input]').removeClass('_active');
+		// })	
 	}
 
 	bind() {
@@ -172,13 +221,13 @@ export default class Form {
 		//modal.show();
 		switch(formType) {
 		  case 'main':
-		    ym(64598434,'reachGoal','form_main');
-		    gtag('event', 'form');
+		    //ym(64598434,'reachGoal','form_main');
+		    //gtag('event', 'form');
 		    break;
 
 		  case 'item':
-		    ym(64598434,'reachGoal','form_room');
-		    gtag('event', 'form');
+		    //ym(64598434,'reachGoal','form_room');
+		    //gtag('event', 'form');
 		    break;
 		}
 

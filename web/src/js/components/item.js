@@ -1,5 +1,6 @@
 'use strict';
 import Swiper from 'swiper';
+import Callback from './callback.js';
 import 'slick-carousel';
 import * as Lightbox from '../../../node_modules/lightbox2/dist/js/lightbox.js';
 
@@ -38,6 +39,7 @@ export default class Item{
             console.log('scroll_form');
         });
 
+
 		var galleryThumbs = new Swiper('.item_thumb_slider', {
             spaceBetween: 5,
             slidesPerView: 5,
@@ -46,7 +48,7 @@ export default class Item{
             watchSlidesProgress: true,
             breakpoints: {
                 767: {
-                  slidesPerView: 'auto',
+                  slidesPerView: 0,
                   spaceBetween: 5
                 }
             }
@@ -57,9 +59,66 @@ export default class Item{
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+            pagination: {
+                el: '.swiper-pagination',
+            },
             thumbs: {
                 swiper: galleryThumbs
+            },
+            breakpoints: {
+                767: {
+                  slidesPerView: 1,
+                  spaceBetween: 5
+                }
             }
-        });	
+        });
+        $('.mobile_button_text').on('click', () => {
+            this.openText('butt_on');
+        })
+        $('.mobil_but_off').on('click', () => {
+            this.closeText('butt_off');
+        })
+
+        
 	}
+    openText(id) {
+
+    if(id == "butt_on"){
+        document.getElementById('mobile_but_all').style.height="auto";
+        document.getElementById('mobile_but_all').style.overflow="visible";
+        document.getElementById('butt_on').style.display="none";
+        document.getElementById('butt_off').style.display="block";
+        }
+    if(id == 'butt_on_options'){
+        document.getElementById('open_for_mobile').style.height="auto";
+        document.getElementById('open_for_mobile').style.overflow="visible";
+        document.getElementById('butt_on_options').style.display="none";
+        document.getElementById('butt_off_options').style.display="block";
+    }
+    }
+    closeText(id) {
+
+  if(id =='butt_off'){  
+    if(window.innerWidth > 767){
+        document.getElementById('mobile_but_all').style.height="120px";
+    }
+    if(window.innerWidth <= 767){
+        document.getElementById('mobile_but_all').style.height="165px";
+    }
+        document.getElementById('mobile_but_all').style.overflow="hidden";
+        document.getElementsByClassName('mobile_button_text')[0].style.display="";
+        document.getElementById('butt_off').style.display="none";
+        }
+   if(id == 'butt_off_options'){
+    if(window.innerWidth > 767){
+        document.getElementById('open_for_mobile').style.height="auto";
+    }
+    if(window.innerWidth <= 767){
+        document.getElementById('open_for_mobile').style.height="200px";}
+        document.getElementById('open_for_mobile').style.overflow="hidden";
+        document.getElementById('butt_on_options').style.display="";
+        document.getElementById('butt_off_options').style.display="none";
+   }     
+    }
+
 }

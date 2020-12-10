@@ -6,7 +6,7 @@ export default class Widget{
 		self = this;
 		this.swiperArr = [];
 
-		if($(window).width() <= 1650){
+		if($(window).width() <= 1920){
 			$('[data-widget-wrapper]').each(function(){
 				self.initSwiper($(this).find('[data-listing-wrapper]'));
 			});
@@ -14,7 +14,7 @@ export default class Widget{
 
 		$(window).on('resize', function(){
 			console.log(self.swiperArr.length);
-			if($(window).width() <= 1650){
+			if($(window).width() <= 1920){
 				if(self.swiperArr.length == 0){
 					$('[data-widget-wrapper]').each(function(){
 						self.initSwiper($(this).find('[data-listing-wrapper]'));
@@ -28,31 +28,38 @@ export default class Widget{
 				self.swiperArr = [];
 			}
 		});
+		var galleryList = new Swiper('.listing_slider', {
+            spaceBetween: 0,
+            slidesPerView: 1,
+            navigation: {
+                nextEl: '._listing_next',
+                prevEl: '._listing_prev',
+            },
+        });	
 	}
 
 	initSwiper($container){
 		let swiper = new Swiper($container, {
-	        slidesPerView: 3,
-	        spaceBetween: 30,
+	        slidesPerView: 4,
+	        spaceBetween: 16,
 	        navigation: {
-              nextEl: '.listing_widget_arrow._next',
-              prevEl: '.listing_widget_arrow._prev',
+              nextEl: '._next',
+              prevEl: '._prev',
             },
             pagination: {
               el: '.listing_widget_pagination',
               type: 'bullets',
             },
 	        breakpoints: {
-	        	1200:{
-	        		slidesPerView: 2,
+	        	1440:{
+	        		slidesPerView: 3,
 	        	},
-	        	768:{
+	        	767:{
 	        		slidesPerView: 1,
-
-	        		navigation: false,
-	        	}
+	        	              }
 	        }
 	    });
+	    
 
 	    let swiper_var = $container.swiper;
 		this.swiperArr.push(swiper);

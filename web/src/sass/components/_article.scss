@@ -1,0 +1,713 @@
+.title{
+
+	&.article{
+		margin-top: 38px;
+
+		@include for-pad{
+			margin-top: 21px;
+		}
+		@include for-mobile{
+			margin-top: 29px;
+		}
+
+		h1{
+			margin-bottom: 11px;
+			font-family: Lato;
+			font-style: normal;
+			font-weight: 900;
+			font-size: 36px;
+			line-height: 48px;
+			text-align: center;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			color: #141417;
+
+			@include for-pad{
+				margin-bottom: 7px;
+			}
+			@include for-mobile{
+				font-size: 28px;
+				line-height: 36px;
+				text-align: center;
+				letter-spacing: 0.03em;
+			}
+		}
+	}
+}
+.article_breadcr{
+
+	a{
+		color: #797C88 !important; 
+	}
+
+	.breadcrumbs_listing{margin-bottom: 30px;
+
+		@include for-pad{
+			margin-bottom: 22px;
+		}
+	}
+}
+.article_date{
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 20px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #2C3044;
+
+	@include for-mobile{
+		display: none;
+	}
+}
+[data-page-type="article_all"]{
+	width: 49.6%;
+    margin: auto;
+    position: relative;
+    margin-bottom: 33px;
+    padding: 0 4px;
+
+    @include for-pad{
+    	width: calc(100% - 20px);
+    }
+    @include for-mobile{
+    	width: calc(100% - 25px);
+    }
+
+    .article_conteiner_img{
+    	width: 944px;
+    	height: 628px;
+    	margin:auto;
+    	margin-bottom: 31px;
+
+    	@include for-pad{
+    		width: 744px;
+    		height: 495px;
+    		margin: auto;
+    		margin-bottom: 24px;
+    	}
+    	@include for-mobile{
+    		width: 288px;
+    		height: 192px;
+    		margin:auto;
+    		margin-bottom: 16px;
+    	}
+
+    	img{
+    		width: 100%;
+    	}
+    }
+
+    .article_text{
+
+    	ul{
+    		padding-left: 31px;
+    		margin-top: 23px;
+    		margin-bottom: 24px;
+    		list-style-image: url(/images/article/Bullet.svg);
+
+    		@include for-pad{
+    			padding-left: 24px;
+    			margin-bottom: 1px;
+    		}
+
+
+    		li{
+    			margin-bottom: 16px;
+    			font-family: Lato;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 16px;
+				line-height: 24px;
+				color: #2C3044;
+
+				&:last-child{
+					margin-bottom: 0px;
+				}
+    		}
+    	}
+
+    	ol{
+    		padding-left: 32px;
+    		margin-top: 25px;
+    		margin-bottom: 25px;
+
+    		li{
+    			margin-bottom: 12px;
+    			font-family: Lato;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 16px;
+				line-height: 24px;
+				color: #2C3044;
+    		}
+    	}
+    	
+
+    	.article_descript{
+		font-family: Lato;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		line-height: 32px;
+		color: #2C3044;
+		margin-bottom: 32px;
+
+		@include for-pad{
+			margin-bottom: 24px;
+		}
+
+		@include for-mobile{
+		font-size: 18px;
+		line-height: 150%;
+		margin-bottom: 16px;
+		}
+    	}
+
+    	p{
+    		font-family: Lato;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 16px;
+			line-height: 24px;
+			color: #2C3044;
+			margin-bottom: 12px;
+    	}
+    	.padPadd{
+
+    		@include for-pad{
+    			padding: 0 2px;
+    		}
+    	}
+
+    	h2{
+    		font-family: Lato;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 32px;
+			line-height: 40px;
+			color: #141417;
+			margin-bottom: 8px;
+			text-align: left;
+
+			@include for-pad{
+			font-size: 32px;
+			line-height: 40px;
+			}
+			@include for-mobile{
+			font-size: 28px;
+			line-height: 32px;
+			}
+    	}
+    	h3{
+    		font-family: Lato;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 24px;
+			line-height: 32px;
+			display: flex;
+			align-items: center;
+			color: #141417;
+			margin-bottom: 8px;
+			margin-top: 24px;
+
+			@include for-pad{
+			margin-bottom: 8px;
+    		margin-top: 24px;
+    		margin-left: 2px;
+			}
+			@include for_mobile{
+			margin-top: 16px;
+			}
+    	}
+
+    	h4{
+    		font-family: Lato;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 20px;
+			line-height: 24px;
+			display: flex;
+			align-items: center;
+			color: #000000;
+			margin-bottom: 10px;
+    	}
+    	.border_article{
+    		border: 2px solid #FFC839;
+			box-sizing: border-box;
+			border-radius: 5px;
+			padding: 21px 32px 30px 30px;
+   			margin-top: 32px;
+   			margin-bottom: 31px;
+
+   			@include for-mobile{
+   				padding: 24px 26px 27px 40px;
+   			}
+   			@include for-mobile{
+   				padding: 14px 31px 23px 21px;
+   			}
+    	}
+    	.img_flex{
+    		display: flex;
+    		flex-flow: row;
+    		justify-content:space-between;
+    		width: 944px;
+    		height: 309px;
+    		margin-bottom: 32px;
+    		margin-top: 32px;
+
+    		@include for-pad{
+    			display: none;
+    		}
+    		@include for-mobile{
+    			display: none;
+    		}
+
+    		img{
+    			width: 49.1%;
+    			height: auto;
+    		}
+    	}
+
+    }
+}
+.quote_line{
+	background-image: url(/images/article/quote_img.svg);
+	width: 370px;
+	height: 12px;
+	margin:auto;
+	margin-bottom: 16px;
+
+	@include for-pad{
+		display: none;
+	}
+
+	@include for-mobile{
+		display: none;
+	}
+}
+.text_underline{
+	font-family: Lora;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 36px;
+	text-align: center;
+	color: #2C3044;
+	width: 78%;
+    margin: auto;
+    margin-bottom: 32px;
+
+    @include for-pad{
+    	display: none;
+    }
+    @include for-mobile{
+    	display: none;
+    }
+}
+/*Стили блока "Возможно вам будет интересно" - начало*/
+.recomend_intresting{
+	width: 100%;
+	display: flex;
+	flex-flow:column;
+	margin-top: -2px;
+    padding: 0 4px;
+    margin-bottom: 115px;
+
+    @include for-pad{
+    	    margin-bottom: 54px;
+    }
+    @include for-mobile{
+    	padding: 0;
+    	margin-bottom: 0px;
+    }
+
+	h4{
+		font-family: Lato;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		line-height: 24px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		color: #2C3044;
+		margin-bottom: 16px;
+	}
+	.intresting_articles{
+		display: flex;
+		flex-flow:row;
+		justify-content:space-between;
+		height: auto;
+
+		.article_contein_recomend{
+			display: flex;
+			flex-flow:column;
+			width: 100%;
+			margin-right: 65px;
+
+			@include for-pad{
+				margin-right: 12px;
+			}
+			@include for-mobile{
+				display: none;
+				margin-right: 0;
+			}
+			&:first-child{
+					
+				@include for-mobile{
+					display: flex;
+				}
+				}
+
+			img{
+				width: 272px;
+				height: 175px;
+				margin-bottom: 9px;
+
+				@include for-pad{
+					width: 240px;
+				}
+				@include for-mobile{
+					width: 100%;
+					height: auto;
+					min-height: 175px;
+				}
+			}
+			a{
+				font-family: Fira Sans;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 14px;
+				line-height: 20px;
+				text-decoration-line: underline;
+				color: #4471E6;
+
+				@include for-mobile{
+					padding: 0 2px;
+				}
+			}
+		}
+	}
+
+}
+
+/*Стили блока "Возможно вам будет интересно" - конец*/
+.top{
+
+	.scroll_block{
+	display: flex;
+    flex-flow: row;
+    margin: auto;
+
+    .scroll_block_text{
+    	font-family: Lato;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		line-height: 24px;
+		color: #FFFFFF;
+		margin: auto;
+		margin-right: 63px;
+    }
+    .scroll_block_button{
+    	font-family: Lato;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 20px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		color: #141417;
+		width: 225px;
+		height: 48px;
+		background: linear-gradient(97.18deg, #FFA776 -25.77%, #FBF339 104.42%), #29EDB2;
+		border-radius: 6px;
+		padding: 0 15px;
+		cursor: pointer;
+    }
+	}
+}
+/* Стили статичного слайдера, удалить после размещения динамичного слайдера - начало*/
+
+.advertising_article{
+	height: 317px;
+    padding-top: 20px;
+
+   	@include for-pad{
+   		height: 230px;
+   		padding-top: 23px;
+   		margin-bottom: 52px;
+   	}
+   	@include for-mobile{
+   		height: auto;
+   	}
+
+	.item-block {
+    width: 944px;
+    height: 266px;
+
+    @include for-pad{
+    width: 744px;
+    height: 230px;
+    }
+    @include for-mobile{
+    width: 100%;
+    height: auto;
+    }
+    .carusel{
+    	margin-right: 1.7%;
+    }
+    .carusel .but_prev{
+    	top: calc(48.5% - 16px);
+    	left: 3.5%;
+    }
+    .carusel .but_next{
+    	top: calc(48.5% - 16px);
+    	right: 3.5%;
+    }
+
+    .item_name{
+    	font-size: 20px !important;
+		line-height: 24px !important;
+		margin-bottom: 9px !important;
+
+		@include for-pad{
+			margin-bottom: 12px !important;
+		}
+    }
+     .item-info .address{
+     	margin-bottom: 0px;
+     }
+    .item-info .address .item_address{
+    	font-size: 14px;
+    	margin-left: 7px;
+
+    	@include for-pad{
+    		margin-bottom: 14px;
+    	}
+    }
+    .item-info .restaurant_own_alcohol .item_meta_text{
+
+    	@include for-pad{
+    		margin-bottom: 11px;
+    	}
+    }
+    .item-info .item_meta_label{
+    	font-family: Lato;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 14px;
+		line-height: 20px;
+		color: #2C3044;
+    }
+    .item-info .capacity .item_meta_text{
+    	font-family: Lato;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 20px;
+		color: #2C3044;
+    }
+    .item-info .capacity{
+    	margin-top: 0px;
+    }
+    .item-info .restaurant_parking{
+    	margin-bottom: 2px;
+
+    	@include for-pad{
+    		margin-bottom: 12px;
+    	}
+    }
+    ._button{
+    	padding: 3px 17px 3px;
+    	width: 151px;
+    	height: 42px;
+
+    	@include for-mobile{
+    	width: 100%;
+    	height: 40px;
+    	margin: auto;
+    	justify-content: center;
+    	}
+    }
+
+
+    	.img_conteiner {
+    width: 464px;
+    height: 266px;
+
+    @include for-pad{
+    width: 100%;
+    height: 91.273%;
+    }
+    @include for-mobile{
+    width: 100%;
+    height: auto;
+    }
+
+    	img{
+    	width: 100%;
+    	height: 266px !important;
+
+    	@include for-pad{
+    		height: 100% !important;
+    	}
+    	@include for-mobile{
+    		height: auto !important;
+    	}
+    	}
+    	.price{
+    		background-image:url(/images/article/price_back_article.svg);
+    		background-repeat: no-repeat;
+    		    margin-top: 0px; 
+			    margin-left: 0px; 
+			    padding-top: 0px; 
+			    padding-left: 0px;
+			    bottom: 6px;
+			    right: -21px;
+
+			    @include for-pad{
+			    	bottom: 1px;
+    				right: 1px;
+			    }
+
+    		@include for-mobile{
+    			    padding-top: 0px;
+    			    bottom: 6px;
+    				right: 4px;
+    		}
+    		@include for-smallmobile{
+    			right: 0px;
+    		}
+
+    		.vector_price{
+    			background-image:url(/images/vector_price.png);
+    			margin-top: 0px;
+   				margin-left: 0px;
+			    position: absolute;
+			    bottom: 3px;
+			    right: 16px;
+
+			    @include for-pad{
+			   	bottom: -3px;
+    			right: 1px;
+			    }
+   				@include for-mobile{
+   				margin-top: 30px;
+    			margin-left: 113px;
+    		    bottom: -3px;
+    			right: 0px;
+   				}
+
+    		}
+
+    		.item_meta_item{
+    			font-family: Lato;
+				font-style: normal;
+				font-weight: bold;
+				font-size: 16px;
+				line-height: 24px;
+				display: flex;
+				align-items: center;
+				text-align: right;
+				color: #FFFFFF;
+
+				@include for-pad{
+					font-size: 14px;
+				}
+
+				@include for-mobile{
+				font-size: 14px;
+    			line-height: 20px;
+				}
+    		}
+    	}
+		}
+	}
+}
+.article_gl{
+.object_gallery .item_thumb_slider .swiper-wrapper{
+	justify-content: flex-start;
+
+	@include for-mobile{
+		flex-flow: row;
+	}
+}
+.object_gallery .item_thumb_slider .swiper-wrapper .swiper-slide{
+
+	&.article_gl{
+		width: auto !important;
+		margin-right: 5px !important;
+
+		@include for-pad{
+			width: 13.3%!important;
+		}
+		@include for-mobile{
+			width: 62px!important;
+    		height: 48px;
+		}
+	}
+}
+.object_gallery .item_thumb_slider{
+	display: flex;
+	width: 100%;
+
+}
+
+.object_gallery{
+
+	&.article_gl{
+		position:sticky !important;
+		width: 945px;
+		flex-flow:column;
+
+		@include for-pad{
+			width: 744px;
+			padding: 12px 0;
+		}
+		@include for-mobile{
+			width: 100%;
+		}
+
+		.item_top_slider{
+			margin-bottom: 0px;
+			width: 100%;
+		}
+
+
+	}
+}
+}
+.content_block{
+
+	&.article_gl{
+		width: 100%!important;
+   		margin-top: 32px;
+   		margin-bottom: 35px;
+	}
+	&._article{
+		margin-bottom: 32px;
+		width: 60%;
+
+		@include for-pad{
+			    width: calc(100% - 20px);
+			    margin-bottom: 23px;
+		}
+		@include for-mobile{
+			    width: calc(100% - 30px);
+			    margin-bottom: 6px;
+		}
+	}
+	&.art_intrest{
+
+		@include for-mobile{
+		margin-bottom: 41px;
+		}
+	}
+}
+
+/* Стили статичного слайдера, удалить после размещения динамичного слайдера- конец*/

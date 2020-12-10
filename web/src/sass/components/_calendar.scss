@@ -1,0 +1,467 @@
+.calendar_container{
+    display: flex;
+    flex-flow: column nowrap;
+    position: absolute;
+    width: 315px;
+    height: auto;
+    top: 0;
+    right: 18px;
+    left: auto;
+    height: auto;
+    background: $clrWhite;
+    border: 1px solid $clrPagination;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    // background: white;
+    // box-shadow: 0px 2px 23px #EDEDED;
+    // border-radius: 5px;
+    z-index: 10;
+
+    @include for-mobile {
+        right: calc(50% - 157.5px);
+        left: auto !important;
+    }
+
+    &._hide{
+        display: none;
+    }
+
+    // &._room{
+    //     align-items: center;
+    // }
+
+    .calendar{
+    width: 100%;
+    height: auto;
+    padding: 16px 20px 0px;
+
+    // &:before{
+    //     content: "";
+    //     position: absolute;
+    //     top: -8px;
+    //     left: 30px;
+    //     width: 16px;
+    //     height: 16px;
+    //     transform: rotate(45deg);
+    //     background: white;
+    // }
+
+    .fc-toolbar.fc-header-toolbar{
+        // padding: 0 0 20px 0;
+        // margin: 0 0 0 0;
+        position: relative;
+        justify-content: center;
+        margin-bottom: 22px;
+
+        .fc-left{
+
+            h2{
+                font-family: Lato;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 24px;
+                display: flex;
+                align-items: flex-end;
+                color: #2C3044;
+            }
+        }
+    
+        .fc-center {
+            display: none;
+        }
+    
+        .fc-right{
+            // margin-left: auto;
+            position: absolute;
+            right: 58px;
+            top: 0;
+        }
+
+        .fc-button-group {
+            position: absolute;
+            width: 50px;
+            display: flex;
+
+            .fc-prev-button {
+                // background: grey;
+                position: absolute;
+                left: 0;
+                width: 22px;
+                height: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .fc-icon-chevron-left {
+                    width: 20px;
+                    height: 14px;
+                    box-sizing: border-box;
+                    background: url('/images/Arrow_calendar_right.svg') no-repeat center center / 40%;
+                    transition: $transition;
+                    background-size: 20px 14px;
+                    transform: rotate(180deg);
+
+                    &:hover {
+                        background: url('/images/Arrow_calendar_right_hover.svg') no-repeat center center / 40%,;
+                        transition: $transition;
+                            -ms-transform: rotate(180deg); /* Для IE */
+                            -webkit-transform: rotate(180deg); /* Для Safari, Chrome, iOS */
+                            -o-transform: rotate(180deg); /* Для Opera */
+                            transform: rotate(180deg);
+                            width: 20px;
+                            height: 14px;
+                            background-size: 20px 14px;
+                    }
+                }
+            }
+
+            .fc-next-button {
+                // background: green;
+                position: absolute;
+                right: 0;
+                width: 22px;
+                height: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .fc-icon-chevron-right {
+                    width: 20px;
+                    height: 14px;
+                    box-sizing: border-box;
+                    background: url('/images/Arrow_calendar_right.svg') no-repeat 60% center / 40%;
+                    transition: $transition;
+                    background-size: 20px 14px;
+
+                    &:hover {
+                        background: url('/images/Arrow_calendar_right_hover.svg') no-repeat 60% center / 40%,;
+                        transition: $transition;
+                        width: 20px;
+                        height: 14px;
+                        background-size: 20px 14px;
+                    }
+                }
+            }
+        }
+    }
+
+    .fc-icon {
+        &:before{
+            display: none;
+        }
+    }
+
+    .fc-button.fc-button-primary{
+        padding: 0;
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    .fc-view-container {
+
+        .fc-widget-header > table > thead > tr {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .fc-widget-header > table{
+            width: 94%;
+        }
+    
+        .fc-day-header > span {
+            font-family: Lato;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 10px;
+            line-height: 14px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #797C88;
+        }
+
+        .fc-week .fc-widget-content {
+            margin-bottom: 22px;
+        }
+
+        .fc-content-skeleton > table > thead > tr {
+            display: flex;
+            justify-content: space-between;
+            width: 273px;
+        }
+
+        .fc-content-skeleton > table > thead > tr > td {
+            width: 8%;
+        }
+
+        .fc-past, .fc-today, .fc-future {
+            font-family: 'NotoSans-Bold';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 22px;
+            color: #444444;
+        }
+
+        .fc-past:hover, .fc-today:hover, .fc-future:hover {
+            &:before {
+                content: "";
+                position: absolute;
+                top: -8px;
+                left: calc(15% - 15px);
+                width: 40px;
+                height: 40px;
+                background: #95B3CD;
+                box-sizing: border-box;
+                border-radius: 50%;
+                // background: $clrGreen;
+                z-index: -1;
+            }
+        }
+
+        .fc-other-month.fc-past, .fc-other-month.fc-future {
+            opacity: 1 !important;
+            color: #CCCCCC;
+        }
+
+        // .fc-day-grid > .fc-week.fc-widget-content:nth-child(6) {
+        //     display: none;
+        // }
+
+        .fc-row.fc-week.fc-widget-content{
+            height: 15px !important;
+            margin-bottom: 27px;
+        }
+        
+        .fc-content-skeleton {
+            .fc-selected-date{
+                color: $clrWhite;
+    
+                &:before{
+                    content: "";
+                    position: absolute;
+                    top: -9px;
+                    left: -9px;
+                    width: 40px;
+                    height: 40px;
+                    border: 1px solid $clrGreen;
+                    box-sizing: border-box;
+                    border-radius: 50%;
+                    background: $clrGreen;
+                    z-index: -1;
+                }
+            }
+        }
+
+        
+    }
+
+        // .fc-scroller .fc-day-grid-container {
+        //     overflow: visible !important;
+        // }
+
+
+
+
+
+
+
+
+
+    
+
+    .fc-day-header{
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    
+
+
+
+    .fc-footer-toolbar{
+        margin-top: 0;
+    }
+
+    .fc-icon{
+        position: relative;
+
+        &:before{
+            display: none;
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 2px;
+            width: 22px;
+            height: 16px;
+            background: url("/img/korporativ-ng/arrow-right.svg");
+            background-size: contain;
+        }
+    }
+
+    .fc-icon.fc-icon-chevron-left{
+
+        &:before{
+            transform: rotate(180deg);
+            left: 0;
+        }
+    }
+
+    td.fc-today{
+        border: none;
+    }
+
+    td, th{
+        border: none;
+    }
+
+    .fc-dayGrid-view .fc-body .fc-row {
+        min-height: 10px;
+    }
+    .fc-scroller.fc-day-grid-container{
+        height: auto !important;
+        padding: 0 0 2px 0 !important;
+        // overflow-y: hidden !important;
+        overflow: visible !important;
+    }
+
+    
+
+    .fc-content-skeleton{
+        //height: 100%;
+        padding-bottom: 0;
+
+        .fc-day-top{
+            cursor: pointer;
+            position: relative;
+            height: 33px;
+        }
+
+        .fc-other-month{
+
+            .fc-day-number{
+                // text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            }
+            
+        }
+
+        .fc-free-day{
+            color: #5BA641;
+
+            &:before{
+                content: "";
+                position: absolute;
+                top: -1px;
+                left: 3px;
+                width: 33px;
+                height: 33px;
+                border: 1px solid #5BA641;
+                border-radius: 17px;
+                z-index: -1;
+            }
+        }
+
+        
+
+        table{
+            thead{
+                td.fc-day-top{
+                    text-align: center;
+                    vertical-align: middle;
+
+                    .fc-day-number{
+                        float: none;
+                        font-family: Lato;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 16px;
+                        line-height: 24px;
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+                        
+                    }
+                }
+            }
+        }
+    }
+
+        &.fc-unthemed{
+            td.fc-today{
+                background-color: transparent;
+            }
+        }
+    }
+
+    .fc-booking-button{
+        cursor: pointer;
+        width: 155px;
+        height: 36px;
+        margin-bottom: 25px;
+        border: 1px solid #D83603;
+        border-radius: 5px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+    
+        &:active{
+            color: black;
+        }
+    }
+
+    .calendar_checkbox{
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        color: #2C3044;
+        
+    }
+
+    .checkbox_item{
+        position: relative;
+        padding:0 0 25px 22px;
+    }
+
+    @include for-mobile{
+        left: -74px;
+
+        .calendar{
+            width: 290px;
+            padding: 20px 15px 20px;
+
+            &:before{
+                left: 45px;
+            }
+
+            .fc-content-skeleton{
+                
+                .fc-selected-date:before{
+                    left: 3px;
+                }
+            } 
+        }
+
+        .checkbox_item{
+            padding: 0 0 20px 25px;
+        }
+    }
+    }
+    .checkbox_item{
+
+        &._active{
+
+            .checkbox_pseudo{
+
+                &._calend::after{
+                content: "";
+                background: url(/images/item/check_item.svg);
+                }
+            }
+        }
+    }
+// }

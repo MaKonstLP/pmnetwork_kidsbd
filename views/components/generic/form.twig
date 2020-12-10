@@ -5,20 +5,20 @@
 
 	<div class="form_main">
 
-		{% if type != 'item' %}
-
-		<div class="form_title">
-			<p class="form_title_main">Помочь с выбором зала?</p>
-			<p class="form_title_desc">Это бесплатно!</p>
-		</div>
-
-		{% else %}
-
-		<div class="form_title">
-			<p class="form_title_main">Хотите свадьбу в этом зале?</p>
-		</div>
 		
-		{% endif %}
+
+		<div class="form_title">
+			<p class="form_title_main">Трудности <br class="mobile_only"/> с выбором зала?</p>
+			<p class="form_title_text">Наши менеджеры <span class="form_title_desc">бесплатно</span> подберут оптимальный вариант. Заполните форму, и мы свяжемся с вами.</p>
+		</div>
+
+
+
+		<!-- <div class="form_title">
+			<p class="form_title_main">Трудности с выбором зала?</p>
+		</div> -->
+		
+		
 		
 
 		<form class="form_block" action="/ajax/form/" data-type={% if type != 'item' %}"main"{% else %}"item"{% endif %}>
@@ -26,55 +26,43 @@
 			<div class="form_inputs">
 
 				<div class="input_wrapper _big">
-					<div class="input_label">Как Вас зовут?</div>
+					<div class="input_label">Как вас зовут?</div>
 					<input type="text" name="name" data-required/>
 				</div>
-				<div class="input_wrapper _big">
+				<div class="input_wrapper ">
 					<div class="input_label">Номер телефона</div>
-					<input type="text" name="phone" data-required/>
+					<input type="text" name="phone" data-required data-dynamic-placeholder/>
 				</div>
 				<div class="input_wrapper">
-					<div class="input_label">Дата свадьбы</div>
-					<input type="text" name="date" data-required/>
+					<div class="input_label">Электронная почта <span class="not-necessery_mobile"> (необязательно)</span></div>
+					<input type="email" name="count" />
+					<p class="not_necessary">необязательно</p>
 				</div>
-				<div class="input_wrapper">
-					<div class="input_label">Кол-во гостей</div>
-					<input type="text" name="count" data-required/>
+				<div class="input_wrapper _small">
+					<div class="input_label">Желаемая дата <span class="not-necessery_mobile"> (необязательно)</span></div>
+					<input type="text" name="date" class="addCalendar" />
+					<input type="text" name="date_hidden" class="hidden_input _active" data-form-hidden-input />
+					<input type="text" name="date_hidden_two" class="hidden_input_two" data-form-hidden-input-two />
+					        <div class="calendar_wrapper">
+					          <div class="open_calendar_button"></div>
+					          <div class="calendar_container _hide">
+					            <div class="calendar"></div>
+					          </div>
+					        </div>
+					<p class="not_necessary">необязательно</p>
 				</div>
+			</div>
 
-				{% if type != 'item' %}
-
-				<div class="form_checkboxes">
-					<div class="checkbox_title">Зал должен быть:</div>
-					<div class="checkbox_wrapper">
-						<div class="checkbox_item">
-							<input type="checkbox" name="water"/>
-							<div class="checkbox_pseudo" data-action="form_checkbox">У воды</div>
-						</div>
-						<div class="checkbox_item">
-							<input type="checkbox" name="tent"/>
-							<div class="checkbox_pseudo" data-action="form_checkbox">С шатром</div>
-						</div>
-						<div class="checkbox_item">
-							<input type="checkbox" name="country"/>
-							<div class="checkbox_pseudo" data-action="form_checkbox">За городом</div>
-						</div>
-						<div class="checkbox_item">
-							<input type="checkbox" name="incity"/>
-							<div class="checkbox_pseudo" data-action="form_checkbox">В черте города</div>
-						</div>
-					</div>
-				</div>
-
-				{% endif %}
-
+			<div class="comments_textarea">
+				<div class="input_label">Комментарий</div>
+				<textarea name="coment_text" class="comment_form"></textarea>
 			</div>
 
 			<div class="form_submit">
-				<input type="submit" class="_button" value="Забронировать"/>
+				<input type="submit" class="_button" value="Отправить"/>
 				<div class="form_policy checkbox_item _active" data-form-privacy>
 					<input type="checkbox" name="policy" class="personalData" checked="">
-					<p class="checkbox_pseudo">Я согласен с <a class="_link" href="/privacy/" target="_blank">политикой обработки персональных данных</a></p>
+					<p class="checkbox_pseudo">Я согласен с <span> <a class="_link" href="/privacy/" target="_blank"> политикой обработки персональных данных</a></span></p>
 				</div>
 			</div>
 			<input type="hidden" name="_csrf" value="{{Declension.csrfToken()}}" />
@@ -84,14 +72,14 @@
 	<div class="form_success" data-success>
 
 		<div class="form_success_title">
-			<p class="form_success_title_main">Заявка успешно отправлена</p>
+			<p class="form_success_title_main">Заявка отправлена</p>
 		</div>
 
 		<div class="form_success_text">
-			<p class="form_success_text_main"><span data-success-name></span>, спасибо за проявленный интерес. Мы свяжемся с вами по телефону <span data-success-phone></span> в течение рабочего дня.</p>
+			<p class="form_success_text_main"><span data-success-name></span>, спасибо за проявленный интерес. Наши менеджеры свяжутся с вами в течении дня и помогут подобрать зал для корпоратива.</p>
 		</div>
 
-		<div class="form_success_close _link" data-success-close>Закрыть</div>
+		<div class="form_success_close _link" data-success-close>Заполнить еще раз</div>
 
 	</div>
 </div>

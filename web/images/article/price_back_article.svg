@@ -1,0 +1,15 @@
+<svg width="149" height="40" viewBox="0 0 149 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.5 8C0.5 4.22876 0.5 2.34315 1.67157 1.17157C2.84315 0 4.72876 0 8.5 0H140.5C144.271 0 146.157 0 147.328 1.17157C148.5 2.34315 148.5 4.22876 148.5 8V40H8.5C4.72877 40 2.84315 40 1.67157 38.8284C0.5 37.6569 0.5 35.7712 0.5 32V8Z" fill="#29EDB2"/>
+<path d="M0.5 8C0.5 4.22876 0.5 2.34315 1.67157 1.17157C2.84315 0 4.72876 0 8.5 0H140.5C144.271 0 146.157 0 147.328 1.17157C148.5 2.34315 148.5 4.22876 148.5 8V40H8.5C4.72877 40 2.84315 40 1.67157 38.8284C0.5 37.6569 0.5 35.7712 0.5 32V8Z" fill="url(#paint0_linear)"/>
+<path d="M0.5 8C0.5 4.22876 0.5 2.34315 1.67157 1.17157C2.84315 0 4.72876 0 8.5 0H140.5C144.271 0 146.157 0 147.328 1.17157C148.5 2.34315 148.5 4.22876 148.5 8V40H8.5C4.72877 40 2.84315 40 1.67157 38.8284C0.5 37.6569 0.5 35.7712 0.5 32V8Z" fill="url(#paint1_radial)"/>
+<defs>
+<linearGradient id="paint0_linear" x1="6.82479" y1="-24.1667" x2="129.196" y2="69.4409" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF372F"/>
+<stop offset="1" stop-color="#883186"/>
+</linearGradient>
+<radialGradient id="paint1_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-5.19592) rotate(15.8176) scale(169.635 142.849)">
+<stop stop-color="#3D9CC5"/>
+<stop offset="1" stop-color="#192A68"/>
+</radialGradient>
+</defs>
+</svg>

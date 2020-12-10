@@ -60,3 +60,823 @@
 		}
 	}
 }
+.disco_ball{
+	background-image: url(/images/Disco_ball.svg);
+	position: absolute;
+	top: -89px;
+	left: 0;
+	width: 376px;
+    height: 560px;
+
+    @include for-pad{
+    	display: none;
+    }
+
+    @include for-mobile{
+    	display: none;
+    }
+}
+.confetti_top_right{
+	background-image: url(/images/confetti_top_right.svg);
+	position: absolute;
+	top: -89px;
+	right: 0;
+	width: 376px;
+    height: 560px;
+
+    @include for-pad{
+    	display: none;
+    }
+    @include for-mobile{
+    	display: none;
+    }
+}
+.title{
+
+	&.index{
+
+
+h2{
+	font-family: Lato;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 48px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #141417;
+    width: 97%;
+    margin-bottom: 27px;
+
+    @include for-pad{
+    width: 77%;
+    margin-bottom: 19px;
+    }
+    @include for-mobile{
+    	letter-spacing: 0.03em;
+    	font-size: 28px;
+		line-height: 36px;
+		margin-bottom: 9px;
+    }
+}
+}
+}
+
+.tags{
+	display: flex;
+	flex-flow:row;
+	justify-content: center;
+
+	@include for-mobile{
+	flex-flow: row wrap;
+    justify-content: flex-start;
+    padding: 0 22px;
+    margin-bottom: 7px;
+	}
+
+
+
+
+
+	.tag{
+		display: flex;
+		flex-flow:row;
+		justify-content:space-between;
+		border: 1px solid #2C689B;
+		box-sizing: border-box;
+		border-radius: 54px;
+		padding: 3px 12px 6px 12px;
+		margin-right: 20px;
+
+		@include for-pad{
+		padding: 3px 6px 6px 6px;
+    	margin-right: 20px;
+		}
+		@include for-mobile{
+		margin-right: 17px;
+    	margin-bottom: 13px;
+    	padding: 3px 5px 5px 5px;
+		}
+
+
+
+
+
+		p{
+			font-family: Lato;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 12px;
+			line-height: 20px;
+			display: flex;
+			align-items: center;
+			color: #2C3044;
+			margin-right: 3px;
+
+			@include for-mobile{
+				    margin-right: 5px;
+			}
+		}
+
+		.num{
+			margin: 0px;
+			color: #2C689B;
+		}
+	}
+}
+.tags :last-child{
+		margin-right: 0px;
+
+		@include for-mobile{
+			margin-bottom: 0px;
+		}
+	}
+
+.often_searched{
+	margin-bottom: 64px;
+
+	@include for-pad{
+		margin-bottom:19px;
+	}
+	@include for-mobile{
+		margin-bottom: 32px;
+	}
+
+	h2{
+		font-family: Lato;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 32px;
+		line-height: 40px;
+		text-align: center;
+		color: #141417;
+		margin-bottom: 16px;
+
+		@include for-mobile{
+			font-size: 28px;
+			line-height: 32px;
+			padding: 0 30px;
+		}
+	}
+
+	.all_blocks{
+		display: flex;
+		flex-flow:row wrap;
+		width: 100%;
+		justify-content: space-between;
+
+		@include for-mobile{
+			padding: 0px 15px;
+		}
+
+		.block{
+			width: 49.296%;
+			height: 320px;
+			margin-bottom: 16px;
+    		position: relative;	
+
+    		@include for-pad{
+    		width: 48.795%;
+    		height: auto;
+    		margin-bottom: 12px;
+    		}
+    		@include for-mobile{
+    			height: 166px;
+    			width: 290px;
+    			margin: auto;
+    			margin-bottom: 8px;
+    		}
+
+			img{
+				width: 100%;
+				height: 320px;
+
+				@include for-pad{
+					height: auto;
+				}
+				@include for-mobile{
+					height: 166px;
+				}
+			}
+
+			p{
+				position: absolute;
+				font-family: Lato;
+				font-style: normal;
+				font-weight: bold;
+				font-size: 24px;
+				line-height: 32px;
+				color: #FFFFFF;
+				bottom: 24px;
+				left: 24px;
+
+				@include for-pad{
+				font-size: 20px;
+				line-height: 24px;
+				bottom: 20px;
+    			left: 15px;
+				}
+				@include for-mobile{
+				font-size: 16px;
+				line-height: 24px;
+				bottom: 9px;
+			    left: 10px;
+
+				}
+			}
+
+		}
+	}
+
+	.big_block{
+		width: 100%;
+		height: 160px;
+    	position: relative;	
+
+    	@include for-pad{
+    		height: auto;
+    	}
+    	@include for-mobile{
+    		height: auto;
+    		width: 290px;
+    		margin: auto;
+    	}
+
+    		.mobil_img{
+    			display: none;
+
+    			@include for-mobile{
+    				background-image: url(/images/index/listing_card_photo_320.svg);
+    				width: 100%;
+    				height: 104px;
+    				display: block;
+    				background-repeat: no-repeat;
+    			}
+    		}
+
+			img{
+				width: 100%;
+				height: 160px;
+
+				@include for-pad{
+					height: auto;
+				}
+				@include for-mobile{
+					display: none;
+				}
+			}
+
+			p{
+				position: absolute;
+				font-family: Lato;
+				font-style: normal;
+				font-weight: bold;
+				font-size: 24px;
+				line-height: 32px;
+				color: #FFFFFF;
+				bottom: 24px;
+				left: 24px;
+
+				@include for-pad{
+				font-size: 20px;
+				line-height: 24px;
+				bottom: 20px;
+    			left: 16px;
+				}
+				@include for-mobile{
+					font-size: 16px;
+					line-height: 24px;
+					bottom: 8px;
+					left: 9px;
+				}
+			}
+	}
+}
+
+._all_often{
+	width: 1136px !important;
+	margin-bottom: 65px !important;
+
+	@include for-pad{
+		width: 100% !important;
+		padding: 0px 11px;
+		margin-bottom: 33px !important;
+	}
+	@include for-mobile{
+		width: 100% !important;
+		margin-bottom: 33px !important;
+	}
+}
+.not_margin_bot{
+	margin-bottom: 34px !important;
+	z-index: 9 !important;
+
+	@include for-pad{
+		margin-bottom: 6px !important;
+	}
+
+	@include for-mobile{
+		margin-bottom: 0px !important;
+	}
+
+	.filter{
+		margin-top: 0px;
+	}
+
+	}
+
+.content_wrap{
+
+	&.forIndex{
+		margin-top: 87px;
+		padding-bottom: 0px;
+
+		@include for-pad{
+			margin-top: 64px;
+		}
+
+		@include for-mobile{
+			margin-top: 50px;
+		}
+	}
+}
+
+.content_block{
+
+
+	&.index_form{
+		margin-bottom: 80px;
+
+		@include for-lowdesc{
+			width: 64%;
+		}
+
+		@include for-pad{
+			margin-bottom: 14px;
+			width: calc(100% - 20px);
+		}
+		@include for-mobile{
+			margin-bottom: 39px;
+			width: calc(100% - 30px);
+		}
+	}
+
+	&.index_page{
+		margin-bottom: 27px;
+
+		@include for-pad{
+			margin-bottom: 17px;
+		}
+		@include for-mobile{
+			margin-bottom: 9px;
+		}
+
+		.title{
+
+			&.index{
+				margin-top: 55px;
+
+				@include for-pad{
+					margin-top: 24px;
+				}
+
+				@include for-mobile{
+					margin-top: 21px;
+				}
+
+				.padBlock{
+					display: none;
+
+					@include for-pad{
+						display: block;
+					}
+					@include for-mobile{
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}
+
+.how_work_block{
+	    margin-bottom: 64px;
+
+	    @include for-pad{
+	    	margin-bottom: 52px;
+	    }
+	    @include for-mobile{
+	    	margin-bottom: 8px;
+	    }
+
+	h2{
+		font-family: Lato;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 32px;
+		line-height: 40px;
+		text-align: center;
+		color: #141417;
+		margin-bottom: 20px;
+
+		@include for-pad{
+			    margin-bottom: 20px;
+		}
+		@include for-mobile{
+			font-size: 28px;
+			line-height: 32px;
+			margin-bottom: 16px;
+		}
+	}
+
+.how_work{
+	width: 100%;
+	display: flex;
+    flex-flow: row;
+    justify-content: center;
+	padding-left: 92px;
+    padding-right: 92px;
+
+    @include for-pad{
+    padding-left: 0px;
+    padding-right: 0px;
+    justify-content: space-between;
+    position: relative;
+    }
+    @include for-mobile{
+    padding: 0 15px;
+    flex-flow: column;
+    justify-content: flex-start;
+    }
+
+    .ball_step{
+    	display: flex;
+	    flex-flow: column;
+	    align-items: center;
+
+	    @include for-pad{
+	    	width: 31.4%;
+	    }
+	    @include for-mobile{
+	    	margin-bottom: 14px;
+	    	flex-flow: row;
+    		align-items: flex-start;
+    		width: 288px;
+    		margin: auto;
+	    }
+    }
+
+	.ball{
+		width: 88px;
+    	height: 88px;
+		background: linear-gradient(97.18deg, #FFA776 -25.77%, #FBF339 104.42%), #29EDB2;
+		border-radius: 50%;
+		position: relative;
+		margin-bottom: 10px;
+
+		@include for-pad{
+			width: 64px;
+			height: 64px;
+			margin-bottom: 6px;
+		}
+		@include for-mobile{
+			width: 48px;
+    		height: 48px;
+    		margin-bottom: 24px;
+		}
+
+			p{
+			position: absolute;
+		    top: calc(41% - 18px);
+		    right: calc(56% - 24px);
+		    font-family: Lato;
+		    font-style: normal;
+		    font-weight: 600;
+		    font-size: 56px;
+		    line-height: 48px;
+		    display: flex;
+		    align-items: center;
+		    text-align: center;
+		    letter-spacing: .06em;
+		    text-transform: uppercase;
+		    color: #141417;
+
+		    @include for-pad{
+		    top: calc(47% - 18px);
+    		right: calc(67% - 24px);
+    		font-size: 36px;
+   			line-height: 37px;
+		    }
+		    @include for-mobile{
+		    	font-size: 24px;
+				line-height: 37px;
+				top: calc(45% - 18px);
+    			right: calc(80% - 24px);
+		    }
+			}
+
+
+	}
+
+	.arrow_ball{
+		background-image: url(/images/index/steps_arrow.svg);
+		width: 250px;
+	    height: 12px;
+	    margin-top: calc(4.5% - 6px);
+
+	    @include for-pad{
+	    	background-image: url(/images/index/steps_arrow_768.svg);
+	    	width: 144px;
+		    position: absolute;
+			top: 31%;
+  		    left: 23.6%;
+		    margin: auto;
+	    }
+	    @include for-mobile{
+	    	display: none;
+	    }
+
+	    &.two{
+
+	    	@include for-pad{
+	    		left: 57.6%;
+	    	}
+	    }
+	}
+	.ball_text{
+				font-family: Lato;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 16px;
+				line-height: 20px;
+				text-align: center;
+				color: #2C3044;
+				width: 78%;
+
+				@include for-pad{
+					width: 100%;
+					font-size: 12px;
+    				line-height: 18px;
+				}
+				@include for-mobile{
+				margin-left: 8px;
+    			margin-top: 15px;
+    			width: 80%;
+				}
+				
+			}
+}
+
+
+}
+.form_wrapper{
+	margin: auto;
+}
+.bottom_text_index{
+	margin: auto;
+	width: 100%;
+	font-family: Lato;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 24px;
+	color: #2C3044;
+    margin-bottom: 0px;
+
+    @include for-pad{
+    	margin-bottom: 0px;
+    	height: auto !important;	
+    }
+    @include for-mobile{
+    	padding: 0 15px;
+    	height: 120px;
+    	overflow: hidden;
+    	margin-bottom: 6px;
+    }
+}
+.mobile_button_text{
+	display: none;
+
+	@include for-mobile{
+		display: block;
+		font-family: Lato;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 24px;
+		color: #4471E6;
+		cursor: pointer;
+		margin: auto;
+		width: 153px;
+	}
+
+	span{
+		border-bottom: 1px dashed #4471E6;
+	}
+}
+
+.mobil_but_off{
+	display: none;
+
+	@include for-mobile{
+		font-family: Lato;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 24px;
+		color: #4471E6;
+		cursor: pointer;
+		margin: auto;
+		width: 100px;
+	}
+	span{
+		border-bottom: 1px dashed #4471E6;
+	}
+}
+.filter_mobile_wrapper{
+
+	&.index_form{
+		padding: 0;
+	}
+}
+/*Стили для страницы 404*/
+[data-page-type="error"]{
+
+	.content_block{
+		margin-bottom: 32px;
+
+		@include for-pad{
+			margin-bottom: 25px;
+		}
+		@include for-mobile{
+			width: calc(93% - 30px);
+			margin-bottom: 26px;
+		}
+	} 
+
+	h1{
+		font-family: Lato;
+		font-style: normal;
+		font-weight: 900;
+		font-size: 36px;
+		line-height: 48px;
+		text-align: center;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: #141417;
+		margin: auto;
+		margin-top: 71px;
+		margin-bottom: 34px;
+
+		@include for-pad{
+		margin-top: 30px;
+    	margin-bottom: 17px;
+		}
+		@include for-mobile{
+		font-size: 28px;
+		line-height: 36px;
+		font-weight: 500;
+		margin-top: 21px;
+		margin-bottom: 16px;
+		}
+	}
+	p{
+		font-family: Lato;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 24px;
+		text-align: center;
+		color: #2C3044;
+
+		@include for-mobile{
+		font-size: 16px;
+		line-height: 24px;
+		}
+	}
+
+	a{
+		color: blue;
+		text-decoration: underline;
+	}
+					.forPad{
+    						display: none;
+
+    						@include for-pad{
+    							display: block;
+    						}
+    					}
+    .forMobile{
+    	display: none;
+
+    	@include for-mobile{
+    		display: block;
+    	}
+    }
+
+    .forMobileP{
+		    			font-family: Lato;
+						font-style: normal;
+						font-weight: bold;
+						font-size: 24px;
+						line-height: 32px;
+						color: #FFFFFF;
+						position: absolute;
+    				    bottom: 28px;
+    					left: 24px;
+    					display: none;
+
+    					@include for-mobile{
+    					font-size: 16px;
+						line-height: 24px;
+					    bottom: 8px;
+    					left: 8px;
+    					display: block;
+    					}
+
+    					
+		    		}
+	.all_blocks{
+		    display: flex;
+		    flex-flow: row wrap;
+		    width: 59.2%;
+		    margin: auto;
+		    justify-content: space-between;
+		    margin-bottom: 47px;
+
+		    @include for-pad{
+		    	width: 100%;
+		    	padding: 0 12px;
+		    	margin-bottom: 30px;
+		    }
+		    @include for-mobile{
+		    	flex-flow: column wrap;
+    			width: 100%;
+    			margin-bottom: 47px;
+    			padding: 0 16px;
+    			margin-bottom: 22px;
+		    }
+
+		    .block{
+		    	width: 49.295%;
+		    	max-height: 160%;
+		    	margin-bottom: 12px;
+
+		    	@include for-pad{
+		    		width: 49%;
+		    	}
+		    	@include for-mobile{
+		    		width: 100%;
+		    		position: relative;
+		    		margin-bottom: 16px;
+		    	}
+		    	   .forMobile{
+    				display: none;
+
+    				@include for-mobile{
+		    		display: block !important;
+		    		width: 100%;
+    			}}
+		    	img{
+		    		width: 100%;
+
+		    		@include for-mobile{
+		    			display: none;
+		    		}
+		    	}
+
+		    	a{
+		    		position: relative;
+
+		    		p{
+		    			font-family: Lato;
+						font-style: normal;
+						font-weight: bold;
+						font-size: 24px;
+						line-height: 32px;
+						color: #FFFFFF;
+						position: absolute;
+    				    bottom: 28px;
+    					left: 24px;
+
+    					@include for-pad{
+    					font-size: 20px;
+						line-height: 24px;
+					    bottom: 20px;
+    					left: 16px;
+    					}
+    					@include for-mobile{
+    					font-size: 16px;
+						line-height: 24px;
+					    bottom: 8px;
+    					left: 8px;
+    					display:none;
+    					}
+
+    					
+		    		}
+		    	}
+		    }
+	}
+}

@@ -2,28 +2,83 @@
 
 	<div class="content_block">
 		<div>
-			<h1>404</h1>
-	        <h2>Страница не найдена</h2>
+			<h1>Страница<br class="forMobile"> не найдена</h1>
+	        <p>Запрашиваемая страница<br class="forMobile"> не существует.<br class="forPad"> Попробуйте начать с <a href="/">главной страницы</a> или одного <br class="forMobile">из разделов</p>
 	    </div>
 
-	    {{filter | raw }}
 	</div>
-	<div data-widget-wrapper class="error_widget">
-		<div class="items_list_listing swiper-container" data-listing-wrapper>
-			<div class="items_list swiper-wrapper" data-listing-list>
-				{% for widget in widgets %}
-					<a href="/catalog/{{widget.slice.alias}}/" class="item listing_widget_link swiper-slide">
-						<div class="listing_widget_link_img"></div>
-						<div class="listing_widget_link_text">{{widget.link_text}}</div>
-						<div class="listing_widget_link_arrow"></div>
-					</a>
-				{% endfor %}
+		<div class="all_blocks">
+			<div class="block">
+				<a href="#">
+				<img src="/images/404error/error_card_photo.svg">
+				<img src="/images/404error/error_card_photo_mobile.svg" class="forMobile">
+
+				<p>Банкетный зал</p>
+				</a>
+				<p class="forMobileP">Банкетный зал</p>
 			</div>
-			<div class="listing_widget_controll">
-				<div class="listing_widget_arrow _prev"></div>
-				<div class="listing_widget_pagination"></div>
-				<div class="listing_widget_arrow _next"></div>
-			</div>	
+			<div class="block">
+				<a href="#">
+				<img src="/images/404error/error_card_photo1.svg">
+				<img src="/images/404error/error_card_photo_mobile1.svg" class="forMobile">
+
+				<p>Конференц-зал</p>
+				</a>
+				<p class="forMobileP">Конференц-зал</p>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/404error/error_card_photo2.svg">
+				<img src="/images/404error/error_card_photo_mobile2.svg" class="forMobile">
+
+				<p>Концертный зал</p>
+				</a>
+				<p class="forMobileP">Концертный зал</p>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/404error/error_card_photo3.svg">
+				<img src="/images/404error/error_card_photo_mobile3.svg" class="forMobile">
+
+				<p>Танцевальный зал</p>
+				</a>
+				<p class="forMobileP">Танцевальный зал</p>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/404error/error_card_photo4.svg">
+				<img src="/images/404error/error_card_photo_mobile4.svg" class="forMobile">
+
+				<p>Для Дня Рождения</p>
+				</a>
+				<p class="forMobileP">Для Дня Рождения</p>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/404error/error_card_photo5.svg">
+				<img src="/images/404error/error_card_photo_mobile5.svg" class="forMobile">
+
+				<p>Для вечеринки</p>
+				</a>
+				<p class="forMobileP">Для вечеринки</p>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/404error/error_card_photo6.svg">
+				<img src="/images/404error/error_card_photo_mobile6.svg" class="forMobile">
+
+				<p>На свадьбу</p>
+				</a>
+				<p class="forMobileP">На свадьбу</p>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/404error/error_card_photo7.svg">
+				<img src="/images/404error/error_card_photo_mobile7.svg" class="forMobile">
+
+				<p>На крыше</p>
+				</a>
+				<p class="forMobileP">На крыше</p>
+			</div>
 		</div>
-	</div>
 </div>

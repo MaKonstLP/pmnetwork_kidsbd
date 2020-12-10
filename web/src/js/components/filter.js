@@ -8,10 +8,36 @@ export default class Filter{
 
 		this.init(this.$filter);
 
+		//
+		this.$filter.find('[data-filter-select-current-clean]').on('click', function(){
+			let $parent = $(this).closest('[data-filter-select-block]');
+			let content = $parent.find('.filter_p').html();
+			if(content != ''){
+				let clear = $parent.find('.filter_p').text("");
+				let clean = $parent.find('[data-filter-label]').removeClass('_active');
+				let onX = $parent.find('[data-filter-select-current]').removeClass('_xActive');
+				let cleanQuanty = $parent.find('[data-quantity]').addClass('_none');
+				let cleanStr = $parent.find('[data-filter-select-item]').removeClass('_active');
+				
+			}
+			$(this).removeClass('_active');
+		});
+
 		//КЛИК ПО БЛОКУ С СЕЛЕКТОМ
 		this.$filter.find('[data-filter-select-current]').on('click', function(){
 			let $parent = $(this).closest('[data-filter-select-block]');
 			self.selectBlockClick($parent);	
+			let content = $(this).find('.filter_p').html();
+			let cleanButt = $(this).find('[data-filter-select-current-clean]').addClass('_active');
+		
+		});
+
+		//КЛИК ПО КНОПКЕ СБРОСИТЬ
+		$('body').find('[data-clean]').on('click', (e) => {
+			let clear = this.$filter.find('[data-filter-select-current] p').text("");
+			let clean = this.$filter.find('[data-filter-label]').removeClass('_active');
+			let cleanQuanty = this.$filter.find('[data-quantity]').addClass('_none');
+			let onX = this.$filter.find('[data-filter-select-current]').removeClass('_xActive');
 		});
 
 		//КЛИК ПО СТРОКЕ В СЕЛЕКТЕ
@@ -36,11 +62,11 @@ export default class Filter{
 		this.$filter.find('[data-filter-close]').on('click', (e) => {
 			this.$filter.removeClass('_active');
 		});
-		this.$filter.on('click', function(e){
-			if(!$(e.target).hasClass('filter_mobile_button') && !$(e.target).hasClass('filter_wrapper') && !$(e.target).closest('.filter_wrapper').length)
-				if(self.$filter.hasClass('_active'))
-					self.filterClose();
-		});
+		// this.$filter.on('click', function(e){
+		// 	if(!$(e.target).hasClass('filter_mobile_button') && !$(e.target).hasClass('filter_wrapper') && !$(e.target).closest('.filter_wrapper').length)
+		// 		if(self.$filter.hasClass('_active'))
+		// 			self.filterClose();
+		// });
 
 		//КЛИК ВНЕ БЛОКА С СЕЛЕКТОМ
 		$('body').click(function(e) {
@@ -48,6 +74,42 @@ export default class Filter{
 		    	self.selectBlockActiveClose();
 		    }
 		});
+
+		//КЛИК ПО СТРЕЛОЧКИ В МОБИЛЬНОМ ФИЛЬТРЕ
+		this.$filter.find('.filter_label').on('click', function(){
+			let parent = $(this).closest('.label_check');
+			if ($(parent).hasClass("_active")) {
+				$(parent).removeClass("_active");
+			$(parent).find('.filter_label').removeClass('_active');
+			let chekOn = $('.label_check');
+			$(parent).find('.filter_check').removeClass('_active');
+			$(parent).find('.clean_this_filter').removeClass('_active');
+			}
+
+			else{
+			$(parent).addClass("_active");
+			$(parent).find('.filter_label').addClass('_active');
+			let chekOn = $('.label_check');
+			$(parent).find('.filter_check').addClass('_active');
+			$(parent).find('.clean_this_filter').addClass('_active');
+
+			}
+		});
+		//КЛИК ПО КНОПКЕ СБРОСИТЬ В МОБИЛЬНОМ ФИЛЬТРЕ
+		this.$filter.find('[data-clean-mobile]').on('click', function(){
+			let parent = $(this).closest('.label_check');
+			$(parent).find('.filter_check').removeClass('_checked');
+		});
+
+		//КЛИК ПО КНОПКЕ "СБРОСИТЬ ФИЛЬТР" В МОБИЛЬНОМ ФИЛЬТРЕ
+		 $('body').find('[data-clean]').on('click', (e) => {
+			 this.$filter.find('.filter_check').removeClass('_checked');
+			 this.$filter.find('.filter_label').removeClass('_active');
+			 this.$filter.find('.filter_check').removeClass('_active');
+			 this.$filter.find('.clean_this_filter').removeClass('_active');
+			
+		});
+
 	}
 
 	init(){
@@ -152,23 +214,38 @@ export default class Filter{
 		let self = this;
 		let blockType = $block.data('type');		
 		let $items = $block.find('[data-filter-select-item]._active');
-		let selectText = '-';
+		let selectText = '';
 
 		if($items.length > 0){
 			self.state[blockType] = '';
 			$items.each(function(){
 				if(self.state[blockType] !== ''){
 					self.state[blockType] += ','+$(this).data('value');
-					selectText = 'Выбрано ('+$items.length+')';
+					// selectText = 'Выбрано ('+$items.length+')';
+					selectText += ',' + $(this).text();
+					$block.find('[data-quantity]').removeClass('_none');
+					$block.find('[data-quantity]').text($items.length);
+					$block.find('[data-filter-select-current]').addClass('_xActive');
+
 				}
 				else{
 					self.state[blockType] = $(this).data('value');
 					selectText = $(this).text();
+					console.log(1);
+					$block.find('[data-filter-label]').addClass('_active');
+					$block.find('[data-quantity]').addClass('_none');
+					$block.find('[data-filter-select-current]').addClass('_xActive');
+
 				}
 			});
 		}
 		else{
 			delete self.state[blockType];
+		}
+		if(selectText == ""){
+			$block.find('[data-filter-label]').removeClass('_active');
+			$block.find('[data-quantity]').addClass('_none');
+			$block.find('[data-filter-select-current]').removeClass('_xActive');
 		}
 
 		$block.find('[data-filter-select-current] p').text(selectText);
@@ -194,7 +271,6 @@ export default class Filter{
 		else{
 			var href = '/catalog/';
 		}			
-
 		return href;
 	}
 }

@@ -1,63 +1,145 @@
+<div class="disco_ball"></div>
+<div class="confetti_top_right"></div>
 <div data-page-type="index">
 
-	<div class="main_top">
+	<!-- <div class="main_top">
         <h1>{{seo.h1}}</h1>
         <div class="main_top_desc">
             {{seo.text_top | raw}}
         </div>                    
-    </div>
+    </div> -->
 
-	<div class="content_block">
-		<div class="title">
-			<h2>Банкетные залы на природе</h2>
-			<div class="title_count">{{count}} зал{{Declension.end_rooms(count)}}</div>
+	<div class="content_block index_page">
+		<div class="title index">
+			<h2>Поиск и аренда мест для мероприятий<br class="padBlock"> в Санкт-Петербурге</h2>
+		</div>
+		<div class="tags">
+			<div class="tag">
+				<p>Новый год</p>
+				<p class="num">12</p>
+			</div>
+			<div class="tag">
+				<p>День рождения</p>
+				<p class="num">12</p>
+			</div>
+			<div class="tag">
+				<p>Свадьба</p>
+				<p class="num">12</p>
+			</div>
+			<div class="tag">
+				<p>Корпоратив</p>
+				<p class="num">12</p>
+			</div>
+			<div class="tag">
+				<p>Выпускной</p>
+				<p class="num">12</p>
+			</div>
+		</div>
+		<div class="filter_mobile_wrapper index_form">
+			<div class="filter_mobile_button _button" data-filter-open><span class="filter_before">Фильтр заведений</span></div>
 		</div>
 
-		{{filter | raw }}
+		
 	</div>
-
-	<div class="filter_mobile_wrapper">
-		<div class="filter_mobile_button _button" data-filter-open>Показать фильтр</div>
-	</div>
-
-	{% for widget in widgets %}
-		<div data-widget-wrapper>
-			<div class="listing_widget_header">
-				<h3 class="listing_widget_title">{{widget.title}}</h3>
-				<p class="listing_widget_subtitle">{{widget.subtitle}}</p>
+	<div class="content_block forFilter not_margin_bot">{{filter | raw }}</div>
+	<div class="content_block _all_often">
+	<div class="often_searched">
+		<h2>Чаще всего ищут эти места</h2>
+		<div class="all_blocks">
+			<div class="block">
+				<a href="#">
+				<img src="/images/index/listing_card_photo1.svg">
+				<p>Банкетный зал</p>
+				</a>
 			</div>
-			<div class="items_list_listing swiper-container" data-listing-wrapper>
-				<div class="items_list swiper-wrapper" data-listing-list>
-					{{ this.render('//components/generic/listing.twig', {'items':widget.items, 'img_alt': widget.img_alt}) | raw }}
-					<a href="/catalog/{{widget.slice.alias}}/" class="item listing_widget_link swiper-slide">
-						<div class="listing_widget_link_img"></div>
-						<div class="listing_widget_link_text">{{widget.link_text}}</div>
-						<div class="listing_widget_link_arrow"></div>
-					</a>
-				</div>
-				<div class="listing_widget_controll">
-					<div class="listing_widget_arrow _prev"></div>
-					<div class="listing_widget_pagination"></div>
-					<div class="listing_widget_arrow _next"></div>
-				</div>					
+			<div class="block">
+				<a href="#">
+				<img src="/images/index/listing_card_photo2.svg">
+				<p>Конференц-зал</p>
+				</a>
 			</div>
-
-			<a href="/catalog/{{widget.slice.alias}}/" class="main_widget_link _button">
-				{{widget.link_text}}
+			<div class="block">
+				<a href="#">
+				<img src="/images/index/listing_card_photo3.svg">
+				<p>Концертный зал</p>
+				</a>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/index/listing_card_photo4.svg">
+				<p>Танцевальный зал</p>
+				</a>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/index/listing_card_photo5.svg">
+				<p>Для Дня Рождения</p>
+				</a>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/index/listing_card_photo6.svg">
+				<p>Для вечеринки</p>
+				</a>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/index/listing_card_photo7.svg">
+				<p>На свадьбу</p>
+				</a>
+			</div>
+			<div class="block">
+				<a href="#">
+				<img src="/images/index/listing_card_photo8.svg">
+				<p>На крыше</p>
+				</a>
+			</div>
+		</div>
+		<div class="big_block">
+			<a href="#">
+			<img src="/images/index/listing_card_photo.svg">
+			<div class="mobil_img"></div>
+			<p>Перейти ко всем залам</p>
 			</a>
+		</div>
 
-			<div class="listing_widget_footer">
-				<div class="seo_text" data-seo-text>
-					{{widget.text | raw }}
-					<div class="seo_text_control" data-seo-control>
-						<p class="_link">Показать полностью</p>
+	</div>
+
+		<div class="how_work_block">
+			<h2>Как это работает</h2>
+			<div class="how_work">
+				<div class="ball_step">
+					<div class="ball">
+						<p>1</p>
 					</div>
+					<div class="ball_text">Подпись к иконке в две строки</div>
+				</div>
+				<div class="arrow_ball"></div>
+				<div class="ball_step">
+					<div class="ball">
+						<p>2</p>
+					</div>
+					<div class="ball_text">Подпись к иконке в две строки</div>
+				</div>
+				<div class="arrow_ball two"></div>
+				<div class="ball_step">
+					<div class="ball">
+						<p>3</p>
+					</div>
+					<div class="ball_text">Подпись к иконке в две строки</div>
 				</div>
 			</div>
 		</div>
-	{% endfor %}
+		<div class="bottom_text_index" id="mobile_but_all">Понтон на воде 400 м² с белым шатром 260 м². Вмещает до 180 постояльцев банкетной рассадкой. На территории понтона размещаются 2 маленькие веранды, которые уже входят в стоимость аренды, а на свободных от шатра углах устроилась мягкая мебель. Шатер оборудован барной стойкой со светодиодной подсветкой, необходимым для вечернего освещения количеством люстр, а на каждой стальной дуге вывешены световые «Пары». В случае непогоды по периметру заакрываются шторы, которые не пропускают воду и ветер, и предоставляются газовые и электронные обогреватели. Понтон содержит отдельный подъезд и личную парковку на 20 машиномест, собственно что выделяет ему превосходство перед другими площадками. Ресторан дает текстиль на столы и стулья и индивидуальные тканевые салфетки. Громкая музыка вероятна до 21:30, впоследствии лишь только в фоновом режиме.</div>
+		<div class="mobile_button_text" id="butt_on"><span>Показать полностью</span></div>
+		<div class="mobil_but_off" id="butt_off"><span>Скрыть текст</span></div>
+	</div>
 
-	<div class="content_block">
+	
+
+	
+
+	<div class="content_block index_form">
 		{{ this.render('//components/generic/form.twig') | raw }}
 	</div>
 

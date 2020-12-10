@@ -1,0 +1,70 @@
+<div class="callback">
+		<div class="form_wrapper">
+	{% if type != 'item' %}	
+		<div class="callback _first_form" id="firstWindow">
+			<div class="arrow_open"></div>
+			<h1>Помочь с выбором зала?</h1>
+			<p>бесплатно подберем оптимальный для вас вариант</p>
+			<div class="phone_number">+7 (846) 205-78-45</div>
+			<button type="button" class="_button callMe">Заказать звонок</button>
+		</div>
+	
+		{% else %}
+		<div class="callback _first_form _item"  id="firstWindow">
+				<div class="arrow_open"></div>
+				<p>Забронировать это место</p>
+				<div class="object_book_hidden">
+                    <p class="object_book_phone">
+                        <span class="object_fake_phone" id="callback_object_phone">+7 (925) xxx-xx-xx</span>
+                        <a href="tel:{{item.restaurant_phone}}" class="object_real_phone"></a>
+                    </p>
+                    <div class="object_book_hidden_button _callback">Показать телефон</div>
+                </div>
+				<button type="button" class="_button callMe">Заказать звонок</button>
+		</div>
+		{% endif %}
+		<div class="callback _second_form" id="secondWindow">
+			<div class="arrow_open _right"></div>
+			<h1>Заказать обратный звонок</h1>
+			<p>Наш менеджер перезвонит через 30 минут.</p>
+			<form action="/ajax/form/" data-type={% if type != 'item' %}"main"{% else %}"item"{% endif %}>
+				<div class="form_inputs">
+					<div class="input_wrapper _big">
+					<div class="input_label">Как вас зовут?</div>
+					<input type="text" name="name" data-required/>
+				</div>
+				<div class="input_wrapper ">
+					<div class="input_label">Номер телефона</div>
+					<input type="text" name="phone" data-required data-dynamic-placeholder/>
+				</div>
+				</div>
+				<div class="form_submit">
+				<button type="submit" class="_button go">Отправить</button>
+				<div class="form_policy checkbox_item _active" data-form-privacy>
+					<input type="checkbox" name="policy" class="personalData" checked="">
+					<p class="checkbox_pseudo">Cогласен с <span> <a class="_link" href="/privacy/" target="_blank"> политикой обработки персональных данных</a></span></p>
+				</div>
+			</div>
+			<input type="hidden" name="_csrf" value="{{Declension.csrfToken()}}" />
+			</form>
+		</div>
+		<div class="callback _third_form" data-success id="theirdWindow">
+			<div class="arrow_open _right"></div>
+			<div data-success>
+
+			<div>
+				<h1>Заявка отправлена</h1>
+			</div>
+
+			<div>
+				<p class="form_success_text_main"><span data-success-name></span>, спасибо<br> за проявленный интерес. Менеджер<br> перезвонит вам через 30 минут.</p>
+			</div>
+			<div class="reload_callback">
+			<img src="/images/reload_icon_callback.svg" class="call_reload_img">
+			<div class="form_success_close _link" data-success-close>Заполнить еще раз</div>
+			</div>
+			</div>
+		</div>
+	</div>
+	</div>
+

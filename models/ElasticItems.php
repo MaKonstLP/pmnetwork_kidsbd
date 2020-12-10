@@ -9,6 +9,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
     {
         return [
             'restaurant_id',
+            'restaurant_city_id',
             'restaurant_gorko_id',
             'restaurant_price',
             'restaurant_min_capacity',
@@ -76,6 +77,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
                 'properties' => [
                     'restaurant_id'                    => ['type' => 'integer'],
                     'restaurant_gorko_id'              => ['type' => 'integer'],
+                    'restaurant_city_id'            => ['type' => 'integer'],
                     'restaurant_price'                 => ['type' => 'integer'],
                     'restaurant_min_capacity'          => ['type' => 'integer'],
                     'restaurant_max_capacity'          => ['type' => 'integer'],
@@ -234,6 +236,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         $record->id  = $room->id;
         
         $record->restaurant_id = $restaurant->id;
+        $record->restaurant_city_id = $restaurant->city_id;
         $record->restaurant_gorko_id = $restaurant->gorko_id;
         $record->restaurant_price = $restaurant->price;
         $record->restaurant_min_capacity = $restaurant->min_capacity;

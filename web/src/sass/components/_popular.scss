@@ -1,0 +1,226 @@
+$fonSizeDescH:32px;
+$lineHeightDescH:40px;
+$fontFamilyLato:Lato;
+$fontSizeDescP:24px;
+$lineHeightDescP:32px;
+$fontSizeMobilH:28px;
+$lineHeightMobilH:32px;
+$fontSizeMobilP:16px;
+$lineHeightMobilP:24px;
+
+[data-page-type="popular_all"]{
+    margin: auto;
+    position: relative;
+    margin-bottom: 22px;
+
+    @include for-pad{
+    	width: calc(100% - 20px);
+    }
+    @include for-mobile{
+    	width: calc(100% - 30px);
+    }
+}
+.popular_all{
+	display: flex;
+	flex-flow:column;
+	justify-content:center;
+
+	.popular_block{
+		display: flex;
+		flex-flow:column;
+		width: 1136px;
+		height: auto;
+		margin: auto;
+		margin-bottom: 40px;
+
+		@include for-pad{
+			width: 744px;
+		}
+		@include for-mobile{
+			width: 288px;
+		}
+
+		h2{
+			font-family: $fontFamilyLato;
+			font-style: normal;
+			font-weight: bold;
+			font-size: $fonSizeDescH;
+			line-height: $lineHeightDescH;
+			text-align: center;
+			color: #2C3044;
+			margin-bottom: 16px;
+
+			@include for-mobile{
+			font-size: $fontSizeMobilH;
+			line-height: $lineHeightMobilH;
+			}
+		}
+
+		.contain_pop{
+			display: flex;
+			flex-flow:row;
+			justify-content: space-between;
+			width: 100%;
+
+			@include for-mobile{
+				flex-flow:column;
+				justify-content:center;
+			}
+
+			a{    
+				width: 49.297%;
+    			height: 320px;
+    			margin-bottom: 30px;
+
+    			@include for-pad{
+    				height: auto;
+    			}
+    			@include for-mobile{
+    				width: 100%;
+    				height: auto;
+    				margin-bottom: 8px
+    			}
+
+			.img_contein_pop{
+				position: relative;
+
+				img{
+					width: 100%;
+					height: auto;
+				}
+				p{
+					position: absolute;
+					font-family: $fontFamilyLato;
+					font-style: normal;
+					font-weight: bold;
+					font-size: $fontSizeDescP;
+					line-height: $lineHeightDescP;
+					color: #FFFFFF;
+					bottom: 28px;
+					left: 24px;
+
+					@include for-mobile{
+						font-size: $fontSizeMobilP;
+						line-height:$lineHeightMobilP ;
+					}
+				}
+			}
+		  } 	
+		}
+
+		button{
+			font-family: $fontFamilyLato;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 14px;
+			line-height: 20px;
+			display: flex;
+			align-items: center;
+			text-align: center;
+			color: #141417;
+			padding: 13px 71px 15px;
+		    width: 234px;
+		    margin: auto;
+		    cursor: pointer;
+		    border-radius: 4px;
+			border:1px solid yellow;
+			border-image: linear-gradient(to right , orange, #ebc302, yellow, yellow);
+			border-image-slice: 1;
+		}
+	}
+
+}
+.title{
+&.popular{
+	width: 55%;
+    margin: auto;
+    margin-top: 71px;
+
+	@include for-pad{
+		margin-top: 0px;
+	}
+	@include for-mobile{
+		width: auto;
+		margin-top: 35px;
+	}
+
+	h1{
+		font-family: Lato;
+		font-style: normal;
+		font-weight: 900;
+		font-size: 36px;
+		line-height: 48px;
+		text-align: center;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: #141417;
+		margin-bottom: 67px;
+
+    	@include for-pad{
+    		margin-bottom: 16px;
+    	}
+    	@include for-mobile{
+    		font-size: 32px;
+    		line-height: 40px;
+    		margin-bottom: 40px;
+    	}
+	}
+}}
+.text_bottom{
+	margin: auto;
+    position: relative;
+    margin-bottom: 65px;
+    width: 60%;
+    padding: 0 8px;
+
+    @include for-pad{
+    	width: 95%;
+    }
+    @include for-mobile{
+    	width: auto;
+    }
+
+    p{
+    font-family: $fontFamilyLato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2C3044;
+    }
+}
+
+
+.yet{
+			font-family: $fontFamilyLato;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 14px;
+			line-height: 20px;
+			display: flex;
+			align-items: center;
+			text-align: center;
+			color: #141417;
+			padding: 13px 70px 15px;
+		    width: 234px;
+		    margin: auto;
+		    cursor: pointer;
+		    border-radius: 4px;
+			border:1px solid yellow;
+			border-image: linear-gradient(to right , orange, #ebc302, yellow, yellow);
+			border-image-slice: 1;
+}
+.content_block{
+ &.pop_form{
+	margin-bottom: 64px;
+	width: 64.6%;
+
+	@include for-pad{
+		width: 100%;
+	}
+	@include for-mobile{
+		width: 100%;
+		padding: 0 10px;
+	}
+}
+}

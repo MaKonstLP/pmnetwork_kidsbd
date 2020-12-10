@@ -7,9 +7,13 @@
 }
 
 @mixin for-notdesc {
- 	@media (max-width: 1440px) { @content; }
+ 	@media (max-width: 1798px) { @content; }
 }
 
 @mixin for-lowdesc {
  	@media (max-width: 1650px) { @content; }
+}
+
+@mixin for-smallmobile {
+	@media (max-width: 444px) { @content; }
 }

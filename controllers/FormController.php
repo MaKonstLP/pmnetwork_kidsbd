@@ -31,7 +31,7 @@ class FormController extends Controller
         }
 
         //$to   = ['martynov@liderpoiska.ru', 'sharapova@liderpoiska.ru', 'sites@plusmedia.ru'];
-        $to   = ['martynov@liderpoiska.ru', 'sharapova@liderpoiska.ru'];
+        $to   = ['ssk@liderpoiska.ru', 'martynov@liderpoiska.ru'];
 
         if($_POST['type'] == 'main'){
             $subj = "Заявка на выбор зала.";
@@ -92,6 +92,7 @@ class FormController extends Controller
     }
 
     public function sendMail($to,$subj,$msg) {
+        return true;
         $message = Yii::$app->mailer->compose()
             ->setFrom(['post@smilerooms.ru' => 'Свадьба на природе.'])
             ->setTo($to)
