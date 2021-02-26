@@ -11,7 +11,7 @@ use frontend\widgets\FilterWidget;
 use frontend\widgets\PaginationWidget;
 use frontend\components\ParamsFromQuery;
 use frontend\components\QueryFromSlice;
-use frontend\components\Breadcrumbs;
+use frontend\modules\arenda\components\Breadcrumbs;
 use frontend\components\Declension;
 use common\models\ItemsFilter;
 use common\models\elastic\ItemsFilterElastic;
@@ -133,8 +133,8 @@ class ListingController extends Controller
 			. ' заведени'
 			. Declension::get_num_ending($items->total, ['е', 'я', 'й']);
 
-
-		// print_r($params_filter);
+		// echo '<pre>';
+		// print_r($seo['breadcrumbs']);
 		// exit;
 
 		return $this->render('index.twig', array(
@@ -163,6 +163,8 @@ class ListingController extends Controller
 		$seo_type = $slice_url ? $slice_url : 'listing';
 		$seo = $this->getSeo($seo_type, $params['page'], $items->total);
 		$seo['breadcrumbs'] = $breadcrumbs;
+
+		// $this->setSeo($seo, 1, false);
 
 		$totalCount = $items->total
 		. ' заведени'
@@ -234,10 +236,11 @@ class ListingController extends Controller
 	private function setSeo($seo, $page, $canonical){
 		$this->view->title = $seo['title'];
 		$this->view->params['desc'] = $seo['description'];
-		if($page != 1){
+		$this->view->params['kw'] = $seo['keywords'];
+
+		if ($page != 1){
 			$this->view->params['canonical'] = $canonical;
 		}
-        $this->view->params['kw'] = $seo['keywords'];
 	}
 
 }

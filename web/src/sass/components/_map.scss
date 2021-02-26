@@ -108,48 +108,60 @@
 		}
 	}
 }
-    .ymaps-2-1-77-b-cluster-content{
 
-    	.balloon_wrapper{
-    		margin-left: 0;
-    	}
+.balloon_wrapper._cluster_wrapper{
+	width: 374px;
+	padding: 16px 38px 24px 0;
+	box-shadow: none;
+}
 
-    	._all{
-    		display: none;
-    	}
-    }
+.ymaps-2-1-77-b-cluster-content{
+
+	.balloon_wrapper{
+		margin-left: 0;
+	}
+
+	._all{
+		display: none;
+	}
+}
+
 .ymaps-2-1-77-islets_balloon_layout_panel{
 
 	@include for-mobile{
 		width: 288px;
-	    top: -403px;
-	    height: 200px;
-	    margin: auto;
+		top: -403px;
+		height: 200px;
+		margin: auto;
 	}
 }
+
 .ymaps-2-1-77-gototech{
 
 	@include for-mobile{
 		position: absolute;
-	    top: 183px;
-	    left: 0;
+		top: 183px;
+		left: 0;
 	}
 }
+
 .ymaps-2-1-77-copyright__link{
 
 	@include for-mobile{
 		display: none;
 	}
 }
+
 .ymaps-2-1-77-gotoymaps{
 
 	@include for-mobile{
 		margin-top: 206px;
 	}
 }
+
 .balloon_single_address{
 
-    .balloon_wrapper{
-        margin-left: 0;
-    }
+	.balloon_wrapper{
+		margin-left: 0;
+	}
 }

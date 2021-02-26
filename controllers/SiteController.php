@@ -11,6 +11,7 @@ use common\models\elastic\ItemsWidgetElastic;
 use common\models\Seo;
 use common\models\Filter;
 use common\models\Slices;
+use common\models\SlicesExtended;
 
 class SiteController extends Controller
 {
@@ -37,8 +38,11 @@ class SiteController extends Controller
             'filter_model' => $filter_model
         ]);
 
+        $slicesForTag = SlicesExtended::find()->where(['type' => 'prazdnik'])->all();
+        $slicesForListing = SlicesExtended::find()->where(['alias' => ['banketnyy-zal', 'konferenc-zal', 'tancevalnyy-zal', 'den-rojdeniya', 'vypusknoy', 'aktovye-zaly', 'svadba', 'veranda']])->all();
+
         // echo '<pre>';
-        // print_r($filter);
+        // print_r($slicesForTag);
         // exit;
 
         return $this->render('index.twig', [
@@ -46,6 +50,8 @@ class SiteController extends Controller
             'widgets' => $apiMain['widgets'],
             'count' => $apiMain['total'],
             'seo' => $seo->seo,
+            'slices_for_tag' => $slicesForTag,
+            'slices_for_listing' => $slicesForListing,
         ]);
     }
 

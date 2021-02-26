@@ -4,6 +4,8 @@ namespace app\modules\arenda\controllers;
 use Yii;
 use backend\models\Filter;
 use common\models\GorkoApiTest;
+use common\models\Slices;
+use common\models\SlicesExtended;
 use frontend\modules\arenda\models\ElasticItems;
 use yii\web\Controller;
 
@@ -86,23 +88,32 @@ class TestController extends Controller
 	    //echo '<pre>';
 	    
 	    //echo '<pre>';
-
-		
-
-
-	    
 	}
 
 	public function actionCustom(){
-		$filter_model = Filter::find()->with('items')->asArray()->all();
+		// $filter_model = Filter::find()->with('items')->asArray()->all();
 
-		foreach ($filter_model[1]['items'] as $key => $value) {
+		// foreach ($filter_model[1]['items'] as $key => $value) {
 			// echo 'rest_type ' . $this->translit($value['text']) . ' ' . $value['text'] . ' ' . '{rest_type:' . $value['value'] . '}<br/>';
-			echo $this->translit($value['text']) . ' ' . $value['text'] . '<br/>';
-		}
+		// 	echo $this->translit($value['text']) . ' ' . $value['text'] . '<br/>';
+		// }
 		
 		// echo '<pre>';
 		// print_r($filter_model[0]['items']);
+
+		// $slices = Slices::find()->all();
+
+		foreach ($slices as $slice){
+			// $extended = new SlicesExtended();
+			// $extended->alias = $slice->alias;
+			// $extended->name = $slice->h1;
+
+			// $extended = SlicesExtended::find()->where(['alias' => $slice->alias])->one();
+			// $extended->type = $slice->type;
+
+			// $extended->save();
+		}
+
 		exit;
 	}
 

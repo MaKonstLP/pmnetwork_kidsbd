@@ -8,6 +8,7 @@ export default class YaMapAll{
 		this.filter = filter;
 		this.myMap = null;
 		this.objectManager = null;
+		this.myBalloonContentLayoutForClaster = false;
 		this.myBalloonContentLayout = false;
 		this.myBalloonLayout = false;
 
@@ -185,6 +186,34 @@ export default class YaMapAll{
 					</div>`
 				);
 
+				self.myBalloonContentLayoutForClaster  = ymaps.templateLayoutFactory.createClass(
+					`<div class="balloon_wrapper _cluster_wrapper">
+
+						<div class="balloon_content">
+
+							<a href="{{properties.link}}"><img src={{properties.img}}></a>
+
+							<div class="balloon_text">
+
+								<a href="{{properties.link}}"><div class="balloon_header">
+									{{properties.organization}}
+								</div></a>
+
+								<div class="balloon_address">
+									{{properties.address}}
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="balloon_link">
+							<button class="balloon_link_button _button"><a href="{{properties.link}}">Посмотреть зал</a></button>
+						</div>
+						<a class="close _all" href="#"><img src="/images/Close_icon_map.svg"></a>
+					</div>`
+				);
+
 				self.objectManager = new ymaps.ObjectManager(
 					{
 						geoObjectBalloonLayout: self.myBalloonLayout, 
@@ -193,7 +222,7 @@ export default class YaMapAll{
 						geoObjectBalloonOffset: [-28, 17],
 						clusterize: true,
 						clusterDisableClickZoom: false,
-						clusterBalloonItemContentLayout: self.myBalloonContentLayout,
+						clusterBalloonItemContentLayout: self.myBalloonContentLayoutForClaster,
 						clusterIconColor: "green",
 						geoObjectIconColor: "green"
 					}
@@ -254,7 +283,7 @@ export default class YaMapAll{
 								geoObjectBalloonOffset: [-28, 17],
 								clusterize: true,
 								clusterDisableClickZoom: false,
-								clusterBalloonItemContentLayout: self.myBalloonContentLayout,
+								clusterBalloonItemContentLayout: self.myBalloonContentLayoutForClaster,
 								clusterIconColor: "green",
 								geoObjectIconColor: "green"
 	
