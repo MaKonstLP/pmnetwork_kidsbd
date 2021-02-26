@@ -1,3 +1,11 @@
+[data-page-type="index"]{
+
+	h1{
+		text-transform: uppercase;
+	}
+
+}
+
 .main_top{
     width: 100%;
     margin: 42px auto 50px;
@@ -91,36 +99,37 @@
     	display: none;
     }
 }
+
 .title{
 
 	&.index{
 
+		h2{
+			font-family: Lato;
+			font-style: normal;
+			font-weight: 900;
+			font-size: 36px;
+			line-height: 48px;
+			text-align: center;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			color: #141417;
+			width: 97%;
+			margin-bottom: 27px;
 
-h2{
-	font-family: Lato;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 36px;
-    line-height: 48px;
-    text-align: center;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #141417;
-    width: 97%;
-    margin-bottom: 27px;
-
-    @include for-pad{
-    width: 77%;
-    margin-bottom: 19px;
-    }
-    @include for-mobile{
-    	letter-spacing: 0.03em;
-    	font-size: 28px;
-		line-height: 36px;
-		margin-bottom: 9px;
-    }
-}
-}
+			@include for-pad{
+				width: 77%;
+				margin-bottom: 19px;
+			}
+			
+			@include for-mobile{
+				letter-spacing: 0.03em;
+				font-size: 28px;
+				line-height: 36px;
+				margin-bottom: 9px;
+			}
+		}
+	}
 }
 
 .tags{
@@ -135,33 +144,19 @@ h2{
     margin-bottom: 7px;
 	}
 
-
-
-
-
 	.tag{
+		cursor: pointer;
 		display: flex;
-		flex-flow:row;
-		justify-content:space-between;
+		flex-flow: row;
 		border: 1px solid #2C689B;
 		box-sizing: border-box;
 		border-radius: 54px;
-		padding: 3px 12px 6px 12px;
-		margin-right: 20px;
+		padding: 4px 12px 4px 12px;
+		margin: 0 10px 0 10px;
 
-		@include for-pad{
-		padding: 3px 6px 6px 6px;
-    	margin-right: 20px;
-		}
 		@include for-mobile{
-		margin-right: 17px;
-    	margin-bottom: 13px;
-    	padding: 3px 5px 5px 5px;
+			margin: 6px 6px 6px 6px;
 		}
-
-
-
-
 
 		p{
 			font-family: Lato;
@@ -183,21 +178,26 @@ h2{
 			margin: 0px;
 			color: #2C689B;
 		}
-	}
-}
-.tags :last-child{
-		margin-right: 0px;
 
-		@include for-mobile{
-			margin-bottom: 0px;
+		&:hover{
+			border: 1px solid #69F5FF;			
 		}
 	}
+}
+
+// .tags :last-child{
+// 	margin-right: 0px;
+
+// 	@include for-mobile{
+// 		margin-bottom: 0px;
+// 	}
+// }
 
 .often_searched{
 	margin-bottom: 64px;
 
 	@include for-pad{
-		margin-bottom:19px;
+		margin-bottom:23px;
 	}
 	@include for-mobile{
 		margin-bottom: 32px;
@@ -211,12 +211,13 @@ h2{
 		line-height: 40px;
 		text-align: center;
 		color: #141417;
-		margin-bottom: 16px;
+		margin-bottom: 24px;
 
 		@include for-mobile{
 			font-size: 28px;
 			line-height: 32px;
-			padding: 0 30px;
+			margin-bottom: 16px;
+			padding: 0 15px 0 15px;
 		}
 	}
 
@@ -260,7 +261,7 @@ h2{
 				}
 			}
 
-			p{
+			h3{
 				position: absolute;
 				font-family: Lato;
 				font-style: normal;
@@ -327,7 +328,7 @@ h2{
 				}
 			}
 
-			p{
+			h3{
 				position: absolute;
 				font-family: Lato;
 				font-style: normal;
@@ -373,7 +374,7 @@ h2{
 	z-index: 9 !important;
 
 	@include for-pad{
-		margin-bottom: 6px !important;
+		margin-bottom: 15px !important;
 	}
 
 	@include for-mobile{
@@ -389,7 +390,7 @@ h2{
 .content_wrap{
 
 	&.forIndex{
-		margin-top: 87px;
+		margin-top: 96px;
 		padding-bottom: 0px;
 
 		@include for-pad{
@@ -397,7 +398,7 @@ h2{
 		}
 
 		@include for-mobile{
-			margin-top: 50px;
+			margin-top: 56px;
 		}
 	}
 }
@@ -429,20 +430,20 @@ h2{
 			margin-bottom: 17px;
 		}
 		@include for-mobile{
-			margin-bottom: 9px;
+			margin-bottom: 10px;
 		}
 
 		.title{
 
 			&.index{
-				margin-top: 55px;
+				padding: 48px 0 30px 0;
 
 				@include for-pad{
-					margin-top: 24px;
+					padding: 24px 0 10px 0;
 				}
 
 				@include for-mobile{
-					margin-top: 21px;
+					padding: 16px 0 5px 0;
 				}
 
 				.padBlock{
@@ -581,28 +582,28 @@ h2{
 
 	.arrow_ball{
 		background-image: url(/images/index/steps_arrow.svg);
-		width: 250px;
-	    height: 12px;
-	    margin-top: calc(4.5% - 6px);
+		width: 249px;
+		height: 12px;
+		margin-top: calc(4.5% - 6px);
 
-	    @include for-pad{
-	    	background-image: url(/images/index/steps_arrow_768.svg);
-	    	width: 144px;
-		    position: absolute;
+		@include for-pad{
+			background-image: url(/images/index/steps_arrow_768.svg);
+			width: 144px;
+			position: absolute;
 			top: 31%;
-  		    left: 23.6%;
-		    margin: auto;
-	    }
-	    @include for-mobile{
-	    	display: none;
-	    }
+			left: 23.6%;
+			margin: auto;
+		}
+		@include for-mobile{
+			display: none;
+		}
 
-	    &.two{
+		&.two{
 
-	    	@include for-pad{
-	    		left: 57.6%;
-	    	}
-	    }
+			@include for-pad{
+				left: 57.6%;
+			}
+		}
 	}
 	.ball_text{
 				font-family: Lato;

@@ -1,7 +1,11 @@
 <?php
 namespace frontend\modules\arenda\models;
 
+use Yii;
 use common\models\Restaurants;
+use common\models\RestaurantsTypes;
+use common\models\RestaurantsSpec;
+use yii\helpers\ArrayHelper;
 
 class ElasticItems extends \yii\elasticsearch\ActiveRecord
 {
@@ -30,13 +34,9 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             'restaurant_payment',
             'restaurant_special',
             'restaurant_phone',
-            'restaurant_location_sea',
-            'restaurant_location_river',
-            'restaurant_location_lake',
-            'restaurant_location_mount',
-            'restaurant_location_city',
-            'restaurant_location_center',
-            'restaurant_location_outside',
+            'restaurant_location',
+            'restaurant_types',
+            'restaurant_spec',
             'restaurant_commission',
             'id',
             'gorko_id',
@@ -97,13 +97,17 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
                     'restaurant_payment'               => ['type' => 'text'],
                     'restaurant_special'               => ['type' => 'text'],
                     'restaurant_phone'                 => ['type' => 'text'],
-                    'restaurant_location_sea'          => ['type' => 'integer'],
-                    'restaurant_location_river'        => ['type' => 'integer'],
-                    'restaurant_location_lake'         => ['type' => 'integer'],
-                    'restaurant_location_mount'        => ['type' => 'integer'],
-                    'restaurant_location_city'         => ['type' => 'integer'],
-                    'restaurant_location_center'       => ['type' => 'integer'],
-                    'restaurant_location_outside'      => ['type' => 'integer'],
+                    'restaurant_types'              => ['type' => 'nested', 'properties' =>[
+                        'id'                            => ['type' => 'integer'],
+                        'name'                          => ['type' => 'text'],
+                    ]],
+                    'restaurant_spec'                 => ['type' => 'nested', 'properties' => [
+                        'id'                             => ['type' => 'integer'],
+                        'name'                           => ['type' => 'text'],
+                    ]],
+                    'restaurant_location'              => ['type' => 'nested', 'properties' =>[
+                        'id'                            => ['type' => 'integer'],
+                    ]],
                     'restaurant_commission'            => ['type' => 'integer'],
                     'id'                    => ['type' => 'integer'],
                     'gorko_id'              => ['type' => 'integer'],
@@ -183,13 +187,44 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         $res = self::deleteIndex();
         $res = self::updateMapping();
         $res = self::createIndex();
+
+        $connection = new \yii\db\Connection([
+            'dsn'       => 'mysql:host=localhost;dbname=pmn_arenda',
+            'username'  => 'root',
+            'password'  => 'LP_db_',
+            'charset'   => 'utf8mb4',
+        ]);
+        $connection->open();
+        Yii::$app->set('db', $connection);
+
         $restaurants = Restaurants::find()
             ->with('rooms')
+            ->limit(10000)
+            ->all($connection);
+
+
+        $restaurants_types = RestaurantsTypes::find()
             ->limit(100000)
+            ->asArray()
             ->all();
+        $restaurants_types = ArrayHelper::index($restaurants_types, 'value');
+
+        $restaurants_spec = RestaurantsSpec::find()
+            ->limit(100000)
+            ->asArray()
+            ->all($connection);
+
+        $restaurants_spec = ArrayHelper::index($restaurants_spec, 'id');
+
+
+        // echo '<pre>';
+        // print_r($restaurants_types);
+        // exit;
+
         foreach ($restaurants as $restaurant) {
+
             foreach ($restaurant->rooms as $room) {
-                $res = self::addRecord($room, $restaurant);
+                $res = self::addRecord($room, $restaurant, $restaurants_types, $restaurants_spec);
             }            
         }
         echo 'Обновление индекса '. self::index().' '. self::type() .' завершено<br>';
@@ -201,6 +236,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             ->limit(100000)
             ->where(['in_elastic' => 0, 'active' => 1])
             ->all();
+
         foreach ($restaurants as $restaurant) {
             foreach ($restaurant->rooms as $room) {
                 $res = self::addRecord($room, $restaurant);
@@ -212,7 +248,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         echo 'Обновление индекса '. self::index().' '. self::type() .' завершено<br>';
     }
 
-    public static function addRecord($room, $restaurant){
+    public static function addRecord($room, $restaurant, $restaurants_types){
         $isExist = false;
         
         try{
@@ -229,6 +265,14 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             $record = new self();
             $record->setPrimaryKey($room->id);
         }
+
+        $restaurant_spec_white_list = [1, 9, 11, 12, 15, 17];
+        $restaurant_spec_rest = explode(',', $restaurant->restaurants_spec);
+
+        if (count(array_intersect($restaurant_spec_white_list, $restaurant_spec_rest)) === 0) {
+            return 'Неподходящий тип мероприятия';
+        }
+
 
         if(count($room->images) == 0)
             return 0;
@@ -258,42 +302,40 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         $record->restaurant_special = $restaurant->special;
         $record->restaurant_phone = $restaurant->phone;
         $record->restaurant_commission = $restaurant->commission;
-        $record->restaurant_location_sea = 0;
-        $record->restaurant_location_river = 0;
-        $record->restaurant_location_lake = 0;
-        $record->restaurant_location_mount = 0;
-        $record->restaurant_location_city = 0;
-        $record->restaurant_location_center = 0;
-        $record->restaurant_location_outside = 0;
-        $location_arr = json_decode($restaurant->location);
-        if(count($location_arr) > 0 ){
-            foreach ($location_arr as $value) {
-                switch ($value) {
-                    case 'Около реки':
-                        $record->restaurant_location_river = 1;
-                        break;
-                    case 'Около моря':
-                        $record->restaurant_location_sea = 1;
-                        break;
-                    case 'Около озера':
-                        $record->restaurant_location_lake = 1;
-                        break;
-                    case 'В горах':
-                        $record->restaurant_location_mount = 1;
-                        break;
-                    case 'В городе':
-                        $record->restaurant_location_city = 1;
-                        break;
-                    case 'В центре города':
-                        $record->restaurant_location_center = 1;
-                        break;
-                    case 'За городом':
-                        $record->restaurant_location_outside = 1;
-                        break;
-                }
-            }
-        }        
+        
+        //Тип помещения
+        $restaurant_types = [];
+        $restaurant_types_rest = explode(',', $restaurant->type);
+        foreach ($restaurant_types_rest as $key => $value) {
+            $restaurant_types_arr = [];
+            $restaurant_types_arr['id'] = $value;
+            $restaurant_types_arr['name'] = isset($restaurants_types[$value]['text']) ? $restaurants_types[$value]['text'] : '';
+            array_push($restaurant_types, $restaurant_types_arr);
+        }
+        $record->restaurant_types = $restaurant_types;
 
+        //Тип мероприятия
+        $restaurant_spec = [];
+
+        foreach ($restaurant_spec_rest as $key => $value) {
+            $restaurant_spec_arr = [];
+            $restaurant_spec_arr['id'] = $value;
+            $restaurant_spec_arr['name'] = isset($restaurants_spec[$value]['name']) ? $restaurants_spec[$value]['name'] : '';
+            array_push($restaurant_spec, $restaurant_spec_arr);
+        }
+
+        $record->restaurant_spec = $restaurant_spec;
+
+        //Тип локации
+        $restaurant_location = [];
+        $restaurant_location_rest = explode(',', $restaurant->location);
+        foreach ($restaurant_location_rest as $key => $value) {
+            $restaurant_location_arr = [];
+            $restaurant_location_arr['id'] = $value;
+            array_push($restaurant_location, $restaurant_location_arr);
+        }
+        $record->restaurant_location = $restaurant_location;
+        
         $record->id = $room->id;
         $record->gorko_id = $room->gorko_id;
         $record->restaurant_id = $room->restaurant_id;

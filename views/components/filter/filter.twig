@@ -1,43 +1,147 @@
 <div class="filter" data-filter-wrapper>
+
 	<div class="filter_wrapper">
+
 		{% for label,filter_item in filters %}
+
+			{% if filter_item.type == 'select' %}
+
 				{{ this.render('filter_select.twig', {
 					'filter_item':filter_item,
 					'label':label,
 					'filter_active': filter_active
 				}) | raw }}
+
+			{% endif %}
+
 		{% endfor %}
+
+		<div class="filter_select">
+	
+			<div class="filter_select_block" data-filter-checkbox-block>
+
+				<div class="filter_select_current" data-filter-checkbox-wrapper>
+
+					<div class="close_x" data-filter-select-current-clean></div>
+					<p class="filter_p"></p>
+					<div class="quantity _none" data-quantity>
+						<span></span>
+					</div>
+
+				</div>
+
+				<div class="filter_select_list">
+
+					<div class="filter_select_item _checkbox_item">
+
+						<div class="checkbox_item custom_item {{filters['alko']['active'][1] is defined ? '_checked':''}}" data-type="alko" data-filter-checkbox-item>
+							<input type="checkbox" name="alko">
+							<p class="checkbox_pseudo custom_pseudo">{{ filters['alko']['items'][0] }}</p>
+						</div>
+
+					</div>
+
+					<div class="filter_select_item _checkbox_item">
+
+						<div class="checkbox_item custom_item {{filters['gift']['active'][1] is defined ? '_checked':''}}" data-type="gift" data-filter-checkbox-item>
+							<input type="checkbox" name="alko">
+							<p class="checkbox_pseudo custom_pseudo">{{ filters['gift']['items'][1] }}</p>
+						</div>
+
+					</div>
+
+				</div>
+
+				<p class="filter_label">Особенности</p>
+
+			</div>
+
+		</div>
+
+
 		<div class="filter_submit">
-		    <div class="filter_submit_button _button" data-filter-button>Применить</div>
-		    <div class="clean_filter" data-clean >Сбросить</div>
+
+			<div class="filter_submit_button _button" data-filter-button>Применить</div>
+			<div class="clean_filter" data-clean >Сбросить</div>
+
 		</div>
 
 		<div class="form_close" data-filter-close></div>
 
 	</div>
+
 </div>
 
 <script type="text/javascript">
 </script>
+
 <div class="filter_mobile" data-filter-wrapper>
+
 	<div class="filter_wrapper_mobile">
-		<h3>Фильтр мероприятий</h3>
+
+		<h4>Фильтр мероприятий</h4>
+
 		{% for label,filter_item in filters %}
-			<div class="label_check" id="ch_la">			
-				{{ this.render('filter_checkbox.twig', {
+
+
+			{% if filter_item.type == 'select' %}	
+
+				{{ this.render('filter_select_mobile.twig', {
 					'filter_item':filter_item,
 					'label':label,
 					'filter_active': filter_active
 				}) | raw }}
-			</div>
+
+			{% endif %}
+
+
 		{% endfor %}
 
+		<div class="filter_select">
+	
+			<div class="filter_select_block" data-filter-checkbox-block>
+
+				<p class="filter_label">Особенности</p>
+
+				<div class="filter_select_list">
+
+					<div class="filter_select_item _checkbox_item">
+
+						<div class="checkbox_item custom_item {{filters['alko']['active'][0] is defined ? '_checked':''}}" data-type="alko" data-filter-checkbox-item>
+							<input type="checkbox" name="alko">
+							<p class="checkbox_pseudo custom_pseudo">{{ filters['alko']['items'][0] }}</p>
+						</div>
+
+					</div>
+
+					<div class="filter_select_item _checkbox_item">
+
+						<div class="checkbox_item custom_item {{filters['gift']['active'][1] is defined ? '_checked':''}}" data-type="gift" data-filter-checkbox-item>
+							<input type="checkbox" name="alko">
+							<p class="checkbox_pseudo custom_pseudo">{{ filters['gift']['items'][1] }}</p>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="clean_this_filter" data-clean-mobile>
+					<span>Сбросить</span>
+				</div>
+
+			</div>
+
+		</div>
+
 		<div class="filter_submit">
+
 		    <div class="filter_submit_button _button" data-filter-button>Показать {{count}}</div>
 		    <div class="clean_filter" data-clean ><span>Сбросить фильтр</span></div>
+
 		</div>
 
 		<div class="form_close" data-filter-close></div>
 
 	</div>
+
 </div>

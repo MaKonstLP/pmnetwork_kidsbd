@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\arenda\models;
+namespace frontend\modules\arenda\components;
 
 use Yii;
 
@@ -9,12 +9,12 @@ class Breadcrumbs {
 		switch ($level) {
 			case 1:	
 				$breadcrumbs=[
-					'/' => 'Свадьба на природе',
+					'/' => 'Аренда зала',
 				];
 				break;
 			case 2:
 				$breadcrumbs=[
-					'/' => 'Свадьба на природе',
+					'/' => 'Аренда зала',
 					'/catalog/' => 'Банкетные залы',
 				];
 				break;
@@ -22,6 +22,13 @@ class Breadcrumbs {
 				$breadcrumbs=[
 					'/blog/' => 'Статьи блога'
 				];
+				break;
+			case 'item':
+				$breadcrumbs=[
+					self::get_breadcrumbs(1)['/'],
+					'/catalog/' => 'Правильные площадки Москвы'
+				];
+				break;
 		}
 		return $breadcrumbs;
 	}

@@ -11,12 +11,14 @@ export default class Index{
 		$('[data-filter-button]').on('click', function(){
 			self.redirectToListing();
 		});
+
 		$('.mobile_button_text').on('click', () => {
-        	this.openText();
-        })
-        $('.mobil_but_off').on('click', () => {
-        	this.closeText();
-        })
+			this.openText();
+		});
+
+		$('.mobil_but_off').on('click', () => {
+			this.closeText();
+		});
 	}
 
 	redirectToListing(){
@@ -29,12 +31,14 @@ export default class Index{
 			}
 		);
 	}
+
 	openText() {
 		document.getElementById('mobile_but_all').style.height="auto";
 		document.getElementById('mobile_but_all').style.overflow="visible";
 		document.getElementById('butt_on').style.display="none";
 		document.getElementById('butt_off').style.display="block";
 	}
+	
 	closeText() {
 		document.getElementById('mobile_but_all').style.height="120px";
 		document.getElementById('mobile_but_all').style.overflow="hidden";

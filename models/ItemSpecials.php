@@ -29,4 +29,22 @@ class ItemSpecials extends BaseObject{
 
 	}
 
+	public static function getChangedStrings($item) {
+		$itemPay = explode(', ', $item->restaurant_payment);
+    $payOptionsString = '';
+		
+    foreach ($itemPay as $pay) {
+
+      if ($pay === 'Наличный') {
+        $payOptionsString .= 'Наличными, ';
+      } elseif ($pay === 'Безналичный') {
+        $payOptionsString .= 'безналичным способом, ';
+      } elseif ($pay === 'Банковская карта') {
+        $payOptionsString .= 'банковской картой (терминал), ';
+      }
+    }
+
+    return substr($payOptionsString, 0, -2);;
+  }
+
 }

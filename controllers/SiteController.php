@@ -37,6 +37,10 @@ class SiteController extends Controller
             'filter_model' => $filter_model
         ]);
 
+        // echo '<pre>';
+        // print_r($filter);
+        // exit;
+
         return $this->render('index.twig', [
             'filter' => $filter,
             'widgets' => $apiMain['widgets'],

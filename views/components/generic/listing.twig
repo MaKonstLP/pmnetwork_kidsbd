@@ -8,80 +8,94 @@
 <div class="item-block" id="{{item.id}}"> 
 
     <div class="carusel">
-    <div class="img_conteiner">
-        <div class="price-position">        
-            <div class="price">
-             {% if item.price %}
-                            <div class="item_meta_item">
-                                <span class="item_meta_text">от <span class="rur">{{item.price}} <span class="norur">руб.</span></span>/чел.</span>
-                            </div>
-                            <div class="vector_price">
-                            </div>
 
-             {% endif %}
-         </div>
-        </div>
-    
-       
+        <div class="img_conteiner">
+
+            <div class="price-position">    
+
+                <div class="price">
+
+                    {% if item.price %}
 
 
-  {% if type != 'other' %}
-    <div class="object_gallery">
-                  <div class="items_list_listing swiper-container listing_slider" data-listing-wrapper>
-                <div class="items_list swiper-wrapper listing_slider" data-listing-list>
-                            {% if item.images[0] %}
-                            <div class="swiper-slide">
-                              <a href="/catalog/{{item.id}}/" class="item-img">  <img src="{{item.images[0].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on" data-images /></a>
-                            </div>
-                            {% endif %}
-                            {% if item.images[1] %}
-                            <div class="swiper-slide">
-                                <a href="/catalog/{{item.id}}/" class="item-img"><img src="{{item.images[1].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on"/></a>
-                            </div>
-                            {% endif %}
-                            {% if item.images[2] %}
-                            <div class="swiper-slide">
-                               <a href="/catalog/{{item.id}}/" class="item-img"> <img src="{{item.images[2].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on"/></a>
-                            </div>
-                            {% endif %}
+                        <div class="item_meta_item">
+                            <span class="item_meta_text">от <span class="rur">{{item.price}} <span class="norur">руб.</span></span>/чел.</span>
+                        </div>
+                        
+                        <div class="vector_price">
+                        </div>
+                    {% endif %}
                 </div>
-                <div class="listing_widget_controll _listing">
-                    <div class="listing_widget_arrow  _listing_prev"></div>
-                    <div class="listing_widget_arrow  _listing_next"></div>
-                </div>                  
-            </div>
-          </div>
 
-      {% else %}
-              <div class="photo_items">
-         <a href="/catalog/{{item.id}}/" class="item-img"> <img src="{{item.images[0].subpath}}" class="block tab" loading="lazy" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name}) | replace({"**room_name**" : item.name}) }}" /></a>
-         
-            {% if item.images[1] %}
-                <a href="/catalog/{{item.id}}/" class="item-img"><img class="item_img_subimg tab" loading="lazy" src="{{item.images[1].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/></a>
-            {% endif %}
-            {% if item.images[2] %}
-                <a href="/catalog/{{item.id}}/" class="item-img"><img class="item_img_subimg tab" loading="lazy" src="{{item.images[2].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/></a>
-            {% endif %}
             </div>
 
-{% endif %}
+            {% if type != 'other' %}
 
-          
-    </div> 
+                <div class="object_gallery">
+
+                    <div class="items_list_listing swiper-container listing_slider" data-listing-wrapper>
+
+                        <div class="items_list swiper-wrapper listing_slider" data-listing-list>
+
+                            {% if item.images[0] %}
+                                <div class="swiper-slide">
+                                    <a href="/catalog/{{item.id}}/" class="item-img">  <img src="{{item.images[0].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on" data-images /></a>
+                                </div>
+                            {% endif %}
+
+                            {% if item.images[1] %}
+                                <div class="swiper-slide">
+                                    <a href="/catalog/{{item.id}}/" class="item-img"><img src="{{item.images[1].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on"/></a>
+                                </div>
+                            {% endif %}
+
+                            {% if item.images[2] %}
+                                <div class="swiper-slide">
+                                    <a href="/catalog/{{item.id}}/" class="item-img"> <img src="{{item.images[2].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on"/></a>
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="listing_widget_controll _listing">
+                            <div class="listing_widget_arrow  _listing_prev"></div>
+                            <div class="listing_widget_arrow  _listing_next"></div>
+                        </div>           
+
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <div class="photo_items">
+
+                    <a href="/catalog/{{item.id}}/" class="item-img"> <img src="{{item.images[0].subpath}}" class="block tab" loading="lazy" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name}) | replace({"**room_name**" : item.name}) }}" /></a>
+                    
+                    {% if item.images[1] %}
+                        <a href="/catalog/{{item.id}}/" class="item-img"><img class="item_img_subimg tab" loading="lazy" src="{{item.images[1].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/></a>
+                    {% endif %}
+                    
+                    {% if item.images[2] %}
+                        <a href="/catalog/{{item.id}}/" class="item-img"><img class="item_img_subimg tab" loading="lazy" src="{{item.images[2].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/></a>
+                    {% endif %}
+
+                </div>
+
+            {% endif %}
+
+        </div> 
 
     </div>
-       
-     
- 
 
     <div class="item-info">
          <div class="name">
          <a href="/catalog/{{item.id}}/"><p class="item_name">{{item.name}}</p></a>
         </div>
 
-        <div class="address">
+        <div class="address move_to_map">
                     
-                    <a  data-latitude="{{item.restaurant_latitude}}" data-longitude="{{item.restaurant_longitude}}" data-name="{{item.name}}" data-address="{{item.restaurant_address}}" data-url="/catalog/{{item.id}}/" class="address_map"><p class="item_address"><span>{{item.restaurant_address}}</span></p></a>
+                    <a data-latitude="{{item.restaurant_latitude}}" data-longitude="{{item.restaurant_longitude}}" data-name="{{item.name}}" data-address="{{item.restaurant_address}}" data-url="/catalog/{{item.id}}/" class="address_map"><p class="item_address"><span>{{item.restaurant_address}}</span></p></a>
                     
         </div>
       <div class="forMobile_items">

@@ -11,11 +11,6 @@ export default class Listing{
 		this.filter = new Filter($('[data-filter-wrapper]'));	
 		this.yaMap = new YaMapAll(this.filter);		
 
-
-		//Клик по адресу
-		
-
-
 		//КЛИК ПО КНОПКЕ "ПОДОБРАТЬ"
 		$('[data-filter-button]').on('click', function(){
 			self.reloadListing();
@@ -27,41 +22,39 @@ export default class Listing{
 			self.getSwiper();
 
 		});
-		console.log(this);
 
-			var galleryList = new Swiper('.listing_slider', {
-	            spaceBetween: 0,
-	            slidesPerView: 1,
-	            navigation: {
-	                nextEl: '._listing_next',
-	                prevEl: '._listing_prev',
-	            },
-	        });
+		var galleryList = new Swiper('.listing_slider', {
+			spaceBetween: 0,
+			slidesPerView: 1,
+			navigation: {
+				nextEl: '._listing_next',
+				prevEl: '._listing_prev',
+			},
+		});
 
-        $('.btn_list._left').on('click', () => {
-        	this.viewListing('left');
-        })
+		$('.btn_list._left').on('click', () => {
+			this.viewListing('left');
+		});
 
-        $('.btn_list._right').on('click', () => {
-        	this.viewListing('right');
-        })
-        $('body').on('click', '.address_map', () => {
-        	this.viewListing('right');
-        })
+		$('.btn_list._right').on('click', () => {
+			this.viewListing('right');
+		});
 
-
+		$('body').on('click', '.address_map', () => {
+			this.viewListing('right');
+		});
 	}
 
 	getSwiper(){
 
-			var galleryList = new Swiper('.listing_slider', {
-            spaceBetween: 0,
-            slidesPerView: 1,
-            navigation: {
-                nextEl: '._listing_next',
-                prevEl: '._listing_prev',
-            },
-        })
+		var galleryList = new Swiper('.listing_slider', {
+			spaceBetween: 0,
+			slidesPerView: 1,
+			navigation: {
+				nextEl: '._listing_next',
+				prevEl: '._listing_prev',
+			},
+		})
 	}
 
 	viewListing(id){
@@ -70,7 +63,7 @@ export default class Listing{
 			document.getElementById('right').classList.remove("active");
 			document.getElementById('listing_on').className += " active";
 			document.getElementById('map_on').classList.remove("active");
-			document.getElementsByClassName('items_pagination')[0].style.display = "flex";
+			// document.getElementsByClassName('items_pagination')[0].style.display = "flex";
 			document.getElementById('pag').style.display = "";
 			document.getElementsByClassName('head_block')[0].style.marginBottom = '46px';
 
@@ -80,9 +73,9 @@ export default class Listing{
 			document.getElementById('left').classList.remove("active");
 			document.getElementById('map_on').className += " active";
 			document.getElementById('listing_on').classList.remove("active");
-			document.getElementsByClassName('items_pagination')[0].style.display = "none";
+			// document.getElementsByClassName('items_pagination')[0].style.display = "none";
 			document.getElementById('pag').style.display = "none";
-			document.getElementsByClassName('head_block')[0].style.marginBottom = '13px';
+			document.getElementsByClassName('head_block')[0].style.marginBottom = '46px';
 		}
 	}
 
@@ -95,7 +88,7 @@ export default class Listing{
 			response => {
 				//ym(64598434,'reachGoal','filter');
 				//gtag('event', 'filter');
-				//console.log(response);
+				// console.log(response.title);
 				$('[data-listing-list]').html(response.listing);
 				let galleryList = new Swiper('.listing_slider', {
 	            spaceBetween: 0,
@@ -104,7 +97,7 @@ export default class Listing{
 	                nextEl: '._listing_next',
 	                prevEl: '._listing_prev',
 	            },
-	        });
+				});
 				$('[data-listing-title]').html(response.title);
 				$('[data-listing-text-top]').html(response.text_top);
 				$('[data-listing-text-bottom]').html(response.text_bottom);
@@ -113,6 +106,7 @@ export default class Listing{
 				self.block.removeClass('_loading');
 				$('html,body').animate({scrollTop:0}, 400);
 				history.pushState({}, '', '/catalog/'+response.url);
+				self.yaMap.refresh(self.filter);
 			}
 		);
 	}

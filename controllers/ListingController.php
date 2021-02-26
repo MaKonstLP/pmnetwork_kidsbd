@@ -12,6 +12,7 @@ use frontend\widgets\PaginationWidget;
 use frontend\components\ParamsFromQuery;
 use frontend\components\QueryFromSlice;
 use frontend\components\Breadcrumbs;
+use frontend\components\Declension;
 use common\models\ItemsFilter;
 use common\models\elastic\ItemsFilterElastic;
 use frontend\modules\arenda\models\ElasticItems;
@@ -26,8 +27,8 @@ class ListingController extends Controller
 	protected $per_page = 30;
 
 	public $filter_model,
-		   $slices_model,
-		   $url;
+				 $slices_model,
+				 $url;
 
 	public function beforeAction($action)
 	{
@@ -39,13 +40,18 @@ class ListingController extends Controller
 
 	public function actionSlice($slice)
 	{
+		// echo '<pre>';
+		// exit;
+
 		$slice_obj = new QueryFromSlice($slice);
-		if($slice_obj->flag){
+
+		if ($slice_obj->flag){
 			$this->view->params['menu'] = $slice;
 			$params = $this->parseGetQuery($slice_obj->params, $this->filter_model, $this->slices_model);
 			isset($_GET['page']) ? $params['page'] = $_GET['page'] : $params['page'];
 
 			$canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+
 			if($params['page'] > 1){
 				$canonical .= $params['canonical'];
 			}			
@@ -58,8 +64,7 @@ class ListingController extends Controller
 				$canonical 		= 	$canonical,
 				$type 			=	$slice
 			);
-		}
-		else{
+		}	else {
 			return $this->goHome();
 		}				
 	}
@@ -68,30 +73,33 @@ class ListingController extends Controller
 	{
 		$getQuery = $_GET;
 		unset($getQuery['q']);
+		
 		if(count($getQuery) > 0){
 			$params = $this->parseGetQuery($getQuery, $this->filter_model, $this->slices_model);
-			$canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
-			if($params['page'] > 1){
-				$canonical .= $params['canonical'];
-			}
+			// $canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+			// if($params['page'] > 1){
+				// 	$canonical .= $params['canonical'];
+				// }
+			// echo '<pre>';
+			// print_r($params);
+			// exit;
 
 			return $this->actionListing(
 				$page 			=	$params['page'],
 				$per_page		=	$this->per_page,
 				$params_filter	= 	$params['params_filter'],
 				$breadcrumbs 	=	Breadcrumbs::get_breadcrumbs(1),
-				$canonical 		= 	$canonical
+				$canonical 		= 	false,
 			);	
-		}
-		else{
-			$canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+		}	else {
+			// $canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
 
 			return $this->actionListing(
 				$page 			=	1,
 				$per_page		=	$this->per_page,
 				$params_filter	= 	[],
 				$breadcrumbs 	= 	Breadcrumbs::get_breadcrumbs(1),
-				$canonical 		= 	$canonical
+				$canonical 		= 	false,
 			);
 		}
 	}
@@ -100,11 +108,6 @@ class ListingController extends Controller
 	{
 		$elastic_model = new ElasticItems;
 		$items = new ItemsFilterElastic($params_filter, $per_page, $page, false, 'rooms', $elastic_model);
-
-		if($page > 1){
-			$seo['text_top'] = '';
-			$seo['text_bottom'] = '';
-		}
 
 		$filter = FilterWidget::widget([
 			'filter_active' => $params_filter,
@@ -126,15 +129,21 @@ class ListingController extends Controller
 			$seo['text_bottom'] = '';
 		}
 
-		//print_r($seo);
-		//exit;
+		$totalCount = $items->total
+			. ' заведени'
+			. Declension::get_num_ending($items->total, ['е', 'я', 'й']);
+
+
+		// print_r($params_filter);
+		// exit;
 
 		return $this->render('index.twig', array(
 			'items' => $items->items,
 			'filter' => $filter,
 			'pagination' => $pagination,
 			'seo' => $seo,
-			'count' => $items->total
+			'count' => $items->total,
+			'totalCount' => $totalCount,
 		));	
 	}
 
@@ -155,21 +164,24 @@ class ListingController extends Controller
 		$seo = $this->getSeo($seo_type, $params['page'], $items->total);
 		$seo['breadcrumbs'] = $breadcrumbs;
 
+		$totalCount = $items->total
+		. ' заведени'
+		. Declension::get_num_ending($items->total, ['е', 'я', 'й']);
+
 		$title = $this->renderPartial('//components/generic/title.twig', array(
 			'seo' => $seo,
-			'count' => $items->total
+			'count' => $totalCount,
 		));
 
-		if($params['page'] == 1){
+		if ($params['page'] == 1){
 			$text_top = $this->renderPartial('//components/generic/text.twig', array('text' => $seo['text_top']));
 			$text_bottom = $this->renderPartial('//components/generic/text.twig', array('text' => $seo['text_bottom']));
-		}
-		else{
+		} else{
 			$text_top = '';
 			$text_bottom = '';
 		}
 
-		if($seo_type == 'listing' and count($params['params_filter']) > 0){
+		if ($seo_type == 'listing' and count($params['params_filter']) > 0){
 			$text_top = '';
 			$text_bottom = '';
 		}
@@ -184,7 +196,7 @@ class ListingController extends Controller
 			'title' => $title,
 			'text_top' => $text_top,
 			'text_bottom' => $text_bottom,
-			'seo_title' => $seo['title']
+			'seo_title' => $seo['title'],
 		]);
 	}
 
@@ -209,7 +221,7 @@ class ListingController extends Controller
 		$return['params_api'] = $temp_params->params_api;
 		$return['params_filter'] = $temp_params->params_filter;
 		$return['listing_url'] = $temp_params->listing_url;
-		$return['canonical'] = $temp_params->canonical;
+		// $return['canonical'] = $temp_params->canonical;
 		return $return;
 	}
 

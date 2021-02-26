@@ -39,13 +39,13 @@ export default class Item{
             console.log('scroll_form');
         });
 
-
 		var galleryThumbs = new Swiper('.item_thumb_slider', {
             spaceBetween: 5,
             slidesPerView: 5,
             freeMode: true,
             watchSlidesVisibility: true,
             watchSlidesProgress: true,
+            watchOverflow: true,
             breakpoints: {
                 767: {
                   slidesPerView: 0,
@@ -72,53 +72,40 @@ export default class Item{
                 }
             }
         });
-        $('.mobile_button_text').on('click', () => {
-            this.openText('butt_on');
-        })
-        $('.mobil_but_off').on('click', () => {
-            this.closeText('butt_off');
-        })
 
-        
+        $('.collapse_button').on('click', function(){
+            var $seoText = $(this).siblings('._seo_text');
+            if ($seoText.hasClass('_collapse')) {
+                $seoText.removeClass('_collapse');
+                $(this).text('Скрыть текст')
+            } else {
+                $seoText.addClass('_collapse');
+                $(this).text('Подробнее о площадке')
+            }
+        });
+
+        $('[data-get-more-rooms]').on('click', function(e){
+            self.getMoreSimilarHalls();
+        });
 	}
-    openText(id) {
 
-    if(id == "butt_on"){
-        document.getElementById('mobile_but_all').style.height="auto";
-        document.getElementById('mobile_but_all').style.overflow="visible";
-        document.getElementById('butt_on').style.display="none";
-        document.getElementById('butt_off').style.display="block";
+    getMoreSimilarHalls(){
+        var data = {
+            'item_id': document.querySelectorAll('[data-item-id]')[0].dataset.itemId,
         }
-    if(id == 'butt_on_options'){
-        document.getElementById('open_for_mobile').style.height="auto";
-        document.getElementById('open_for_mobile').style.overflow="visible";
-        document.getElementById('butt_on_options').style.display="none";
-        document.getElementById('butt_off_options').style.display="block";
-    }
-    }
-    closeText(id) {
 
-  if(id =='butt_off'){  
-    if(window.innerWidth > 767){
-        document.getElementById('mobile_but_all').style.height="120px";
-    }
-    if(window.innerWidth <= 767){
-        document.getElementById('mobile_but_all').style.height="165px";
-    }
-        document.getElementById('mobile_but_all').style.overflow="hidden";
-        document.getElementsByClassName('mobile_button_text')[0].style.display="";
-        document.getElementById('butt_off').style.display="none";
-        }
-   if(id == 'butt_off_options'){
-    if(window.innerWidth > 767){
-        document.getElementById('open_for_mobile').style.height="auto";
-    }
-    if(window.innerWidth <= 767){
-        document.getElementById('open_for_mobile').style.height="200px";}
-        document.getElementById('open_for_mobile').style.overflow="hidden";
-        document.getElementById('butt_on_options').style.display="";
-        document.getElementById('butt_off_options').style.display="none";
-   }     
-    }
+        $.ajax({
+            type: 'get',
+            url: '/item/ajax-more-other-halls',
+            data: data,
+            success: function(response) {
+                var moreRooms = $.parseJSON(response);
+                $('[data-similar-listing-wrapper]').append(moreRooms.other_rooms);
+                // console.log(moreRooms);
+            },
+            error: function(response) {
 
+            }
+        });
+    }
 }

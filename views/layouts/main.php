@@ -5,7 +5,7 @@
 
 use yii\helpers\Html;
 use common\models\Subdomen;
-//use frontend\modules\svadbanaprirode\assets\AppAsset;
+use frontend\modules\arenda\assets\AppAsset;
 
 frontend\modules\arenda\assets\AppAsset::register($this);
 ?>
@@ -18,9 +18,9 @@ frontend\modules\arenda\assets\AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="/img/zal.ico">
-    <link rel="stylesheet" type="text/css" href="http://fonts.fontstorage.com/import/lato.css">
+    <!-- <link rel="stylesheet" type="text/css" href="http://fonts.fontstorage.com/import/lato.css"> -->
     <link rel="stylesheet" type="text/css" href="http://fonts.fontstorage.com/import/firasans.css">
-    <link href="https://allfont.ru/allfont.css?fonts=lora" rel="stylesheet" type="text/css" />
+    <!-- <link href="https://allfont.ru/allfont.css?fonts=lora" rel="stylesheet" type="text/css" /> -->
     <title><?php echo $this->title ?></title>
     <?php $this->head() ?>
     <?php if (isset($this->params['desc']) and !empty($this->params['desc'])) echo "<meta name='description' content='".$this->params['desc']."'>";?>
@@ -73,10 +73,10 @@ frontend\modules\arenda\assets\AppAsset::register($this);
 
                                 function createCityNameLine($city){
                                     if($city->alias){
-                                        $newLine = "<p><a href='https://$city->alias.arenda.ru'>$city->name</a></p>";
+                                        $newLine = "<p><a href='//$city->alias." . Yii::$app->params['siteAddress'] . "'>$city->name</a></p>";
                                     }
                                     else{
-                                        $newLine = "<p><a href='https://arenda.ru'>$city->name</a></p>";
+                                        $newLine = "<p><a href='//" . Yii::$app->params['siteAddress'] . "'>$city->name</a></p>";
                                     }
                                     return $newLine;
                                 }
@@ -114,13 +114,13 @@ frontend\modules\arenda\assets\AppAsset::register($this);
                         </div>
                     </div>
         <nav class="header_menu">
-             <a href="#" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'zaly')echo '_active';?>">Залы</a>
-             <a href="#" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'loft')echo '_active';?>">Лофт</a>
-             <a href="#" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'ploschadki')echo '_active';?>">Площадки</a>
-             <a href="#" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'zavedeniya')echo '_active';?>">Заведения</a>
-             <a href="#" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'priroda')echo '_active';?>">Природа</a>
-             <a href="/popular/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'lutchee')echo '_active';?>">Лучшее</a>
-             <a href="#" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'vse-kategorii')echo '_active';?>">Все категории</a>
+             <a href="/catalog/zaly/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'zaly')echo '_active';?>">Залы</a>
+             <a href="/catalog/loft/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'loft')echo '_active';?>">Лофт</a>
+             <a href="/catalog/ploshchadki/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'ploschadki')echo '_active';?>">Площадки</a>
+             <a href="/catalog/zavedeniya/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'zavedeniya')echo '_active';?>">Заведения</a>
+             <a href="/catalog/priroda/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'priroda')echo '_active';?>">Природа</a>
+             <!-- <a href="/popular/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'lutchee')echo '_active';?>">Лучшее</a> -->
+             <a href="/popular/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'vse-kategorii')echo '_active';?>">Все категории</a>
              <a href="/blog/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'blog')echo '_active';?>">Блог</a>
               <div class="city _mobile">
                 <!-- <img src="/images/map.svg" class="map_inc"> -->
@@ -187,6 +187,10 @@ frontend\modules\arenda\assets\AppAsset::register($this);
 
         <div class="popup_form">
             <?=$this->render('//components/generic/form.twig')?>
+        </div>
+
+        <div class="popup_filter_container _hidden">
+            
         </div>
 
     </div>

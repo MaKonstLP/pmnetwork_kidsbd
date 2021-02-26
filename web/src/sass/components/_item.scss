@@ -96,62 +96,67 @@ $fontFamilyLato:Lato;
             }
         }
     }
+
     .item_thumb_slider{
         width: 49.8%;
 
         @include for-pad{
             width: 100%;
         }
+
         @include for-mobile{
             display: none;
         }
 
         .swiper-wrapper{
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-        width: 100%;
-        transform:none;
-
-        @include for-pad{
-            margin-top: 4px;
+            display: flex;
+            flex-flow: row wrap;
             justify-content: space-between;
-        }
-
-        .swiper-slide{
-            width: 49.6% !important;
-            height: auto;
-            margin-right: 0px !important;
+            width: 100%;
+            transform:none;
 
             @include for-pad{
-                width: 23.388% !important;
-                height: auto;
-                
+                margin-top: 4px;
+                justify-content: space-between;
+            }
 
-                &:last-of-type{
-                    margin-right: 0px;
+            .swiper-slide{
+                width: 49.6% !important;
+                height: auto;
+                margin-right: 0px !important;
+
+                @include for-pad{
+                    width: 23.388% !important;
+                    height: auto;
+                    
+                    &:last-of-type{
+                        margin-right: 0px;
+                    }
+                }
+
+                img{
+                    width: 100%;
+                }
+
+                &:first-of-type{
+                    display: none;
                 }
             }
-
-            img{
-                width: 100%;
-            }
         }
+    }
+
+    .swiper-pagination{
+        display: none;
+
+        @include for-mobile{
+        display: flex; 
+        position: absolute;
+        top: 102%!important;
+        margin: auto;
+        width: 100%;
+        justify-content: center;
         }
-
     }
-.swiper-pagination{
-    display: none;
-
-    @include for-mobile{
-    display: flex; 
-    position: absolute;
-    top: 102%!important;
-    margin: auto;
-    width: 100%;
-    justify-content: center;
-    }
-}
     // @include for-mobile{
     //     width: 100%;
     // }
@@ -312,7 +317,7 @@ $fontFamilyLato:Lato;
         right: 14%;
         display: flex;
         flex-flow: row;
-        justify-content: space-between;
+        justify-content: center;
         bottom: auto;
         top: 104%;
         border-radius: 6px;
@@ -343,9 +348,7 @@ $fontFamilyLato:Lato;
             font-size: 16px;
             line-height: 24px;
             color: #2C3044;
-            margin: 0;
-            margin-top: 8px;
-            margin-left: 28px;
+            margin: 8px 15px 0 28px;
         }
         @include for-mobile{
             display: none;
@@ -472,17 +475,6 @@ $fontFamilyLato:Lato;
 .object_parameters{
     height: auto;
 
-    @include for-pad{
-        width: 96.875%;
-        display: flex;
-        justify-content: space-between;
-    }
-    @include for-mobile{
-        height: 215px;
-        overflow: hidden;
-        order:0;
-    }
-
     .object_parameters_list{
         margin-top: 0px;
         margin-bottom: 10px;
@@ -550,27 +542,27 @@ $fontFamilyLato:Lato;
                 flex-flow: column wrap;
                 width: 56%;
                 margin-left: 2px;
-                height: 130px;
+                // height: 130px;
 
                 @include for-pad{
-                    height: 155px;
+                    // height: 155px;
                     width: 83%;
                 }
                 @include for-mobile{
                     flex-flow: column nowrap;
-                    height: auto;
+                    // height: auto;
                 }
 
-                &._right{
-                    height: 200px;
+                // &._right{
+                    // height: 200px;
 
-                    @include for-pad{
-                        height: auto;
-                    }
-                    @include for-mobile{
-                        height: auto;
-                    }
-                }
+                //     @include for-pad{
+                //         height: auto;
+                //     }
+                //     @include for-mobile{
+                //         height: auto;
+                //     }
+                // }
             }
             
             .object_parameters_item{
@@ -601,6 +593,10 @@ $fontFamilyLato:Lato;
 [data-page-type="item"]{
     width:100% !important;
     margin-bottom: 22px !important;
+
+    .title{
+        padding: 0 0 0 0;
+    }
 
     @include for-pad{
         margin-bottom: 3px!important;
@@ -823,12 +819,13 @@ $fontFamilyLato:Lato;
             }
 
             &:before {
-    content: url(/images/map_content.png);
-    margin-top: 4px;
 
-    @include for-mobile{
-        margin-top: 2px;
-    }
+                content: url(/images/map_content.png);
+                margin-top: 4px;
+
+                @include for-mobile{
+                    margin: 2px 5px 0 0;
+                }
             }
 
             p{
@@ -924,6 +921,8 @@ $fontFamilyLato:Lato;
     flex-flow: column;
 
     @include for-pad{
+        width: auto;
+        max-width: 49%;
         margin-right: 15px;
 
         &:last-of-type{
@@ -938,8 +937,17 @@ $fontFamilyLato:Lato;
     display: flex;
     justify-content:space-between;
 
+    @include for-pad{
+        width: 96.875%;
+        display: flex;
+        justify-content: flex-start;
+    }
+
     @include for-mobile{
         flex-flow: column;
+        height: 215px;
+        overflow: hidden;
+        order:0;
     }
 }
 .item_similar_rooms{
@@ -1027,10 +1035,14 @@ $fontFamilyLato:Lato;
 
             @include for-pad{
                 margin-bottom: 23px;
-                }
-                @include for-mobile{
-                    margin-bottom: 11px;
-                }
+            }
+
+            @include for-mobile{
+                position: absolute;
+                top: 122px;
+                left: 166px;
+                margin: 0 0 0 0;
+            }
         }
         .item-info .capacity{
             margin-top: 19px;
@@ -1066,26 +1078,35 @@ $fontFamilyLato:Lato;
         &.swiper-container{
 
             @include for-mobile{
-            padding: 0;}
-
-        &.listing_slider{
-            flex-flow:row;
-
-            .listing_slider{
-                flex-flow:row;
-                margin: 0;
+                padding: 0;
             }
-        }
+
+            &.listing_slider{
+                flex-flow:row;
+
+                .listing_slider{
+                    flex-flow:row;
+                    margin: 0;
+                }
+            }
         }
     }
 }
+
+[data-page-type="item"]{
+
+    .item_other_rooms .item-block .img_conteiner .items_list_listing.swiper-container.listing_slider{
+        width: 288px;
+    }
+}
+
 
 .item_other_rooms{
     margin-bottom:46px;
 
     @include for-pad{
         margin-bottom: 15px;
-        margin-top: -14px;
+        // margin-top: -14px;
     }
     @include for-mobile{
         margin-bottom: 32px;
@@ -1264,7 +1285,8 @@ $fontFamilyLato:Lato;
     .item-block{
         // width: 23.823%;
         width: 100%;
-        height:336px;
+        // height:336px;
+        height: auto;
         display: flex;
         flex-flow: column;
         margin-bottom: 0;
@@ -1307,6 +1329,7 @@ $fontFamilyLato:Lato;
             }
 
             @include for-mobile{
+                width: 288px; 
                 margin-left: 2px;
             }
 
@@ -1440,22 +1463,23 @@ $fontFamilyLato:Lato;
        } 
 
         .img_conteiner {
-        width: 100%;
-        height: auto;
-        position: relative;
-
-        img{
-            height: 175px !important;
+            width: 100%;
+            height: auto;
+            position: relative;
 
             @include for-mobile{
-                height: auto !important;
+                width: 288px;
             }
-            @include for-smallmobile{
-                height: 175px !important;
-            }
-        }
 
+            img{
+                height: 175px !important;
+
+                @include for-mobile{
+                    height: auto !important;
+                }
             }
+
+        }
 
         // .item-info{
         //     width: 100%;
@@ -1583,11 +1607,14 @@ $fontFamilyLato:Lato;
     input[type="checkbox"] {
      display: none;
     }
+
     @include for-mobile{
-    input[type="checkbox"]:checked + .object_parameters{
-      height: auto;
-      }
+
+        input[type="checkbox"]:checked + .object_parameters{
+            height: auto;
+        }
     }
+
     label {
       display: none;  
       order: 1;
@@ -1612,4 +1639,36 @@ $fontFamilyLato:Lato;
 
       }
     }
+
+.item_other_rooms{
+
+    .item-block{
+        align-items: center;
+    }
+}
+
+.item_similar_rooms{
+
+    .item-block{
+        align-items: center;
+
+        .item-info .address{
+            cursor: default;
+
+            &:before{
+                top: 3px;
+            }
+
+            .item_address{
+                color: #2c3044;
+    
+                span{
+                    border: none;
+                }
+
+            }
+        }
+    }
+}
+
 

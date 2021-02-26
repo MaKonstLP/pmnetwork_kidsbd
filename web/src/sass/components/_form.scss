@@ -567,18 +567,22 @@
 	}
 }
 .calendar_wrapper {
-    position: absolute;
-    width: 100%;
-    top: 45px;
+	position: absolute;
+	width: 100%;
+	top: 45px;
 
-    .open_calendar_button {
-      position: absolute;
-      background-image: url('/images/calendar_icon.svg');
-      width: 20px;
-      height: 20px;
-      top: -6px;
-      right: 4px;
-      cursor: pointer;
-    }
-  }
+	.open_calendar_button {
+		position: absolute;
+		background-image: url('/images/calendar_icon.svg');
+		width: 20px;
+		height: 20px;
+		top: -6px;
+		right: 4px;
+		cursor: pointer;
+
+		@include for-mobile{
+			top: -10px;
+		}
+	}
+}
   

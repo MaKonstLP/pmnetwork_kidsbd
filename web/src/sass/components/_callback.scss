@@ -7,6 +7,10 @@
     border-radius: 4px 0px 0px 4px;
     z-index: 1;
 
+    @include for-pad{
+        display: none;
+    }
+    
     @include for-mobile{
         display: none;
     }

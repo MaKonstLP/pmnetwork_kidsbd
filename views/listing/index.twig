@@ -1,75 +1,94 @@
-<!--Начало верстки блока под шапкой для страницы листингов -->
-
-    <!--Конец верстки блока под шапкой для страницы листингов -->
-
 <div data-page-type="listing">
-	    <div class="head_block">
-    	{{ this.render('//components/generic/breadcrump.twig', {'count':count, 'seo':seo}) | raw }}
-    	{{ this.render('//components/generic/title.twig', {'count':count, 'seo':seo}) | raw }}
-	<div class="content_block forFilter">
-		{{filter | raw }}
-	</div>
-	<div class="for_mobile_filter_butt">
-		<div class="filter_mobile_wrapper index_form">
-			<div class="filter_mobile_button _button" data-filter-open><span class="filter_before">Фильтр заведений</span></div>
-		</div>
-	</div>	
-    </div>
 
+	<div class="head_block">
+
+		{{ this.render('//components/generic/breadcrump.twig', {'count':count, 'seo':seo}) | raw }}
+
+		<div data-listing-title>
+
+			{{ this.render('//components/generic/title.twig', {'count':totalCount, 'seo':seo}) | raw }}
+			
+		</div>
+
+		<div class="content_block forFilter">
+
+			{{filter | raw }}
+
+		</div>
+
+		<div class="for_mobile_filter_butt">
+
+			<div class="filter_mobile_wrapper index_form">
+
+				<div class="filter_mobile_button _button" data-filter-open><span class="filter_before">Фильтр заведений</span></div>
+
+			</div>
+
+		</div>	
+
+	</div>
 
 	<div class="items_list_listing" data-listing-wrapper>
+
 		<div class="view_position">	
-				<div class="view">
-					 <div class="btn_list _left active" id="left">
-					 	<p class="list_btn left">Списком</p>
-					 </div>
-					 <div class="btn_list _right " id="right">
-					 	<p class="list_btn right">На карте</p>
-					 </div>
+
+			<div class="view" data-listing-switcher>
+
+				<div class="btn_list _left active" id="left">
+					<p class="list_btn left">Списком</p>
 				</div>
+
+				<div class="btn_list _right " id="right">
+					<p class="list_btn right">На карте</p>
+				</div>
+
 			</div>
+
+		</div>
 
     
 
 		<div class="items_list active" id="listing_on" data-listing-list>
 				
-			
 			{{ this.render('//components/generic/listing.twig', {'items':items, 'img_alt':seo.img_alt}) | raw }}
-			
 		
 		</div>
+
 		<div class="content_block _listing_pag" id="pag"> 
+
 			<div data-pagination-wrapper>
+
 				{{pagination | raw }}
+
 			</div>
+
 		</div>	
 
 		<!--Карта не та! Вставленна для примера, необходимо заменить! -->
-		<div class="map" id="map_on" data-map-api-subid="2">
-		</div>
+		<div class="map" id="map_on" data-map-api-subid="2" data-map></div>
 		 
 	</div>
 
-	
-
 	<div class="content_block _listing_form">
 		
-        {{ this.render('//components/generic/form.twig') | raw }}
+		{{ this.render('//components/generic/form.twig') | raw }}
 
-    </div>
-    <div class="listing_text">
-    	<label for="button_see_all"><span>Показать полностью</span></label>
-        <input type="checkbox" id="button_see_all">
- 		<div class="bottom_text">
-    		<p>Понтон на воде 400м с белым шатром 260м. Вмещает до 180 постояльцев банкетной рассадкой. На территории понтона размещаются 2 маленькие веранды, которые уже входят в стоимость аренды, а на свобродных от шатра углах устроилась мягкая мебель. Шатер оборудован барной стойкой со светодиодной подсветкой, необходимым для вечернего освещения количеством люстр, а на каждой стальной дуге вывешены световые "Пары". В случае непогоды по периметру закрываются шторы, которые не пропускают воду и ветер, и предоставляются газовые и электронные обогреватели. Понтон содержит оттдельный подъезд и личную парковку на 20 машиномест, собственно что выделяет ему превосходство перед другими площадками. Ресторан дает текстиль на столы и стулья и индивидуальные тканевык салфетки. Громкая музыка вероятно до 21:30, впоследствии лишь только в фоновом режими. </p>
-    	</div>
+	</div>
 
-    </div>
+	<div class="listing_text">
 
+		<label for="button_see_all"><span>Показать полностью</span></label>
+
+		<input type="checkbox" id="button_see_all">
+
+		<div class="bottom_text">
+			<p>Понтон на воде 400м с белым шатром 260м. Вмещает до 180 постояльцев банкетной рассадкой. На территории понтона размещаются 2 маленькие веранды, которые уже входят в стоимость аренды, а на свобродных от шатра углах устроилась мягкая мебель. Шатер оборудован барной стойкой со светодиодной подсветкой, необходимым для вечернего освещения количеством люстр, а на каждой стальной дуге вывешены световые "Пары". В случае непогоды по периметру закрываются шторы, которые не пропускают воду и ветер, и предоставляются газовые и электронные обогреватели. Понтон содержит оттдельный подъезд и личную парковку на 20 машиномест, собственно что выделяет ему превосходство перед другими площадками. Ресторан дает текстиль на столы и стулья и индивидуальные тканевык салфетки. Громкая музыка вероятно до 21:30, впоследствии лишь только в фоновом режими. </p>
+		</div>
+
+	</div>
 
 	<div class="content_loading"></div>
-	 {{ this.render('//components/generic/callback.twig') | raw }}
+
+	{{ this.render('//components/generic/callback.twig') | raw }}
 
 </div>
-
-
