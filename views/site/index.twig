@@ -16,8 +16,8 @@
 			{% for slice in slices_for_tag %}
 
 				<a href="/catalog/{{slice.alias}}/" class="tag">
-					<p>{{slice.name}}</p>
-					<p class="num">{{slice.restaurants_count}}</p>
+					<p>{{slice.text}}</p>
+					<p class="num">{{slice.count}}</p>
 				</a>
 
 			{% endfor %}

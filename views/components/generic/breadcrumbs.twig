@@ -1,0 +1,26 @@
+{# <div class="breadcrumbs_listing" data-listing-breadcrumbs> #}
+
+    <ul class="breadcrumb_ul">
+
+        {% for link, name in seo.breadcrumbs %}
+
+            {% if seo.breadcrumbs|length > 1 and loop.last %}
+
+                <li>
+                    <p>{{name}}</p>
+                </li>
+
+            {% else %}
+
+                <li>
+                    <a href="{{link}}">{{name}}</a>
+                </li>
+
+            {% endif %}
+
+
+        {% endfor %}
+
+    </ul>
+
+{# </div> #}

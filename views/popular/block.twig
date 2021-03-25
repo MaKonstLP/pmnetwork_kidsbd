@@ -1,0 +1,32 @@
+<div class="popular_block" data-group-name="{{key}}">
+
+  <h2>{{key}}</h2>
+  
+  <div class="contain_pop" data-slices-list>
+
+    {% for slice in popularBlock %}
+
+      <a href="/catalog/{{slice.alias}}/">
+
+        <img src="/images/slices/{{slice.image}}">
+        <h3>{{slice.name}}</h3>
+
+      </a>
+
+    {% endfor %}
+
+  </div>
+
+  {% if isMoreSlices %}
+
+    <button class="yet _active">Показать еще</button>
+
+  {% else %}
+
+    <button class="yet">Показать еще</button>
+
+  {% endif %}
+
+
+
+</div>

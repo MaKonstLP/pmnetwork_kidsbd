@@ -245,6 +245,11 @@
                 transform:none;
             }
         }
+
+        &._invalid{
+            border: 1px solid red;
+            border-radius: 4px;
+        }
     }
 
     .filter_select_list{
@@ -373,6 +378,10 @@
             @include for-pad{
                 padding: 2px 22px 4px;
             }
+        }
+
+        &._disabled{
+            cursor: not-allowed;
         }
     }
 }

@@ -13,6 +13,7 @@ use app\modules\arenda\models\ItemSpecials;
 use frontend\modules\arenda\models\ElasticItems;
 use frontend\modules\arenda\components\Breadcrumbs;
 use common\models\elastic\ItemsWidgetElastic;
+use common\models\elastic\ItemsFilterElastic;
 
 class ItemController extends Controller
 {
@@ -21,19 +22,19 @@ class ItemController extends Controller
 	{
 		$elastic_model = new ElasticItems;
 		$item = $elastic_model::get($id);
-
+		
 		$seo = new Seo('item', 1, 0, $item);
 		$seo = $seo->seo;
 		$this->setSeo($seo);
-
+		
 		
 		$seo['h1'] = $item->name;
-		$seo['breadcrumbs'] = Breadcrumbs::get_breadcrumbs('item');
+		$seo['breadcrumbs'] = Breadcrumbs::getItemCrumb($item);
 		$seo['address'] = $item->restaurant_address;
 		$seo['desc'] = $item->restaurant_name;
-
+		
 		$changedStrings = ItemSpecials::getChangedStrings($item);
-
+		
 		
 		$special_obj = new ItemSpecials($item->restaurant_special);
 		$item->restaurant_special = $special_obj->special_arr;
@@ -41,7 +42,19 @@ class ItemController extends Controller
 		
 		$itemsWidget = new ItemsWidgetElastic;
 		$other_rooms = $itemsWidget->getOther($item->restaurant_id, $id, $elastic_model);
-		$similar_rooms = $itemsWidget->getSimilar($item, 'rooms', $elastic_model);
+		$similar_rooms = ElasticItems::find()->limit(10)->query([
+			'bool' => [
+				'must' => [
+					['match' => ['restaurant_district' => $item->restaurant_district]],
+					['match' => ['restaurant_city_id' => \Yii::$app->params['subdomen_id']]],
+				],
+				'must_not' => [
+					['match' => ['restaurant_id' => $item->restaurant_id]]
+				],
+			],
+		])->all();
+		shuffle($similar_rooms);
+		$similar_rooms = array_slice($similar_rooms, 0, 3);
 
 		// echo '<pre>';
 		// print_r($item);

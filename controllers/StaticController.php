@@ -30,12 +30,12 @@ class StaticController extends Controller
 	public function actionRobots()
 	{
 		return 'User-agent: *
-Sitemap:  https://arenda.com/sitemap/  ';
+		Sitemap:  https://arenda.com/sitemap/  ';
 	}
 
 	private function setSeo($seo){
-        $this->view->title = $seo['title'];
-        $this->view->params['desc'] = $seo['description'];
-        $this->view->params['kw'] = $seo['keywords'];
-    }
+		$this->view->title = $seo['title'];
+		$this->view->params['desc'] = $seo['description'];
+		$this->view->params['kw'] = $seo['keywords'];
+	}
 }

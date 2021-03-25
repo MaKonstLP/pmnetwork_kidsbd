@@ -149,7 +149,7 @@ export default class Filter{
 				this.$filter.find('[data-filter-checkbox-block] .filter_label').removeClass('_active');
 				this.$filter.find('[data-filter-checkbox-wrapper] p').text('');
 				this.state = {};
-				console.log(this.state);
+				// console.log(this.state);
 			});
 
 			// КЛИК ПО СТРОКЕ В СЕЛЕКТЕ
@@ -233,66 +233,94 @@ export default class Filter{
 		$('.popup_filter_container').addClass('_hidden');
 	}
 
+	requiredDataCheck(){
+		var self = this;
+		if (self.state['prazdnik'] !== undefined || self.state['rest_type'] !== undefined) {
+			$('[data-type="prazdnik"] [data-filter-select-current]').removeClass('_invalid');		
+			$('[data-type="rest_type"] [data-filter-select-current]').removeClass('_invalid');		
+	
+			return true;
+		}
+
+		$('[data-type="prazdnik"] [data-filter-select-current]').addClass('_invalid');		
+		$('[data-type="rest_type"] [data-filter-select-current]').addClass('_invalid');		
+
+		return false;
+	}
+
+	blockSubmitButton(){
+		$('[data-filter-button]').addClass('_disabled');
+	}
+	
+	unblockSubmitButton(){
+		$('[data-filter-button]').removeClass('_disabled');
+	}
+
 	filterListingSubmit(page = 1){
 		let self = this;
-		self.state.page = page;
 
-		if (self.mobileMode){
-			self.closeMobileFilter();
+		if (self.requiredDataCheck()) {
+			self.state.page = page;
+	
+			if (self.mobileMode){
+				self.closeMobileFilter();
+			}
+	
+			let data = {
+				'filter' : JSON.stringify(self.state)
+			}
+	
+			this.promise = new Promise(function(resolve, reject) {
+				self.reject = reject;
+				self.resolve = resolve;
+				});		
+	
+			$.ajax({
+				type: 'get',
+				url: '/ajax/filter/',
+				data: data,
+				success: function(response) {
+					response = $.parseJSON(response);
+					// console.log(response.params_filter);
+					self.resolve(response);
+				},
+				error: function(response) {
+				}
+			});
 		}
-
-		let data = {
-			'filter' : JSON.stringify(self.state)
-		}
-
-		this.promise = new Promise(function(resolve, reject) {
-			self.reject = reject;
-			self.resolve = resolve;
-	    });		
-
-		$.ajax({
-            type: 'get',
-            url: '/ajax/filter/',
-            data: data,
-            success: function(response) {
-            	response = $.parseJSON(response);
-                self.resolve(response);
-            },
-            error: function(response) {
-
-            }
-        });
 	}
 
 	filterMainSubmit(){
 		let self = this;
-		let data = {
-			'filter' : JSON.stringify(self.state)
+
+		if (self.requiredDataCheck()) {
+
+			let data = {
+				'filter' : JSON.stringify(self.state)
+			}
+
+			this.promise = new Promise(function(resolve, reject) {
+				self.reject = reject;
+				self.resolve = resolve;
+			});
+
+			$.ajax({
+				type: 'get',
+				url: '/ajax/filter-main/',
+				data: data,
+				success: function(response) {
+					if(response){
+						self.resolve('/catalog/'+response);
+					}
+					else{
+						self.resolve(self.filterListingHref());
+					}
+				},
+				error: function(response) {
+
+				}
+			});
 		}
-
-		this.promise = new Promise(function(resolve, reject) {
-			self.reject = reject;
-			self.resolve = resolve;
-		});
-
-		$.ajax({
-            type: 'get',
-            url: '/ajax/filter-main/',
-            data: data,
-            success: function(response) {
-            	if(response){
-            		//console.log(response);
-            		self.resolve('/catalog/'+response);
-            	}
-            	else{
-            		//console.log(response);
-            		self.resolve(self.filterListingHref());
-            	}
-            },
-            error: function(response) {
-
-            }
-        });
 	}
 
 	selectBlockClick($block){
@@ -324,7 +352,7 @@ export default class Filter{
 	}
 
 	selectStateRefresh($block){
-		console.log('selectStateRefresh');
+		// console.log('selectStateRefresh');
 		let self = this;
 		let blockType = $block.data('type');		
 		let $items = $block.find('[data-filter-select-item]._active');
@@ -476,9 +504,9 @@ export default class Filter{
 			delete self.state[blockType];
 		}
 
-		console.log(self.state[blockType]);
-		console.log('After refresh:');
-		console.log(self.state);
+		// console.log(self.state[blockType]);
+		// console.log('After refresh:');
+		// console.log(self.state);
 	}
 
 	filterListingHref(){

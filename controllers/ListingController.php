@@ -40,14 +40,12 @@ class ListingController extends Controller
 
 	public function actionSlice($slice)
 	{
-		// echo '<pre>';
-		// exit;
-
 		$slice_obj = new QueryFromSlice($slice);
 
 		if ($slice_obj->flag){
 			$this->view->params['menu'] = $slice;
 			$params = $this->parseGetQuery($slice_obj->params, $this->filter_model, $this->slices_model);
+
 			isset($_GET['page']) ? $params['page'] = $_GET['page'] : $params['page'];
 
 			$canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
@@ -60,7 +58,7 @@ class ListingController extends Controller
 				$page 			=	$params['page'],
 				$per_page		=	$this->per_page,
 				$params_filter	= 	$params['params_filter'],
-				$breadcrumbs 	=	Breadcrumbs::get_breadcrumbs(2),
+				$breadcrumbs 	=	Breadcrumbs::get_breadcrumbs(2, $slice),
 				$canonical 		= 	$canonical,
 				$type 			=	$slice
 			);
@@ -84,11 +82,15 @@ class ListingController extends Controller
 			// print_r($params);
 			// exit;
 
+			substr($params['listing_url'], 0, 1) == '?' ? 
+			$breadcrumbs = Breadcrumbs::get_breadcrumbs(4, false, $params['params_filter']) 
+			: $breadcrumbs = Breadcrumbs::get_breadcrumbs(2, substr($params['listing_url'], 0, -1));
+
 			return $this->actionListing(
 				$page 			=	$params['page'],
 				$per_page		=	$this->per_page,
 				$params_filter	= 	$params['params_filter'],
-				$breadcrumbs 	=	Breadcrumbs::get_breadcrumbs(1),
+				$breadcrumbs 	=	$breadcrumbs,
 				$canonical 		= 	false,
 			);	
 		}	else {
@@ -118,8 +120,10 @@ class ListingController extends Controller
 			'total' => $items->pages,
 			'current' => $page,
 		]);
-
 		$seo_type = $type ? $type : 'listing';
+		// echo '<pre>';
+		// print_r($items->total);
+		// exit;
 		$seo = $this->getSeo($seo_type, $page, $items->total);
 		$seo['breadcrumbs'] = $breadcrumbs;
 		$this->setSeo($seo, $page, $canonical);
@@ -132,10 +136,6 @@ class ListingController extends Controller
 		$totalCount = $items->total
 			. ' заведени'
 			. Declension::get_num_ending($items->total, ['е', 'я', 'й']);
-
-		// echo '<pre>';
-		// print_r($seo['breadcrumbs']);
-		// exit;
 
 		return $this->render('index.twig', array(
 			'items' => $items->items,
@@ -158,17 +158,24 @@ class ListingController extends Controller
 			'current' => $params['page'],
 		]);
 
-		substr($params['listing_url'], 0, 1) == '?' ? $breadcrumbs = Breadcrumbs::get_breadcrumbs(1) : $breadcrumbs = Breadcrumbs::get_breadcrumbs(2);
+		
 		$slice_url = ParamsFromQuery::isSlice(json_decode($_GET['filter'], true));
 		$seo_type = $slice_url ? $slice_url : 'listing';
 		$seo = $this->getSeo($seo_type, $params['page'], $items->total);
-		$seo['breadcrumbs'] = $breadcrumbs;
-
+		
+		substr($params['listing_url'], 0, 1) == '?' ? 
+			$seo['breadcrumbs'] = Breadcrumbs::get_breadcrumbs(4, false, $params['params_filter']) 
+			: $seo['breadcrumbs'] = Breadcrumbs::get_breadcrumbs(2, substr($params['listing_url'], 0, -1));
 		// $this->setSeo($seo, 1, false);
 
 		$totalCount = $items->total
 		. ' заведени'
 		. Declension::get_num_ending($items->total, ['е', 'я', 'й']);
+
+		$crumbs = $this->renderPartial('//components/generic/breadcrumbs.twig', array(
+			'seo' => $seo,
+			'count' => $totalCount,
+		));
 
 		$title = $this->renderPartial('//components/generic/title.twig', array(
 			'seo' => $seo,
@@ -196,9 +203,11 @@ class ListingController extends Controller
 			'pagination' => $pagination,
 			'url' => $params['listing_url'],
 			'title' => $title,
+			'crumbs' => $crumbs,
 			'text_top' => $text_top,
 			'text_bottom' => $text_bottom,
 			'seo_title' => $seo['title'],
+			'params_filter' => $params['params_filter'],
 		]);
 	}
 

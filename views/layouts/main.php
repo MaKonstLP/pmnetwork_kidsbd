@@ -17,8 +17,7 @@ frontend\modules\arenda\assets\AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="/img/zal.ico">
-    <!-- <link rel="stylesheet" type="text/css" href="http://fonts.fontstorage.com/import/lato.css"> -->
+    <link rel="icon" type="image/png" href="/images/favicon.png">
     <link rel="stylesheet" type="text/css" href="http://fonts.fontstorage.com/import/firasans.css">
     <!-- <link href="https://allfont.ru/allfont.css?fonts=lora" rel="stylesheet" type="text/css" /> -->
     <title><?php echo $this->title ?></title>

@@ -14,29 +14,27 @@ class FormController extends Controller
     //    return Yii::getAlias('@app/modules/svadbanaprirode/views/site');
     //}
 
-    public function beforeAction($action) {
+    public function beforeAction($action)
+    {
         $this->enableCsrfValidation = false;
         return parent::beforeAction($action);
     }
 
     public function actionSend()
     {
-        if($_POST['type'] == 'main'){
-            $messageApi = $this->sendApi($_POST['name'], $_POST['phone'], $_POST['date'], $_POST['count']);
-
+        if ($_POST['type'] == 'main'){
+            // $messageApi = $this->sendApi($_POST['name'], $_POST['phone'], $_POST['date'], $_POST['count']);
             //return json_encode($messageApi);
-        }
-        else{
-            $messageApi = $this->sendApi($_POST['name'], $_POST['phone'], $_POST['date'], $_POST['count']);
+        } else {
+            // $messageApi = $this->sendApi($_POST['name'], $_POST['phone'], $_POST['date'], $_POST['count']);
         }
 
         //$to   = ['martynov@liderpoiska.ru', 'sharapova@liderpoiska.ru', 'sites@plusmedia.ru'];
-        $to   = ['ssk@liderpoiska.ru', 'martynov@liderpoiska.ru'];
+        $to   = ['artm@liderpoiska.ru'];
 
-        if($_POST['type'] == 'main'){
+        if ($_POST['type'] == 'main'){
             $subj = "Заявка на выбор зала.";
-        }
-        else{
+        } else {
             $subj = "Заявка на бронирование зала.";
         }
         
@@ -91,7 +89,8 @@ class FormController extends Controller
         return $resp;
     }
 
-    public function sendMail($to,$subj,$msg) {
+    public function sendMail($to, $subj, $msg)
+    {
         return true;
         $message = Yii::$app->mailer->compose()
             ->setFrom(['post@smilerooms.ru' => 'Свадьба на природе.'])

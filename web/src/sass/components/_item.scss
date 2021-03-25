@@ -195,8 +195,6 @@ $fontFamilyLato:Lato;
         margin-bottom: 22px;
     }
 
-
-
     .object_meta_block{
         display: flex;
 
@@ -292,45 +290,26 @@ $fontFamilyLato:Lato;
 }
 
 .object_book{
+    width: 488px;
+    margin: 0 0 0 auto;
+    padding: 9px 24px 15px;
     background: #E7F3FF;
     border-radius: 12px;
-    padding: 9px 24px 15px;
-    position: absolute;
-    right: -7px;
-    bottom: 3px;
-    width: 43.08%;
-
-    @include for-notdesc{
-        width: 45%;
-        padding: 10px 20px 15px;
-        right: -50px;
-    }
-
-    @include for-lowdesc{
-        width: 52%;
-        padding: 10px 20px 15px;
-        right: -185px;
-    }
 
     @include for-pad{
-        width: 72.137%;
-        right: 14%;
         display: flex;
         flex-flow: row;
         justify-content: center;
-        bottom: auto;
-        top: 104%;
-        border-radius: 6px;
+        width: calc(100% - 214px);
+        margin: 0 0 0 0;
         padding: 14px 26px 14.87px;
     }
 
-
     @include for-mobile{
-    position: relative;
-    width: 98.843%;
-    bottom: 0;
-    right: 0;
-    padding: 4px 27px 10px 36px;
+        position: relative;
+        width: 100%;
+        margin: 0 0 0 0;
+        padding: 4px 27px 10px 36px;
     }
 
     .object_book_text{
@@ -631,8 +610,8 @@ $fontFamilyLato:Lato;
             }
     }
     .item-block .vector_price{
-        margin-top: 13px;
-        margin-left: 160px;
+        margin-top: 14px;
+        margin-left: 161px;
 
         @include for-pad{
                 margin-top: 30px;
@@ -656,13 +635,7 @@ $fontFamilyLato:Lato;
             margin-top: 0;
         }
     }
-    // .item_similar_rooms .item-block{
-    //     margin-bottom: 32px;
-
-    //     @include for-mobile{
-    //         margin-bottom: 60px;
-    //     }
-    // }
+    
     .yet{
         padding: 0;
         text-align: center;
@@ -711,17 +684,18 @@ $fontFamilyLato:Lato;
         color: #2C3044;
         margin-bottom: 24px;
 
-        @include for-pad{
-        height: 120px;
-        overflow: hidden;
-        margin-bottom: 8px
-        }
-        @include for-mobile{
-        height: 196px;
-        overflow: hidden;
-        margin-bottom: 0px;
+        // @include for-pad{
+        // height: 120px;
+        // overflow: hidden;
+        // margin-bottom: 8px
+        // }
 
-        }
+        // @include for-mobile{
+        // height: 196px;
+        // overflow: hidden;
+        // margin-bottom: 0px;
+
+        // }
     }
 
     button{
@@ -856,7 +830,7 @@ $fontFamilyLato:Lato;
 .content_block{
 
     &._item{
-        width: 59%;
+        width: 1136px;
         margin-bottom: 0px;
 
         @include for-pad{

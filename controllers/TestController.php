@@ -6,8 +6,11 @@ use backend\models\Filter;
 use common\models\GorkoApiTest;
 use common\models\Slices;
 use common\models\SlicesExtended;
+use common\models\Pages;
+use common\models\RestaurantsTypes;
 use frontend\modules\arenda\models\ElasticItems;
 use yii\web\Controller;
+
 
 class TestController extends Controller
 {
@@ -92,27 +95,38 @@ class TestController extends Controller
 
 	public function actionCustom(){
 		// $filter_model = Filter::find()->with('items')->asArray()->all();
-
+		
 		// foreach ($filter_model[1]['items'] as $key => $value) {
 			// echo 'rest_type ' . $this->translit($value['text']) . ' ' . $value['text'] . ' ' . '{rest_type:' . $value['value'] . '}<br/>';
-		// 	echo $this->translit($value['text']) . ' ' . $value['text'] . '<br/>';
-		// }
-		
-		// echo '<pre>';
-		// print_r($filter_model[0]['items']);
+			// 	echo $this->translit($value['text']) . ' ' . $value['text'] . '<br/>';
+			// }
+			
+			// echo '<pre>';
+			// print_r($filter_model[0]['items']);
+			
+			// $slices = Slices::find()->all();
+			
+			// foreach ($slices as $slice){
+				// $extended = new SlicesExtended();
+				// $extended->alias = $slice->alias;
+				// $extended->name = $slice->h1;
+				
+				// $extended = SlicesExtended::find()->where(['alias' => $slice->alias])->one();
+				// $extended->type = $slice->type;
+				
+				// $extended->save();
+			// }
+			
+			// Pages::createSiteObjects();
+				
+			$model = RestaurantsTypes::find()->asArray()->all();
+			$filter_model = Filter::find()->with('items')->asArray()->all();
 
-		// $slices = Slices::find()->all();
+			foreach ($model as $value) {
+				// echo '[' . $value['value'] . ',' . $value['text'] . '],<br/>';
 
-		foreach ($slices as $slice){
-			// $extended = new SlicesExtended();
-			// $extended->alias = $slice->alias;
-			// $extended->name = $slice->h1;
-
-			// $extended = SlicesExtended::find()->where(['alias' => $slice->alias])->one();
-			// $extended->type = $slice->type;
-
-			// $extended->save();
-		}
+			}
+			print_r($filter_model[1]);
 
 		exit;
 	}

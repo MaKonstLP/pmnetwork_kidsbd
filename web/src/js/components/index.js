@@ -22,6 +22,13 @@ export default class Index{
 	}
 
 	redirectToListing(){
+		let self = this;
+
+		if (!self.filter.requiredDataCheck()) {
+			self.filter.blockSubmitButton();
+			return;
+		}
+
 		this.filter.filterMainSubmit();
 		this.filter.promise.then(
 			response => {

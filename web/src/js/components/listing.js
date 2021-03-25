@@ -82,6 +82,13 @@ export default class Listing{
 	reloadListing(page = 1){
 		let self = this;
 		self.filter.filterClose();
+
+		if (!self.filter.requiredDataCheck()) {
+			self.filter.blockSubmitButton();
+			return;
+		}
+
+		self.filter.unblockSubmitButton();
 		self.block.addClass('_loading');
 		self.filter.filterListingSubmit(page);
 		self.filter.promise.then(
@@ -99,6 +106,7 @@ export default class Listing{
 	            },
 				});
 				$('[data-listing-title]').html(response.title);
+				$('[data-listing-breadcrumbs]').html(response.crumbs);
 				$('[data-listing-text-top]').html(response.text_top);
 				$('[data-listing-text-bottom]').html(response.text_bottom);
 				$('[data-pagination-wrapper]').html(response.pagination);

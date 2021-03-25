@@ -2,7 +2,9 @@
 
 	<div class="head_block">
 
-		{{ this.render('//components/generic/breadcrump.twig', {'count':count, 'seo':seo}) | raw }}
+		<div class="breadcrumbs_listing" data-listing-breadcrumbs>
+			{{ this.render('//components/generic/breadcrumbs.twig', {'count':count, 'seo':seo}) | raw }}
+		</div>
 
 		<div data-listing-title>
 

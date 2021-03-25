@@ -15,46 +15,54 @@ export default class Form {
 		this.to = (this.$form.attr('action') == undefined || this.$form.attr('action') == '') ? this.to : this.$form.attr('action');
 		let im_phone = new Inputmask('+7 (999) 999-99-99', {
 			clearIncomplete: true,
-	    });
-	    im_phone.mask($(this.$form).find('[name="phone"]'));
+		});
+		im_phone.mask($(this.$form).find('[name="phone"]'));
 
 		this.bind();	
-		this.$form.find('.input_wrapper').on('click' , function(){
-			console.log(1221);
-			let parent = $(this).closest('.input_wrapper');
-			parent.find('.qs-num').on('click' , function(){
-			setTimeout(function() {
-			let valueVisible = parent.find('.addCalendar').val();
-			let valueHidInp = parent.find('[data-form-hidden-input]').val();
-			let valueHidInpTwo = parent.find('[data-form-hidden-input-two]').val();
-			if(valueVisible == ''){
-				parent.find('.addCalendar').val(valueHidInp);
 
-			}
-			else if(valueHidInp != '' && valueHidInpTwo != '' ){
-				parent.find('.addCalendar').val(valueHidInp + '-' + valueHidInpTwo);
-				parent.find('[data-form-hidden-input]').addClass('_hide');
-			}
-			else if(valueHidInp != '' && valueHidInpTwo ==''){
-				parent.find('.addCalendar').val(valueHidInp);
-			}
-			else {parent.find('.addCalendar').val('');}
-			},50);
-		})
-		})
-		this.$form.find('[data-form-hidden-input]').on('click' , function(){
-			let parent = $(this).closest('.input_wrapper');
-			$(this).removeClass('_active');
-			parent.find('[data-form-hidden-input-two]').addClass('_active');
+		// this.$form.find('[data-calendar-input-wrapper]').on('click' , function(){
+		// 	console.log(1221);
+		// 	let parent = $(this).closest('.input_wrapper');
 
-		})
-		this.$form.find('[data-form-hidden-input-two]').on('click' , function(){
-			let parent = $(this).closest('.input_wrapper');
-			$(this).removeClass('_active');
-			parent.find('[data-form-hidden-input]').addClass('_active');
-			parent.find('[data-form-hidden-input]').addClass('_hide');
+		// 	parent.find('.qs-num').on('click' , function(){
 
-		})
+		// 		setTimeout(function() {
+		// 			let valueVisible = parent.find('.addCalendar').val();
+		// 			let valueHidInp = parent.find('[data-form-hidden-input]').val();
+		// 			let valueHidInpTwo = parent.find('[data-form-hidden-input-two]').val();
+
+		// 			if (valueVisible == ''){
+		// 				parent.find('.addCalendar').val(valueHidInp);
+		// 			}	else if (valueHidInp != '' && valueHidInpTwo != '' ){
+		// 				parent.find('.addCalendar').val(valueHidInp + '-' + valueHidInpTwo);
+		// 				parent.find('[data-form-hidden-input]').addClass('_hide');
+		// 			}	else if (valueHidInp != '' && valueHidInpTwo ==''){
+		// 				parent.find('.addCalendar').val(valueHidInp);
+		// 			}	else {
+		// 				parent.find('.addCalendar').val('');
+		// 			}
+		// 		},50);
+		// 	});
+		// });
+
+		this.$form.find('[data-calendar-input-wrapper]').on('click' , function(){
+			console.log('open calendar');
+
+		});
+
+		// this.$form.find('[data-form-hidden-input]').on('click' , function(){
+		// 	let parent = $(this).closest('.input_wrapper');
+		// 	$(this).removeClass('_active');
+		// 	parent.find('[data-form-hidden-input-two]').addClass('_active');
+
+		// })
+
+		// this.$form.find('[data-form-hidden-input-two]').on('click' , function(){
+		// 	let parent = $(this).closest('.input_wrapper');
+		// 	$(this).removeClass('_active');
+		// 	parent.find('[data-form-hidden-input]').addClass('_active');
+		// 	parent.find('[data-form-hidden-input]').addClass('_hide');
+		// })
 
 
 		// this.$form.find('[data-form-hidden-input]').on('click' , function(){

@@ -38,6 +38,7 @@ $lineHeightMobilP:24px;
 		}
 		@include for-mobile{
 			width: 288px;
+			margin-bottom: 20px;
 		}
 
 		h2{
@@ -58,53 +59,66 @@ $lineHeightMobilP:24px;
 
 		.contain_pop{
 			display: flex;
-			flex-flow:row;
+			flex-flow: row wrap;
 			justify-content: space-between;
-			width: 100%;
+			width: 1136px;
 
+			@include for-pad{
+				width: 734px;
+				margin: 0 auto 0 auto;
+			}
 			@include for-mobile{
-				flex-flow:column;
-				justify-content:center;
+				width: 100%;
+			}
+
+			h3{
+				position: absolute;
+				font-family: Lato;
+				font-style: normal;
+				font-weight: bold;
+				font-size: 24px;
+				line-height: 32px;
+				color: #FFFFFF;
+				bottom: 24px;
+				left: 24px;
+	
+				@include for-pad{
+					font-size: 20px;
+					line-height: 24px;
+					bottom: 20px;
+					left: 15px;
+				}
+
+				@include for-mobile{
+					font-size: 16px;
+					line-height: 24px;
+					bottom: 9px;
+					left: 10px;
+	
+				}
 			}
 
 			a{    
-				width: 49.297%;
-    			height: 320px;
-    			margin-bottom: 30px;
-
-    			@include for-pad{
-    				height: auto;
-    			}
-    			@include for-mobile{
-    				width: 100%;
-    				height: auto;
-    				margin-bottom: 8px
-    			}
-
-			.img_contein_pop{
 				position: relative;
+				width: 560px;
+				height: 320px;
+				margin: 0 0 16px 0;
 
-				img{
+				@include for-pad{
+					width: 734px;
+					height: auto;
+				}
+
+				@include for-mobile{
 					width: 100%;
 					height: auto;
 				}
-				p{
-					position: absolute;
-					font-family: $fontFamilyLato;
-					font-style: normal;
-					font-weight: bold;
-					font-size: $fontSizeDescP;
-					line-height: $lineHeightDescP;
-					color: #FFFFFF;
-					bottom: 28px;
-					left: 24px;
 
-					@include for-mobile{
-						font-size: $fontSizeMobilP;
-						line-height:$lineHeightMobilP ;
-					}
+				img{
+					display: block;
+					width: 100%;
+					height: auto;
 				}
-			}
 		  } 	
 		}
 
@@ -119,53 +133,77 @@ $lineHeightMobilP:24px;
 			text-align: center;
 			color: #141417;
 			padding: 13px 71px 15px;
-		    width: 234px;
-		    margin: auto;
-		    cursor: pointer;
-		    border-radius: 4px;
+			width: 234px;
+			margin: 32px auto 0 auto;
+			cursor: pointer;
+			border-radius: 4px;
 			border:1px solid yellow;
 			border-image: linear-gradient(to right , orange, #ebc302, yellow, yellow);
 			border-image-slice: 1;
+		}
+
+		button.yet{
+			display: none;
+			font-family: $fontFamilyLato;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 14px;
+			line-height: 20px;
+			align-items: center;
+			text-align: center;
+			color: #141417;
+			padding: 13px 70px 15px;
+			width: 234px;
+			margin: 32px auto 0 auto;
+			cursor: pointer;
+			border-radius: 4px;
+			border:1px solid yellow;
+			border-image: linear-gradient(to right , orange, #ebc302, yellow, yellow);
+			border-image-slice: 1;
+		
+			&._active{
+				display: flex;
+			}
+
+			@include for-mobile{
+				margin: 16px auto 0 auto;
+			}
 		}
 	}
 
 }
 .title{
-&.popular{
-	width: 55%;
-    margin: auto;
-    margin-top: 71px;
 
-	@include for-pad{
-		margin-top: 0px;
-	}
-	@include for-mobile{
-		width: auto;
-		margin-top: 35px;
-	}
+	&.popular{
+		width: 55%;
+		margin: auto;
 
-	h1{
-		font-family: Lato;
-		font-style: normal;
-		font-weight: 900;
-		font-size: 36px;
-		line-height: 48px;
-		text-align: center;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		color: #141417;
-		margin-bottom: 67px;
+		@include for-pad{
+			margin-top: 0px;
+		}
 
-    	@include for-pad{
-    		margin-bottom: 16px;
-    	}
-    	@include for-mobile{
-    		font-size: 32px;
-    		line-height: 40px;
-    		margin-bottom: 40px;
-    	}
+		@include for-mobile{
+			width: auto;
+			margin-top: 15px;
+		}
+
+		h1{
+			text-align: center;
+			text-transform: uppercase;
+			color: #141417;
+			margin-bottom: 64px;
+
+			@include for-pad{
+				margin-bottom: 16px;
+			}
+
+			@include for-mobile{
+				margin-bottom: 20px;
+			}
+		}
 	}
-}}
+}
+
 .text_bottom{
 	margin: auto;
     position: relative;
@@ -190,37 +228,19 @@ $lineHeightMobilP:24px;
     }
 }
 
-
-.yet{
-			font-family: $fontFamilyLato;
-			font-style: normal;
-			font-weight: normal;
-			font-size: 14px;
-			line-height: 20px;
-			display: flex;
-			align-items: center;
-			text-align: center;
-			color: #141417;
-			padding: 13px 70px 15px;
-		    width: 234px;
-		    margin: auto;
-		    cursor: pointer;
-		    border-radius: 4px;
-			border:1px solid yellow;
-			border-image: linear-gradient(to right , orange, #ebc302, yellow, yellow);
-			border-image-slice: 1;
-}
 .content_block{
- &.pop_form{
-	margin-bottom: 64px;
-	width: 64.6%;
 
-	@include for-pad{
-		width: 100%;
+ 	&.pop_form{
+		margin-bottom: 64px;
+		width: 64.6%;
+
+		@include for-pad{
+			width: 100%;
+		}
+
+		@include for-mobile{
+			width: 100%;
+			padding: 0 10px;
+		}
 	}
-	@include for-mobile{
-		width: 100%;
-		padding: 0 10px;
-	}
-}
 }

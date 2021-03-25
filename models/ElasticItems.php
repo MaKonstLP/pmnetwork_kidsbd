@@ -191,7 +191,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         $connection = new \yii\db\Connection([
             'dsn'       => 'mysql:host=localhost;dbname=pmn_arenda',
             'username'  => 'root',
-            'password'  => 'LP_db_',
+            'password'  => 'Gkcfmdsop',
             'charset'   => 'utf8mb4',
         ]);
         $connection->open();
@@ -206,7 +206,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         $restaurants_types = RestaurantsTypes::find()
             ->limit(100000)
             ->asArray()
-            ->all();
+            ->all($connection);
         $restaurants_types = ArrayHelper::index($restaurants_types, 'value');
 
         $restaurants_spec = RestaurantsSpec::find()
@@ -235,7 +235,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             ->with('rooms')
             ->limit(100000)
             ->where(['in_elastic' => 0, 'active' => 1])
-            ->all();
+            ->all($connection);
 
         foreach ($restaurants as $restaurant) {
             foreach ($restaurant->rooms as $room) {
@@ -273,6 +273,12 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             return 'Неподходящий тип мероприятия';
         }
 
+        $restaurant_type_white_list = [31, 17, 2, 37, 34, 33, 27, 36, 1, 3, 4, 16, 30, 14, 15];
+        $restaurant_type = explode(',', $restaurant->type);
+
+        if (count(array_intersect($restaurant_type_white_list, $restaurant_type)) === 0) {
+            return 'Неподходящий тип площадки';
+        }
 
         if(count($room->images) == 0)
             return 0;

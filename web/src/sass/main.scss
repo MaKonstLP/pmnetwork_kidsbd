@@ -233,13 +233,13 @@ a {
 
 h1{
     font-weight: 900;
-    line-height: 48px;
     font-size: 36px;
+    line-height: 48px;
     letter-spacing: 0.06em;
 
     @include for-mobile{
         font-weight: bold;
-        font-size: 32px;
+        font-size: 28px;
         line-height: 36px;
         letter-spacing: 0.03em;
     }
@@ -622,5 +622,12 @@ h4{
 
     .filter_mobile{
         display: none;
+    }
+}
+
+.form_wrapper{
+
+    .qs-active{
+        color: #ffffff;
     }
 }

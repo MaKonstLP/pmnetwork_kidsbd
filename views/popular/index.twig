@@ -1,65 +1,42 @@
 <div class="confetti_left_blog"></div>
 <div class="confetti_right_blog"></div>
+
 <div data-page-type="popular">
 
-    <div class="_popular">
-        <div class="title popular">
-            <h1>Популярные подборки. Банкетные залы Санкт-петербурга</h1>
-        </div>
+  <div class="_popular">
+
+    <div class="title popular">
+
+      <h1>{{seo.title}}</h1>
+
     </div>
 
-    <div  data-page-type="popular_all">
-       <div class="popular_all"> 
-        <div class="popular_block">
-            <h2>Лофт</h2>
-          <div class="contain_pop">  
-             <a href="#"><div class="img_contein_pop">
-               <img src="/images/popular/pop_card_photo.png">
-                <p>Для Дня рождения</p>
-            </div></a>
-            <a href="#"> <div class="img_contein_pop">
-                <img src="/images/popular/pop_card_photo1.png">
-                <p>Для вечеринки</p>
-            </div></a>
-          </div>
-          <button class="yet">Показать еще</button>  
-        </div>
-        <div class="popular_block">
-            <h2>Природа</h2>
-          <div class="contain_pop">  
-            <a href="#"> <div class="img_contein_pop">
-                <img src="/images/popular/pop_card_photo.png">
-                <p>Терраса</p>
-            </div>
-            <a href="#"><div class="img_contein_pop">
-                <img src="/images/popular/pop_card_photo1.png">
-                <p>Веранда</p>
-            </div></a>
-          </div>
-          <button class="yet">Показать еще</button>  
-        </div>
-        <div class="popular_block">
-            <h2>Банкетный зал</h2>
-          <div class="contain_pop">  
-            <a href="#"> <div class="img_contein_pop">
-                <img src="/images/popular/pop_card_photo.png">
-                <p>Банкетный зал</p>
-            </div></a>
-          <a href="#">  <div class="img_contein_pop">
-                <img src="/images/popular/pop_card_photo1.png">
-                <p>Конференц-зал</p>
-            </div></a>
-          </div>
-          <button class="yet">Показать еще</button>  
-        </div>
+  </div>
+
+  <div data-page-type="popular_all">
+
+    <div class="popular_all"> 
+
+      {% for key, popularBlock in popularBlocks %}
+
+        {{ this.render('//popular/block.twig', {'key': key, 'popularBlock': popularBlock.block, 'isMoreSlices': popularBlock.isMoreSlices}) | raw }}
+
+      {% endfor %}
+
     </div>
-</div>
-<div class="text_bottom">
+
+  </div>
+
+  <div class="text_bottom">
+
     <p>Понтон на воде 400 м² с белым шатром 260 м². Вмещает до 180 постояльцев банкетной рассадкой. На территории понтона размещаются 2 маленькие веранды, которые уже входят в стоимость аренды, а на свободных от шатра углах устроилась мягкая мебель. Шатер оборудован барной стойкой со светодиодной подсветкой, необходимым для вечернего освещения количеством люстр, а на каждой стальной дуге вывешены световые «Пары». В случае непогоды по периметру заакрываются шторы, которые не пропускают воду и ветер, и предоставляются газовые и электронные обогреватели. Понтон содержит отдельный подъезд и личную парковку на 20 машиномест, собственно что выделяет ему превосходство перед другими площадками. Ресторан дает текстиль на столы и стулья и индивидуальные тканевые салфетки. Громкая музыка вероятна до 21:30, впоследствии лишь только в фоновом режиме.</p>
-</div>
-<div class="content_block pop_form">
-        
-        {{ this.render('//components/generic/form.twig') | raw }}
 
-    </div>
+  </div>
+
+  <div class="content_block pop_form">
+        
+    {{ this.render('//components/generic/form.twig') | raw }}
+
+  </div>
+  
 </div>
