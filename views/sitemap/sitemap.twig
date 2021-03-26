@@ -6,6 +6,9 @@
         <url>
             <loc>{{host}}/catalog/</loc>
         </url>
+        <url>
+            <loc>{{host}}/popular/</loc>
+        </url>
 
         {% for slice in slices %}
         	<url>
@@ -19,7 +22,7 @@
 
         {% for item in items %}
         	<url>
-	            <loc>{{host}}/catalog/{{item.id}}/</loc>
+	            <loc>{{host}}/catalog/hall-{{item.slug}}/</loc>
 	        </url>
         {% endfor %}
         

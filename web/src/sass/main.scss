@@ -593,6 +593,7 @@ h4{
 
     &:after {
         content: " ₽";
+        font-family: Lato, sans-serif;
     }
 }
 
@@ -630,4 +631,8 @@ h4{
     .qs-active{
         color: #ffffff;
     }
+}
+
+._invisible_border{
+    border: 1px solid rgba(0, 0, 0, 0) !important;
 }

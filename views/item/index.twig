@@ -157,7 +157,7 @@
 
         <div class="map" id="map_on">
 
-            <div id="map" data-mapDotX="{{item.restaurant_latitude}}" data-mapDotY="{{item.restaurant_longitude}}" data-balloon="{{seo.address}}" data-hint="{{seo.h1}}">
+            <div id="map" data-mapDotX="{{item.restaurant_latitude}}" data-mapDotY="{{item.restaurant_longitude}}" data-balloon="{{seo.address}}" data-hint="{{seo.h1|first}}">
             </div>
 
         </div>
@@ -290,7 +290,7 @@
 
                             {% if item.restaurant_parking %}
 
-                                <p class="object_parameters_item">{{item.restaurant_parking}}</p>
+                                <p class="object_parameters_item">Своя парковка: {{item.restaurant_parking}}</p>
 
                             {% endif %}
 

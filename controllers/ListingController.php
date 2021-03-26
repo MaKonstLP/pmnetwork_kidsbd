@@ -41,19 +41,18 @@ class ListingController extends Controller
 	public function actionSlice($slice)
 	{
 		$slice_obj = new QueryFromSlice($slice);
-
 		if ($slice_obj->flag){
 			$this->view->params['menu'] = $slice;
 			$params = $this->parseGetQuery($slice_obj->params, $this->filter_model, $this->slices_model);
-
+			
 			isset($_GET['page']) ? $params['page'] = $_GET['page'] : $params['page'];
-
+			
 			$canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
-
+			
 			if($params['page'] > 1){
-				$canonical .= $params['canonical'];
+				// $canonical .= $params['canonical'];
 			}			
-
+			
 			return $this->actionListing(
 				$page 			=	$params['page'],
 				$per_page		=	$this->per_page,
@@ -63,8 +62,22 @@ class ListingController extends Controller
 				$type 			=	$slice
 			);
 		}	else {
-			return $this->goHome();
-		}				
+
+			$item = ElasticItems::find()->query([
+				'bool' => [
+					'must' => [
+						['match' => ['slug' => $slice]],
+						['match' => ['restaurant_city_id' => \Yii::$app->params['subdomen_id']]],
+					],
+				]
+			])->one();
+
+			if (empty($item)) {
+				return $this->goHome();
+			} else {
+				return $this->redirect(array('item/index', $slice));
+			}				
+		}
 	}
 
 	public function actionIndex()
@@ -74,13 +87,11 @@ class ListingController extends Controller
 		
 		if(count($getQuery) > 0){
 			$params = $this->parseGetQuery($getQuery, $this->filter_model, $this->slices_model);
-			// $canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
-			// if($params['page'] > 1){
-				// 	$canonical .= $params['canonical'];
-				// }
-			// echo '<pre>';
-			// print_r($params);
-			// exit;
+			$canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+
+			if($params['page'] > 1){
+				$canonical .= '?' . $params['canonical'];
+			}			
 
 			substr($params['listing_url'], 0, 1) == '?' ? 
 			$breadcrumbs = Breadcrumbs::get_breadcrumbs(4, false, $params['params_filter']) 
@@ -91,17 +102,17 @@ class ListingController extends Controller
 				$per_page		=	$this->per_page,
 				$params_filter	= 	$params['params_filter'],
 				$breadcrumbs 	=	$breadcrumbs,
-				$canonical 		= 	false,
+				$canonical 		= 	$canonical,
 			);	
 		}	else {
-			// $canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+			$canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
 
 			return $this->actionListing(
 				$page 			=	1,
 				$per_page		=	$this->per_page,
 				$params_filter	= 	[],
 				$breadcrumbs 	= 	Breadcrumbs::get_breadcrumbs(1),
-				$canonical 		= 	false,
+				$canonical 		= 	$canonical,
 			);
 		}
 	}
@@ -166,7 +177,6 @@ class ListingController extends Controller
 		substr($params['listing_url'], 0, 1) == '?' ? 
 			$seo['breadcrumbs'] = Breadcrumbs::get_breadcrumbs(4, false, $params['params_filter']) 
 			: $seo['breadcrumbs'] = Breadcrumbs::get_breadcrumbs(2, substr($params['listing_url'], 0, -1));
-		// $this->setSeo($seo, 1, false);
 
 		$totalCount = $items->total
 		. ' заведени'
@@ -232,7 +242,7 @@ class ListingController extends Controller
 		$return['params_api'] = $temp_params->params_api;
 		$return['params_filter'] = $temp_params->params_filter;
 		$return['listing_url'] = $temp_params->listing_url;
-		// $return['canonical'] = $temp_params->canonical;
+		$return['canonical'] = $temp_params->canonical;
 		return $return;
 	}
 
@@ -246,9 +256,11 @@ class ListingController extends Controller
 		$this->view->title = $seo['title'];
 		$this->view->params['desc'] = $seo['description'];
 		$this->view->params['kw'] = $seo['keywords'];
-
+		$this->view->params['robots'] = false;
+		
 		if ($page != 1){
 			$this->view->params['canonical'] = $canonical;
+			$this->view->params['robots'] = true;
 		}
 	}
 

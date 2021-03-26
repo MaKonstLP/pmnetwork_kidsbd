@@ -23,6 +23,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             'restaurant_alcohol',
             'restaurant_firework',
             'restaurant_name',
+            'restaurant_slug',
             'restaurant_address',
             'restaurant_cover_url',
             'restaurant_latitude',
@@ -51,6 +52,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
             'separate_entrance',
             'type_name',
             'name',
+            'slug',
             'features',
             'cover_url',
             'images',
@@ -87,6 +89,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
                     'restaurant_firework'              => ['type' => 'integer'],
                     'restaurant_name'                  => ['type' => 'text'],
                     'restaurant_address'               => ['type' => 'text'],
+                    'restaurant_slug'                  => ['type' => 'keyword'],
                     'restaurant_cover_url'             => ['type' => 'text'],
                     'restaurant_latitude'              => ['type' => 'text'],
                     'restaurant_longitude'             => ['type' => 'text'],
@@ -122,6 +125,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
                     'separate_entrance'     => ['type' => 'integer'],
                     'type_name'             => ['type' => 'text'],
                     'name'                  => ['type' => 'text'],
+                    'slug'                  => ['type' => 'keyword'],
                     'features'              => ['type' => 'text'],
                     'cover_url'             => ['type' => 'text'],
                     'description'           => ['type' => 'text'],
@@ -222,9 +226,10 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         // exit;
 
         foreach ($restaurants as $restaurant) {
-
+            $roomNumber = 0;
             foreach ($restaurant->rooms as $room) {
-                $res = self::addRecord($room, $restaurant, $restaurants_types, $restaurants_spec);
+                $roomNumber++;
+                $res = self::addRecord($room, $restaurant, $restaurants_types, $restaurants_spec, $roomNumber);
             }            
         }
         echo 'Обновление индекса '. self::index().' '. self::type() .' завершено<br>';
@@ -248,7 +253,27 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         echo 'Обновление индекса '. self::index().' '. self::type() .' завершено<br>';
     }
 
-    public static function addRecord($room, $restaurant, $restaurants_types){
+    public static function getTransliterationForUrl($name)
+    {
+        $latin = array('-', "Sch", "sch", 'Yo', 'Zh', 'Kh', 'Ts', 'Ch', 'Sh', 'Yu', 'ya', 'yo', 'zh', 'kh', 'ts', 'ch', 'sh', 'yu', 'ya', 'A', 'B', 'V', 'G', 'D', 'E', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', '', 'Y', '', 'E', 'a', 'b', 'v', 'g', 'd', 'e', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', '', 'y', '', 'e');
+        $cyrillic = array(' ', "Щ", "щ", 'Ё', 'Ж', 'Х', 'Ц', 'Ч', 'Ш', 'Ю', 'я', 'ё', 'ж', 'х', 'ц', 'ч', 'ш', 'ю', 'я', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Ь', 'Ы', 'Ъ', 'Э', 'а', 'б', 'в', 'г', 'д', 'е', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'ь', 'ы', 'ъ', 'э');
+        return trim(
+            preg_replace(
+                "/(.)\\1+/",
+                "$1",
+                strtolower(
+                    preg_replace(
+                        "/[^a-zA-Z0-9-]/",
+                        '',
+                        str_replace($cyrillic, $latin, $name)
+                    )
+                )
+            ),
+            '-'
+        );
+    }
+
+    public static function addRecord($room, $restaurant, $restaurants_types, $restaurants_spec, $roomNumber){
         $isExist = false;
         
         try{
@@ -376,6 +401,28 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         $record->images = $images;
         $record->images = $thumbs;
 
+        // restaurant slug
+        if ($row = (new \yii\db\Query())->select('slug')->from('restaurant_slug')->where(['gorko_id' => $restaurant->gorko_id])->one()) {
+            $record->restaurant_slug = $row['slug'];
+        } else {
+            $record->restaurant_slug = self::getTransliterationForUrl($restaurant->name);
+            \Yii::$app->db->createCommand()->insert('restaurant_slug', ['gorko_id' => $restaurant->gorko_id, 'slug' =>  $record->restaurant_slug])->execute();
+        }
+
+        // room slug
+        if ($row = (new \yii\db\Query())->select('slug')->from('restaurant_slug')->where(['gorko_id' => $room->gorko_id])->one()) {
+            $record->slug = $row['slug'];
+        } else {
+            $slug = self::getTransliterationForUrl($room->name);
+            // $isSameSlug = count(array_filter($rooms, function ($prevRoom) use ($slug) {
+            //     return $prevRoom['slug'] == $slug;
+            // })) > 0;
+            // $slugPostFix = $isSameSlug ? "-$idx" : "";
+            // $slug .= $slugPostFix;
+            $slug .= '-' . $roomNumber;
+            $record->slug = $slug;
+            \Yii::$app->db->createCommand()->insert('restaurant_slug', ['gorko_id' => $room->gorko_id, 'slug' =>  $record->slug])->execute();
+        }
         
         try{
             if(!$isExist){

@@ -76,6 +76,7 @@ export default class Listing{
 			// document.getElementsByClassName('items_pagination')[0].style.display = "none";
 			document.getElementById('pag').style.display = "none";
 			document.getElementsByClassName('head_block')[0].style.marginBottom = '46px';
+			$("html,body").animate({scrollTop: $('.view_position').offset().top - 100}, 600);
 		}
 	}
 

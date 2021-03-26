@@ -25,6 +25,7 @@ frontend\modules\arenda\assets\AppAsset::register($this);
     <?php if (isset($this->params['desc']) and !empty($this->params['desc'])) echo "<meta name='description' content='".$this->params['desc']."'>";?>
     <?php if (isset($this->params['canonical']) and !empty($this->params['canonical'])) echo "<link rel='canonical' href='".$this->params['canonical']."'>";?>
     <?php if (isset($this->params['kw']) and !empty($this->params['kw'])) echo "<meta name='keywords' content='".$this->params['kw']."'>";?>
+    <?php if (isset($this->params['robots']) and $this->params['robots']) echo "<meta name='robots' content='noindex, follow'>";?>
     <?= Html::csrfMetaTags() ?>
 </head>
 <body>
@@ -120,7 +121,7 @@ frontend\modules\arenda\assets\AppAsset::register($this);
              <a href="/catalog/priroda/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'priroda')echo '_active';?>">Природа</a>
              <!-- <a href="/popular/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'lutchee')echo '_active';?>">Лучшее</a> -->
              <a href="/popular/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'vse-kategorii')echo '_active';?>">Все категории</a>
-             <a href="/blog/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'blog')echo '_active';?>">Блог</a>
+             <!-- <a href="/blog/" class="<?if(!empty($this->params['menu']) and $this->params['menu'] == 'blog')echo '_active';?>">Блог</a> -->
               <div class="city _mobile">
                 <!-- <img src="/images/map.svg" class="map_inc"> -->
                 <a href="#"><p class="city_name"><?=Yii::$app->params['subdomen_name']?></p></a>

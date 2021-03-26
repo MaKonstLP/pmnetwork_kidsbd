@@ -46,7 +46,7 @@ class Breadcrumbs {
 		if (RestaurantsTypes::find()->where(['value' => $restType])->exists()){
 			$sliceInfo = Slices::find()->where(['alias' => RestaurantsTypes::find()->where(['value' => $restType])->one()->alias])->one();
 			$breadcrumbs = [
-				self::get_breadcrumbs(1)['/'],
+				'/' => 'Главная',
 				"/catalog/{$sliceInfo->alias}/" => $sliceInfo->h1,
 				
 			];

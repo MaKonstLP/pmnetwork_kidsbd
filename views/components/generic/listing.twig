@@ -17,13 +17,10 @@
 
                     {% if item.price %}
 
-
                         <div class="item_meta_item">
                             <span class="item_meta_text">от <span class="rur">{{item.price}} <span class="norur">руб.</span></span>/чел.</span>
                         </div>
-                        
-                        <div class="vector_price">
-                        </div>
+
                     {% endif %}
                 </div>
 
@@ -39,19 +36,19 @@
 
                             {% if item.images[0] %}
                                 <div class="swiper-slide">
-                                    <a href="/catalog/{{item.id}}/" class="item-img">  <img src="{{item.images[0].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on" data-images /></a>
+                                    <a href="/catalog/hall-{{item.slug}}/" class="item-img">  <img src="{{item.images[0].subpath}}=w560-h320-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on" data-images /></a>
                                 </div>
                             {% endif %}
 
                             {% if item.images[1] %}
                                 <div class="swiper-slide">
-                                    <a href="/catalog/{{item.id}}/" class="item-img"><img src="{{item.images[1].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on"/></a>
+                                    <a href="/catalog/hall-{{item.slug}}/" class="item-img"><img src="{{item.images[1].subpath}}=ww560-h320-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on"/></a>
                                 </div>
                             {% endif %}
 
                             {% if item.images[2] %}
                                 <div class="swiper-slide">
-                                    <a href="/catalog/{{item.id}}/" class="item-img"> <img src="{{item.images[2].subpath}}=w474-h269-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on"/></a>
+                                    <a href="/catalog/hall-{{item.slug}}/" class="item-img"> <img src="{{item.images[2].subpath}}=w560-h320-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on"/></a>
                                 </div>
                             {% endif %}
 
@@ -70,14 +67,14 @@
 
                 <div class="photo_items">
 
-                    <a href="/catalog/{{item.id}}/" class="item-img"> <img src="{{item.images[0].subpath}}" class="block tab" loading="lazy" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name}) | replace({"**room_name**" : item.name}) }}" /></a>
+                    <a href="/catalog/hall-{{item.slug}}/" class="item-img"> <img src="{{item.images[0].subpath}}" class="block tab" loading="lazy" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name}) | replace({"**room_name**" : item.name}) }}" /></a>
                     
                     {% if item.images[1] %}
-                        <a href="/catalog/{{item.id}}/" class="item-img"><img class="item_img_subimg tab" loading="lazy" src="{{item.images[1].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/></a>
+                        <a href="/catalog/hall-{{item.slug}}/" class="item-img"><img class="item_img_subimg tab" loading="lazy" src="{{item.images[1].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/></a>
                     {% endif %}
                     
                     {% if item.images[2] %}
-                        <a href="/catalog/{{item.id}}/" class="item-img"><img class="item_img_subimg tab" loading="lazy" src="{{item.images[2].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/></a>
+                        <a href="/catalog/hall-{{item.slug}}/" class="item-img"><img class="item_img_subimg tab" loading="lazy" src="{{item.images[2].subpath}}" alt="{{img_alt | replace({"**room**" : item.name}) | replace({"**restaurant**" : item.restaurant_name | replace({"**room_name**" : item.name}) })}}"/></a>
                     {% endif %}
 
                 </div>
@@ -90,7 +87,7 @@
 
     <div class="item-info">
          <div class="name">
-         <a href="/catalog/{{item.id}}/"><p class="item_name">{{item.name}}</p></a>
+         <a href="/catalog/hall-{{item.slug}}/"><p class="item_name">{{item.name}} - {{item.restaurant_name}}</p></a>
         </div>
 
         <div class="address move_to_map">

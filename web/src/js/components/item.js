@@ -83,29 +83,5 @@ export default class Item{
                 $(this).text('Подробнее о площадке')
             }
         });
-
-        $('[data-get-more-rooms]').on('click', function(e){
-            self.getMoreSimilarHalls();
-        });
 	}
-
-    getMoreSimilarHalls(){
-        var data = {
-            'item_id': document.querySelectorAll('[data-item-id]')[0].dataset.itemId,
-        }
-
-        $.ajax({
-            type: 'get',
-            url: '/item/ajax-more-other-halls',
-            data: data,
-            success: function(response) {
-                var moreRooms = $.parseJSON(response);
-                $('[data-similar-listing-wrapper]').append(moreRooms.other_rooms);
-                // console.log(moreRooms);
-            },
-            error: function(response) {
-
-            }
-        });
-    }
 }

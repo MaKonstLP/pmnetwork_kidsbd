@@ -7,7 +7,7 @@
 }
 
 @mixin for-notdesc {
- 	@media (max-width: 1798px) { @content; }
+ 	@media (max-width: 1440px) { @content; }
 }
 
 @mixin for-lowdesc {
