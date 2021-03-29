@@ -12,6 +12,7 @@ use common\models\Seo;
 use common\models\elastic\ItemsWidgetElastic;
 use common\models\elastic\ItemsFilterElastic;
 use app\modules\arenda\models\ItemSpecials;
+use frontend\components\Declension;
 use frontend\modules\arenda\models\ElasticItems;
 use frontend\modules\arenda\components\Breadcrumbs;
 
@@ -43,6 +44,7 @@ class ItemController extends Controller
 		
 		$special_obj = new ItemSpecials($item->restaurant_special);
 		$item->restaurant_special = $special_obj->special_arr;
+		$parking = $item->restaurant_parking . ' ' . Declension::get_num_ending($item->restaurant_parking, array('машина', 'машины', 'машин'));
 		
 		$itemsWidget = new ItemsWidgetElastic;
 		$other_rooms = $itemsWidget->getOther($item->restaurant_id, $item->id, $elastic_model);
@@ -69,6 +71,7 @@ class ItemController extends Controller
 			'queue_id' => $item->id,
 			'seo' => $seo,
 			'changedStrings' => $changedStrings,
+			'parking' => $parking,
 			'other_rooms' => $other_rooms,
 			'similar_rooms' => $similar_rooms
 		));

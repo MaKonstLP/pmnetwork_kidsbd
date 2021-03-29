@@ -168,8 +168,11 @@
 
         <div class="object_head _forMobileHide">
 
-            <label for="button_see_all"><span>Показать полностью</span></label>
             <input type="checkbox" id="button_see_all">
+            <label for="button_see_all">
+                <span class="_to_open">Показать полностью</span>
+                <span class="_to_close">Cкрыть описание</span>
+            </label>
 
             <div class="object_parameters" id="open_for_mobile">
 
@@ -290,7 +293,7 @@
 
                             {% if item.restaurant_parking %}
 
-                                <p class="object_parameters_item">Своя парковка: {{item.restaurant_parking}}</p>
+                                <p class="object_parameters_item">Своя парковка: {{parking}}</p>
 
                             {% endif %}
 

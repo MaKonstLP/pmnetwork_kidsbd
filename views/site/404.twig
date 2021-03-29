@@ -1,0 +1,34 @@
+<div data-page-type="404">
+
+  <div class="content_block title_block">
+
+    <h1>Страница не найдена</h1>
+  
+    <p>Запрашиваемая страница не существует. Попробуйте начать с <a class="_inline_link" href="/">главной страницы</a> или одного из разделов</p>
+
+  </div>
+
+  <div class="content_block slices_wrapper">
+
+    <div class="all_blocks">
+  
+      {% for slice in slices_for_listing %}
+  
+        <div class="block">
+  
+          <a href="/catalog/{{slice.alias}}/">
+  
+            <img src="/images/slices/{{slice.image}}">
+            <h3>{{slice.name}}</h3>
+  
+          </a>
+  
+        </div>
+  
+      {% endfor %}
+  
+    </div>
+
+  </div>
+
+</div>

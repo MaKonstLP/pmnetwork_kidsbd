@@ -863,7 +863,7 @@ $fontFamilyLato: Lato;
     padding: 0 15px;
   }
   @include for-mobile {
-    display: none;
+    height: 285px;
   }
 
   .map {
@@ -1099,9 +1099,11 @@ $fontFamilyLato: Lato;
       margin: 0px auto 0;
     }
     @include for-mobile {
-      padding: 0;
-      margin-top: 32px;
       display: flex;
+      flex-flow: column nowrap;
+      align-items: flex-start;
+      margin-top: 32px;
+      padding: 0;
     }
 
     .listing_widget_title {
@@ -1128,7 +1130,7 @@ $fontFamilyLato: Lato;
         margin-left: 0px;
       }
 
-      &._subtitle{
+      &._subtitle {
         padding: 5px 0 0 0;
         font-weight: 300;
       }
@@ -1550,8 +1552,25 @@ input[type="checkbox"] {
 }
 
 @include for-mobile {
-  input[type="checkbox"]:checked + .object_parameters {
+
+  ._to_close{
+    display: none;
+  }
+
+  input[type="checkbox"]:checked ~ .object_parameters {
     height: auto;
+  }
+
+  input[type="checkbox"]:checked ~ label{
+
+    ._to_open{
+      display: none;
+    }
+
+    ._to_close{
+      display: block;
+    }
+  
   }
 }
 

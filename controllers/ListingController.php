@@ -73,7 +73,7 @@ class ListingController extends Controller
 			])->one();
 
 			if (empty($item)) {
-				return $this->goHome();
+				throw new \yii\web\NotFoundHttpException();
 			} else {
 				return $this->redirect(array('item/index', $slice));
 			}				

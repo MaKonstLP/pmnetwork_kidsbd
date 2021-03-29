@@ -636,3 +636,13 @@ h4{
 ._invisible_border{
     border: 1px solid rgba(0, 0, 0, 0) !important;
 }
+
+._inline_link{
+    border-bottom: 1px solid #4471E6;
+    color: #4471E6;
+    
+    &:hover{
+        border-bottom: 1px solid #69F5FF;
+        color: #69F5FF;
+    }
+}

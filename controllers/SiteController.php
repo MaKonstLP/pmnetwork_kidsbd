@@ -65,7 +65,18 @@ class SiteController extends Controller
           }, []);
       
 
-        $slicesForListing = SlicesExtended::find()->where(['alias' => ['banketnyy-zal', 'konferenc-zal', 'tancevalnyy-zal', 'den-rojdeniya', 'vypusknoy', 'aktovye-zaly', 'svadba', 'veranda']])->all();
+        $slicesForListing = SlicesExtended::find()
+            ->where(['alias' => [
+                                'banketnyy-zal', 
+                                'konferenc-zal', 
+                                'tancevalnyy-zal', 
+                                'den-rojdeniya', 
+                                'vypusknoy', 
+                                'aktovye-zaly', 
+                                'svadba', 
+                                'veranda'
+                                ]
+            ])->all();
 
         // echo '<pre>';
         // print_r(Yii::$app->params['subdomen_id']);
@@ -83,27 +94,21 @@ class SiteController extends Controller
 
     public function actionError()
     {
-        $elastic_model = new ElasticItems;
+        $slicesForListing = SlicesExtended::find()
+            ->where(['alias' => [
+                                'banketnyy-zal', 
+                                'konferenc-zal', 
+                                'tancevalnyy-zal', 
+                                'den-rojdeniya', 
+                                'vypusknoy', 
+                                'aktovye-zaly', 
+                                'svadba', 
+                                'veranda'
+                                ]
+            ])->all();
 
-        $filter_model = Filter::find()->with('items')->all();
-        $slices_model = Slices::find()->all();
-
-        $itemsWidget = new ItemsWidgetElastic;
-        $apiMain = $itemsWidget->getMain($filter_model, $slices_model, 'rooms', $elastic_model);
-
-        $seo = new Seo('error', 1, 0);
-        $this->setSeo($seo->seo);
-
-        $filter = FilterWidget::widget([
-            'filter_active' => [],
-            'filter_model' => $filter_model
-        ]);
-
-        return $this->render('error.twig', [
-            'filter' => $filter,
-            'widgets' => $apiMain['widgets'],
-            'count' => $apiMain['total'],
-            'seo' => $seo->seo,
+        return $this->render('404.twig', [
+            'slices_for_listing' => $slicesForListing,
         ]);
     }
 
