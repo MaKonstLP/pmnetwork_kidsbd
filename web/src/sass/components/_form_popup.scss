@@ -1,0 +1,396 @@
+.popup_wrap{
+	user-select: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	background-color: $bg_popup;
+
+	&._active{
+		display: flex;
+	}
+}
+
+.popup_form_reservationHall,
+.popup_form_requestCall{
+	display: none;
+	max-height: 100%;
+	overflow: auto;
+	&::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+	}
+	&::-moz-scrollbar {
+		width: 0;
+		height: 0;
+	}
+
+	&._active{
+		display: block;
+	}
+}
+
+.form_wrapper.popup {
+	width: 740px;
+	height: 390px;
+	position: relative;	
+	padding: 1px 0 0 0;
+	color: $header_text;
+
+	@include medium {
+		width: 296px;
+		height: auto;
+	}
+
+	.bg_form_popup_wrapper_for_large {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+
+		@include medium {
+			display: none;
+		}
+	}
+
+	.bg_form_popup_wrapper_for_medium {
+		display: none;
+
+		@include medium {
+			display: block;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
+	}
+	
+	.form_close_popup {
+		position: absolute;
+		width: 48px;
+		height: 48px;
+		cursor: pointer;
+		top: 0;
+		right: 0;
+	
+		svg {
+			path:nth-child(1) {
+				fill: #FF685F;
+			}
+		}
+		&:hover {
+			svg path:nth-child(1) {
+				fill: url(#paint0_linear_form_close_popup);
+			}
+		}    
+		&:active {
+			svg path:nth-child(1) {
+				fill: url(#paint1_linear_form_close_popup);
+			}
+		}
+	}
+
+	.form_block_popup {
+		display: block;
+		&._hide {
+			display: none;
+		}
+	}
+	
+	.form_title_main_popup {
+		margin: calc(56px - 1px) 0 0 0;
+		font-size: 38px;
+		line-height: 46px;
+		text-align: center;
+
+		@include medium {
+			margin: calc(56px - 1px) 16px 0 16px;
+			font-size: 33px;
+			line-height: 38px;
+			text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		}
+	}
+	
+	.form_title_text_popup {
+		margin: 3px 0 0 0;
+		font-size: 18px;
+		line-height: 24px;
+		text-align: center;
+
+		@include medium {
+			margin: 0 16px;
+			font-size: 16px;
+			letter-spacing: 0.01em;
+		}
+	}	
+	
+	.form_inputs_popup {
+		margin: 16px 0 0 0;
+		height: 106px;
+		display: flex;
+		justify-content: center;
+		align-items: start;
+	
+		.input_wrapper {
+			margin: 0 12px;
+
+			@include medium {
+				margin: 0 0;
+				height: 98px;
+			}
+		}
+	
+		.input_label {
+			font-weight: bold;
+			font-size: 16px;
+			line-height: 24px;
+			letter-spacing: 0.01em;
+			color: $header_text;
+		}
+	
+		input {
+			margin: 2px 0;			
+			height: 56px;
+			background: #FFFFFF;
+			border-radius: 4px;
+			padding-left: 8px;
+			font-size: 16px;
+			line-height: 24px;
+			letter-spacing: 0.01em;
+			color: $header_text;
+			cursor: pointer;
+	
+			&::placeholder {
+				color: $select_city_input_border;
+			}
+
+			&._invalid {
+				border: 1px solid $color_error;
+			}
+
+			&:focus {
+				border: 1px solid #FC9E6A;
+			}
+		}
+
+		.form_popup_inpyt_RequestCall {
+			width: 288px;
+
+			@include medium {
+				width: 264px;
+			}
+		}
+
+		.form_popup_inpyt_ReservationHall {
+			width: 208px;
+
+			@include medium {
+				width: 264px;
+			}
+		}
+
+		.form_popup_inpyt_ReservationHall_date {
+			width: 148px;
+
+			@include medium {
+				width: 264px;
+			}
+		}
+	
+		.form_input_error {
+			font-size: 12px;
+			line-height: 18px;
+			letter-spacing: 0.01em;
+			color: $color_error;
+		}
+
+		@include medium {
+			margin: 10px 16px 0 16px;
+			height: auto;
+			flex-direction: column;
+			justify-content: start;
+		}
+	}
+	
+	.form_submit_popup {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	
+		.btn_popup {
+			width: 205px;
+			height: 56px;
+			display: flex;
+			position: relative;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+	
+			svg {
+				width: 205px;
+				height: 56px;
+				position: absolute;
+				top: 0;
+				left: 0;
+
+				path {
+					fill: url(#paint0_linear_form_submit_popup_btn)
+				}
+			}
+	
+			p {
+				font-weight: bold;
+				font-size: 18px;
+				line-height: 24px;
+				color: $color_btn_font;
+				z-index: 1;
+			}
+
+			&:hover {
+				svg path {
+					fill: url(#paint1_linear_form_submit_popup_btn)
+				}
+			}	
+			&:active {
+				svg path {
+					fill: url(#paint2_linear_form_submit_popup_btn)
+				}
+			}
+		}
+	
+		.form_policy_popup {
+			margin: 13px 0 0 0;
+
+			.checkbox_wrapper {
+				float: left;
+			}
+	
+			input[type=checkbox] {
+				display: none;
+			}
+			label {
+				display: inline-block;
+				cursor: pointer;
+				position: relative;
+				font-size: 14px;
+				line-height: 20px;
+				letter-spacing: 0.01em;
+				color: $header_text;
+				border: none;
+				box-shadow: none;
+				padding-left: 23px;
+	
+				&:before {
+					content: "";
+					width: 17px;
+					height: 20px;
+					position: absolute;
+					left: 0;
+					top: 0;
+					background: center/ contain no-repeat;
+					background-image: url("/images/main/form_popup/bg_checkbox.svg");
+					background-size: 110%;
+	
+				}
+			}
+			input[type=checkbox]:checked + label:before {
+				content: "\2714";
+				font-size: 19px;
+				color: #2C689B;
+				text-align: right;
+				line-height: 15px;
+			}
+	
+			a {
+				cursor: pointer;
+				position: relative;				
+				font-size: 14px;
+				line-height: 20px;
+				letter-spacing: 0.01em;
+				color: $header_text;
+				text-decoration: underline;
+				border: none;
+			}
+			
+			@include medium {
+				margin: 8px 16px 65px 16px;
+			}
+		}
+	}
+	
+	.form_success_popup {
+		display: none;
+		text-align: center;
+		color: $header_text;
+
+		.form_success_title_main {
+			margin: calc(131px - 1px) 0 0 0;
+			font-size: 38px;
+			line-height: 46px;
+
+			@include medium {
+				margin: calc(58px - 1px) 16px 0 16px;
+				font-size: 33px;
+				line-height: 38px;
+			}
+		}
+
+		.form_success_text_main {
+			margin: 4px auto 0 auto;
+			max-width: 620px;
+			font-size: 18px;
+			line-height: 24px;
+
+			@include medium {
+				margin: 4px 16px 0 16px;
+			}
+		}
+
+		.form_success_close {
+			margin: 8px 0 0 0;
+			font-size: 16px;
+			line-height: 24px;
+			letter-spacing: 0.01em;
+			position: relative;
+			display: inline-block;
+			border-bottom: 1px solid $header_text;
+			color: $header_text;
+
+			&:after {
+				content: '\2716';
+				position: absolute;
+				font-size: 21px;
+				font-weight: 700;
+				top: 3px;
+				right: -25px;
+			}
+
+			&:hover {
+				border-bottom: 1px solid $header_text_hover;
+				color: $header_text_hover;
+			}
+
+			&:active {
+				border-bottom: 1px solid $header_text_active;
+				color: $header_text_active;
+			}
+
+			@include medium {
+				margin: 8px 16px 40px 16px;
+			}
+		}
+	
+		&._active {
+			display: block;
+		}
+	}
+}

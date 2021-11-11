@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\arenda;
+namespace app\modules\kidsbd;
 
 
 use Yii;
@@ -13,31 +13,52 @@ class Module extends \yii\base\Module
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'app\modules\arenda\controllers';
+    public $controllerNamespace = 'app\modules\kidsbd\controllers';
 
     /**
      * {@inheritdoc}
      */
     public function init()
     {
-        $subdomen = explode('.', $_SERVER['HTTP_HOST'])[0];
-        if($subdomen != 'arenda_prod'){
-            Yii::$app->params['subdomen'] = $subdomen;
+        // $subdomen = explode('.', $_SERVER['HTTP_HOST'])[0];
 
-            $subdomen_model = Subdomen::find()
-                ->where(['alias' => $subdomen])
-                ->one();
+        $firstLevel = explode('/', $_SERVER['REQUEST_URI'])[1];
 
-            if(!$subdomen_model)
-                throw new \yii\web\NotFoundHttpException();         
-        }
-        else{
-            Yii::$app->params['subdomen'] = '';
+        if ($firstLevel == "" || 
+            $firstLevel == "katalog" || 
+            $firstLevel == "stati" || 
+            $firstLevel == "kontakty" || 
+            $firstLevel == "politika-konfidentsialnosti" ||
+            
+            $firstLevel == "catalog") {
+            $subdomen = "";
+        } else {
+            $subdomen = $firstLevel;
+        };
 
-            $subdomen_model = Subdomen::find()
-                ->where(['alias' => ''])
-                ->one();
-        }
+        $subdomen_model = Subdomen::find()
+            ->where(['alias' => $subdomen])
+            ->one();
+         
+        if(!$subdomen_model) throw new \yii\web\NotFoundHttpException();
+
+        // if($subdomen != 'kidsbd'){
+        //     Yii::$app->params['subdomen'] = $subdomen;
+        // 
+        //     $subdomen_model = Subdomen::find()
+        //         ->where(['alias' => $subdomen])
+        //         ->one();
+        // 
+        //     if(!$subdomen_model)
+        //         throw new \yii\web\NotFoundHttpException();         
+        // }
+        // else{
+        //     Yii::$app->params['subdomen'] = '';
+        // 
+        //     $subdomen_model = Subdomen::find()
+        //         ->where(['alias' => ''])
+        //         ->one();
+        // }
 
         if($subdomen_model){
             Yii::$app->params['subdomen_alias'] = $subdomen_model->alias;

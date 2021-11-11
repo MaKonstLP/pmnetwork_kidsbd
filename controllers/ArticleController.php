@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\arenda\controllers;
+namespace app\modules\kidsbd\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
@@ -7,7 +7,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use frontend\modules\arenda\models\Breadcrumbs;
+use frontend\modules\kidsbd\models\Breadcrumbs;
 
 class ArticleController extends Controller
 {

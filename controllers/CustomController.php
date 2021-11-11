@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\arenda\controllers;
+namespace app\modules\kidsbd\controllers;
 
 use Yii;
 use yii\web\Controller;
@@ -10,8 +10,8 @@ use common\models\SlicesExtended;
 use common\models\RestaurantsSpec;
 use common\models\elastic\ItemsFilterElastic;
 use frontend\components\QueryFromSlice;
-use frontend\modules\arenda\models\ElasticItems;
-use frontend\modules\arenda\models\RestaurantsTypes;
+use frontend\modules\kidsbd\models\ElasticItems;
+use frontend\modules\kidsbd\models\RestaurantsTypes;
 use frontend\components\ParamsFromQuery;
 use backend\models\Filter;
 

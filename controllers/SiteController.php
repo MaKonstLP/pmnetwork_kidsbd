@@ -1,11 +1,11 @@
 <?php
-namespace app\modules\arenda\controllers;
+namespace app\modules\kidsbd\controllers;
 
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use frontend\modules\arenda\models\ElasticItems;
+use frontend\modules\kidsbd\models\ElasticItems;
 use common\widgets\FilterWidget;
 use common\models\elastic\ItemsWidgetElastic;
 use common\models\Seo;
@@ -18,7 +18,7 @@ use common\models\RestaurantsSpec;
 class SiteController extends Controller
 {
 
-    public function actionIndex()
+    public function actionIndex($city = "")
     {
         $elastic_model = new ElasticItems;
         $filter_model = Filter::find()->with('items')->all();

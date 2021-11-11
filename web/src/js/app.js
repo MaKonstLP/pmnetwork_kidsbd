@@ -2,7 +2,11 @@ import $ from 'jquery';
 
 import Listing from './components/listing';
 import Item from './components/item';
+
+
 import Main from './components/main';
+import ListingNew from './components/listing_kidsbd';
+
 import Index from './components/index';
 import Widget from './components/widget';
 import Form from './components/form';
@@ -18,10 +22,15 @@ window.$ = $;
 
 (function($) {
   	$(function() {
-
+		// if ($('[data-page-type="listing"]').length > 0) {
+		// 	var listing = new Listing($('[data-page-type="listing"]'));
+		// }
 		if ($('[data-page-type="listing"]').length > 0) {
-			var listing = new Listing($('[data-page-type="listing"]'));
+			var listing = new ListingNew($('[data-page-type="listing"]'));
 		}
+
+
+
 
 		if ($('[data-page-type="item"]').length > 0) {
 			var item = new Item($('[data-page-type="item"]'));
@@ -56,25 +65,27 @@ window.$ = $;
 		}
 			
 		var main = new Main();
+		// mainInit();
+
 		var form = [];
 
 		$('form').each(function(){
 			form.push(new Form($(this)))
-		});
+		});    // Так можно? form.push(new Form($('form')))
 
-		const start = datepicker('.popup_form .form_wrapper .hidden_input', {
-			startDay : 1,    
-			customDays : [ 'ВС' , 'ПН' , 'ВТ' , 'СР' , 'ЧТ' , 'ПТ' , 'СБ' ],
-			customMonths : [ ' Январь ' , ' Февраль ' , ' Март ' , ' Апрель ' , ' Май ' , ' Июнь ' , ' Июль ' , ' Август ' , ' Сентябрь ' , ' Октябрь ' , ' Ноябрь ' , ' Декабрь ' ],
-			formatter: (input, date, instance) => {
-				const value = date.toLocaleDateString()
-				input.value = value // => '1/1/2099'
-			},
-			showAllDates: true,
-			disableYearOverlay : true,
-			position : 'br',
-			id: 2,         
-		});
+		//const start = datepicker('.popup_form .form_wrapper .hidden_input', {
+		//	startDay : 1,    
+		//	customDays : [ 'ВС' , 'ПН' , 'ВТ' , 'СР' , 'ЧТ' , 'ПТ' , 'СБ' ],
+		//	customMonths : [ ' Январь ' , ' Февраль ' , ' Март ' , ' Апрель ' , ' Май ' , ' Июнь ' , ' Июль ' , ' Август ' , ' Сентябрь ' , ' Октябрь ' , ' Ноябрь ' , ' Декабрь ' ],
+		//	formatter: (input, date, instance) => {
+		//		const value = date.toLocaleDateString()
+		//		input.value = value // => '1/1/2099'
+		//	},
+		//	showAllDates: true,
+		//	disableYearOverlay : true,
+		//	position : 'br',
+		//	id: 2,         
+		//});
 
 		// const end = datepicker('.popup_form .form_wrapper .hidden_input_two', {
 		// 	startDay : 1 ,    
@@ -94,19 +105,19 @@ window.$ = $;
 		// end.getRange(); // Gives you the same as above!
 
 
-		const datapicker = datepicker('.content_block .form_wrapper .hidden_input', {
-			startDay : 1 ,    
-			customDays : [ 'ВС' , 'ПН' , 'ВТ' , 'СР' , 'ЧТ' , 'ПТ' , 'СБ' ],
-			customMonths : [ ' Январь ' , ' Февраль ' , ' Март ' , ' Апрель ' , ' Май ' , ' Июнь ' , ' Июль ' , ' Август ' , ' Сентябрь ' , ' Октябрь ' , ' Ноябрь ' , ' Декабрь ' ],
-			formatter: (input, date, instance) => {
-				const value = date.toLocaleDateString()
-				input.value = value // => '1/1/2099'
-			},
-			showAllDates: true,
-			disableYearOverlay : true,
-			position : 'br',
-			id: 1,         
-		});
+		//const datapicker = datepicker('.content_block .form_wrapper .hidden_input', {
+		//	startDay : 1 ,    
+		//	customDays : [ 'ВС' , 'ПН' , 'ВТ' , 'СР' , 'ЧТ' , 'ПТ' , 'СБ' ],
+		//	customMonths : [ ' Январь ' , ' Февраль ' , ' Март ' , ' Апрель ' , ' Май ' , ' Июнь ' , ' Июль ' , ' Август ' , ' Сентябрь ' , ' Октябрь ' , ' Ноябрь ' , ' Декабрь ' ],
+		//	formatter: (input, date, instance) => {
+		//		const value = date.toLocaleDateString()
+		//		input.value = value // => '1/1/2099'
+		//	},
+		//	showAllDates: true,
+		//	disableYearOverlay : true,
+		//	position : 'br',
+		//	id: 1,         
+		//});
 
 		// const dataend = datepicker('.content_block .form_wrapper .hidden_input_two', {
 		// 	startDay : 1 ,    

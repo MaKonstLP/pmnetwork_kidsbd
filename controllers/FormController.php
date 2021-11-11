@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\arenda\controllers;
+namespace app\modules\kidsbd\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
@@ -21,7 +21,20 @@ class FormController extends Controller
     }
 
     public function actionSend()
-    {
+    {   
+        // $name = $_POST['name'];
+        // $phone = $_POST['phone'];
+
+        $respNew = [
+            'name' => $_POST['name'],
+            'phone' => $_POST['phone'],
+        ];  
+
+        // $objresp = (object) array('name' => $_POST['name'], 'phone' => $_POST['phone']);
+
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return $respNew;
+
         if ($_POST['type'] == 'main'){
             // $messageApi = $this->sendApi($_POST['name'], $_POST['phone'], $_POST['date'], $_POST['count']);
             //return json_encode($messageApi);

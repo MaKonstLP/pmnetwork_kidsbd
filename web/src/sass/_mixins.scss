@@ -17,3 +17,24 @@
 @mixin for-smallmobile {
 	@media (max-width: 444px) { @content; }
 }
+
+//мои медиа
+// @mixin medium-desktop {
+// 	@media (max-width: 1650px) { @content; }
+// }
+
+@mixin small-desktop {
+	@media (max-width: 1440px) { @content; }
+}
+
+@mixin extra-large {
+	@media (max-width: 1199px) { @content; }
+}
+
+@mixin large {
+	@media (max-width: 991px) { @content; }
+}
+
+@mixin medium {
+	@media (max-width: 766px) { @content; }
+}

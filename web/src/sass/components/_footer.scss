@@ -1,271 +1,183 @@
-footer{
-    font-size: 14px;
-    border-top: 1px solid rgba(176,176,176, .25);
+footer {
     position: relative;
+    left: 300px;
+    width: calc(100% - 300px);
+    padding: 80px 91px 40px 172px;
+    display: flex;
+    justify-content: space-between;
+    color: $footer_text;
     z-index: 10;
+    background-color: #ffffff;
+    opacity: 1;
+    background: radial-gradient(16770px 16770px at center -8337px,transparent 50%,transparent 50%,#ffffff calc(50% + 5px));
 
-    @include for-pad{
-        
+    @include small-desktop {
+        padding: 80px 16px 32px 16px;
     }
 
-    @include for-mobile{
-        
+    @include extra-large {
+        flex-direction: column;
+        padding: 80px 75px 32px 16px;
     }
 
-    .footer_wrap{
-        padding: 30px 0px;
-        padding-top: 19px;
-        background: radial-gradient(110.28% 287.99% at -3.85% 0%, #3D9CC5 0%, #192A68 100%), linear-gradient(101.68deg, #FF372F -6.81%, #883186 101.8%), #29EDB2;
+    @include large {
+        top: 80px;
+        left: 0;
+        width: 100%;
+    }
 
-        @include for-pad{
-            height: 85px;
-            padding-top: 2px;
+    @include medium {
+        top: 64px;
+        padding: 26px 75px 14px 12px;
+        background: none;
+        background-color: #ffffff;
+    }
+
+    .footer_cities {
+        @include extra-large {
+            order: 1;       
         }
-        @include for-mobile{
-            padding-top: 10px;
-            padding-bottom: 25px;
-        }
 
-        .footer_row{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            @include for-mobile{
-                flex-direction: column-reverse;
-            }
-
-            .footer_block{
-
-
-
-                .for_form_footer{
-
-                    &:before{
-                        content: url("/images/confetti.svg")
-                    }
-                }
-
-                &._left{
-                    display: flex;
-                    align-items: center;
-
-                    @include for-mobile{
-                        padding-right: 7px;
-                    }                  
-                }
-
-                &._right{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    margin-right: 39px;
-                    margin-top: 6px;
-
-                    @include for-pad{
-                    margin-right: 13px;
-                    margin-top: 14px;
-                    }
-
-                    @include for-mobile{
-                        align-items: center;
-                        margin-bottom: 10px;
-                    }
-                }
-
-                .footer_logo{
-                    margin-right: 36px;
-                    display: flex;
-
-                    @include for-pad{
-                            margin-right: 19px;
-                    }
-
-                    .logo_text{
-                    font-size: 29px;
-                    line-height: 21px;
-
-                    @include for-pad{
-                        line-height: 22px;
-                    }
-                    }
-
-
-
-                    @include for-mobile{
-                        display: none;
-                    }
-
-                    .footer_logo_img{
-                        width: 50px;
-                        height: 50px;
-                        background-image: url(/images/logo_img.svg);
-                        background-size: contain;
-                        filter: hue-rotate(0deg);
-                        transition: filter 0.2s ease;
-                        margin-left: 31px;
-                        margin-right: 2px;
-
-                        @include for-pad{
-                            margin-left: 8px;
-                        }
-                    }
-                    &:hover .footer_logo_img{
-                        filter: hue-rotate(25deg);
-                    }
-                }
-
-                .footer_info{
-                    padding-top: 4px;
-
-                    @include for-pad{
-                    }
-
-                	.footer_copy{
-                    font-family: Lato;
-					font-style: normal;
-					font-weight: normal;
-					font-size: 12px;
-					line-height: 14px;
-					color: #D2FCFF;
-
-                    @include for-mobile{
-                        line-height: 14px;
-                    }
-					}
-
-					.footer_pc{
-
-						
-							font-family: Lato;
-							font-style: normal;
-							font-weight: normal;
-							font-size: 12px;
-							line-height: 20px;
-							color: #FFFFFF;
-							border-bottom: 1px solid #FFFFFF30;
-						
-					}
-
-                    @include for-mobile{
-                        text-align: center;
-                    }
-                }
-
-                .footer_phone{                       
-                    padding: 0px 0px 0px 25px;
-                    background-position: 0px 50%;
-                    background-repeat: no-repeat;
-                    margin-bottom: 3px;
-
-                    @include for-pad{
-                  
-                    padding-left: 10px;
-                    }
-
-                    @include for-mobile{
-                    padding: 1px 0 0 38px;
-                    margin-bottom: 4px;
-                    }
-
-                    p{
-                        font-family: Lato;
-						font-style: normal;
-						font-weight: bold;
-						font-size: 24px;
-						line-height: 32px;
-						text-align: right;
-						color: #D2FCFF;
-
-                        @include for-pad{
-
-                        font-size: 20px;
-                        line-height: 24px;
-                        }
-
-                        @include for-mobile{
-                            font-size: 20px;
-                            line-height: 24px;
-                        }
-                    }
-                }
-
-                .footer_phone_button{
-                    font-family: Lato;
-					font-style: normal;
-					font-weight: normal;
-					font-size: 16px;
-					line-height: 24px;
-					color: #FFFFFF;
-                    margin-left: 44px;
-                    display: flex;
-
-                    @include for-pad{
-                        margin: 0;
-                    }
-                    @include for-mobile{
-                        margin-left: 42px;
-                    }
-
-                    .confetti{
-                    width: 24px;
-                    height: 24px;
-                    margin-top: 0px;
-                    margin-right: 7px;
-
-                    @include for-pad{
-                        margin-right: 4px;  
-                    }
-                    @include for-mobile{
-                        margin-right: 3px;
-                    }
-                    }
-
-                    
-                    // &:before{
-                    //     content: url("/images/confetti.svg");
-                    //     top: 4px;
-                    //     left: 0px;
-                    //     width: 24px;
-                    //     height: 24px;
-                    //     margin-right: 4px;
-                    // }
-
-                    // &:before{
-                    //     left: 9px;
-                    // }
-                    ._link{
-                        border-bottom: 1px dashed #ffffff50;
-
-                        @include for-mobile{
-                        border: none;
-                        }
-                    }
-                    & > p{
-                        display: inline;
-                        text-align: right;
-                        line-height: 23px;
-                        font-size: 16px;
-                        font-weight: 500;
-
-                        @include for-mobile{
-                        line-height: 20px;
-                        font-size: 14px;
-
-                            &::after {
-                              content: '';
-                              position: absolute;
-                              bottom: 77px;
-                              left: 29px;
-                              right: 0;
-                              height: 1px;
-                              border-bottom: 1px dashed #ffffff50;
-                              width: 125px;
-                              margin: auto;
-                            }
-                        }
-                    }
-                }
-            }
+        @include medium {
+            display: none;
         }
     }
+
+    .footer_cities_title {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.01em;
+
+        @include extra-large {
+            margin: 16px 0 0 0;
+        }
+    }
+
+    .footer_cities_wrapper {
+        column-count: 4;
+        column-width: 175px;
+        column-gap: 0;
+    }
+
+    .footer_cities_link_wrapper {
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.01em;
+        cursor: pointer;
+
+    }    
+
+    .footer_copyright,
+    .footer_privacy_policy {
+        display: inline-block;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: 0.01em;
+        width: 300px;
+        cursor: pointer;
+
+        @include extra-large {
+            width: auto;
+        }
+    }
+
+    .footer_privacy_policy {
+        margin: 4px 0 0 0;
+        text-decoration: underline;
+        display: block;
+
+        @include extra-large {
+            margin: 0 0 0 calc(16px - 2px);
+            display: inline-block;
+        }
+
+        @include medium {
+            margin: 0 0 0 0;
+            display: block;
+        }
+    }
+
+    .img_footer_big_balloon,
+    .img_footer_small_balloon,
+    .img_footer_girl_present,
+    .img_footer_boy,
+    .img_footer_girl_smile {
+        position: absolute;
+        background: center / contain no-repeat;
+    }
+
+    .img_footer_big_balloon {
+        top: -433px;
+        right: 137px;
+        width: 68px;
+        height: 153px;
+        background-image: url("/images/main/footer/blue_balloon.svg");
+        display: none;
+
+        @include extra-large {
+            display: block;
+            top: 10px;
+            right: 41px;
+        }
+
+        @include medium {
+            display: none;
+        }
+    }
+    .img_footer_small_balloon {
+        top: -514px;
+        left: 65px;
+        width: 61px;
+        height: 153px;
+        background-image: url("/images/main/footer/red_balloon.svg");
+        display: none;
+
+        @include extra-large {
+            display: block;
+            left: auto;
+            top: 168px;
+            right: -19px;
+        }
+
+        @include medium {
+            top: 0px;
+            right: 19px;
+            width: 54px;
+            height: 92px;
+        }
+    }
+    // .img_footer_girl_present {
+    //     top: -216px;
+    //     right: 49px;
+    //     width: 123px;
+    //     height: 257px;
+    //     background-image: url("/images/main/footer/girl_present.svg");
+
+    //     @include extra-large {
+    //         display: none;
+    //     }
+    // }
+    // .img_footer_boy {
+    //     top: -127px;
+    //     right: 204px;
+    //     width: 121px;
+    //     height: 171px;
+    //     background-image: url("/images/main/footer/small_boy_tube.svg");
+
+    //     @include extra-large {
+    //         display: none;
+    //     }
+    // }
+    // .img_footer_girl_smile {
+    //     top: -186px;
+    //     left: 66px;
+    //     width: 133px;
+    //     height: 228px;
+    //     background-image: url("/images/main/footer/girl_smile.svg");
+
+    //     @include extra-large {
+    //         display: none;
+    //     }
+    // }
 }

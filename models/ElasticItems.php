@@ -1,5 +1,5 @@
 <?php
-namespace frontend\modules\arenda\models;
+namespace frontend\modules\kidsbd\models;
 
 use Yii;
 use common\models\Restaurants;
@@ -62,7 +62,7 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
     }
 
     public static function index() {
-        return 'pmn_arenda_rooms';
+        return 'pmn_kidsbd_rooms';
     }
     
     public static function type() {
@@ -193,9 +193,9 @@ class ElasticItems extends \yii\elasticsearch\ActiveRecord
         $res = self::createIndex();
 
         $connection = new \yii\db\Connection([
-            'dsn'       => 'mysql:host=localhost;dbname=pmn_arenda',
+            'dsn'       => 'mysql:host=localhost;dbname=pmn_kidsbd',
             'username'  => 'root',
-            'password'  => 'Gkcfmdsop',
+            'password'  => 'LP_db_',
             'charset'   => 'utf8mb4',
         ]);
         $connection->open();

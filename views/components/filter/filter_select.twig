@@ -48,13 +48,13 @@
 
                     {% set categoryKey = key %}
 
-                        <div class="filter_select_item {{filter_item.active[key] is defined ? '_active':''}}" data-value="{{key}}" data-filter-select-category><p>{{value}}</p></div>
+                        <div class="filter_select_item {{filter_item.active[key] is defined ? '_active' : ''}}" data-value="{{key}}" data-filter-select-category><p>{{value}}</p></div>
 
                     {% endif %}
 
                 {% else %}
 
-        		    <div class="filter_select_item {{filter_item.active[key] is defined ? '_active':''}}" data-value="{{key}}" data-filter-select-item data-category={{categoryKey}}><p>{{value}}</p></div>
+        		    <div class="filter_select_item {{filter_item.active[key] is defined ? '_active' : ''}}" data-value="{{key}}" data-filter-select-item data-category={{categoryKey}}><p>{{value}}</p></div>
 
                 {% endif %}
 

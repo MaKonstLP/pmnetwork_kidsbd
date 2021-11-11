@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\arenda\controllers;
+namespace app\modules\kidsbd\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
@@ -9,13 +9,14 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use frontend\widgets\FilterWidget;
 use frontend\widgets\PaginationWidget;
+use frontend\widgets\PaginationWidgetPrevNext; // этот мне больше подходит
 use frontend\components\ParamsFromQuery;
 use frontend\components\QueryFromSlice;
-use frontend\modules\arenda\components\Breadcrumbs;
+use frontend\modules\kidsbd\components\Breadcrumbs;
 use frontend\components\Declension;
 use common\models\ItemsFilter;
 use common\models\elastic\ItemsFilterElastic;
-use frontend\modules\arenda\models\ElasticItems;
+use frontend\modules\kidsbd\models\ElasticItems;
 use backend\models\Filter;
 use backend\models\Slices;
 use common\models\GorkoApi;
@@ -38,8 +39,11 @@ class ListingController extends Controller
 	    return parent::beforeAction($action);
 	}
 
-	public function actionSlice($slice)
+	public function actionSlice($city = "", $slice)
 	{
+
+		// echo "$city / $slice"; exit;
+
 		$slice_obj = new QueryFromSlice($slice);
 		if ($slice_obj->flag){
 			$this->view->params['menu'] = $slice;
@@ -51,7 +55,7 @@ class ListingController extends Controller
 			
 			if($params['page'] > 1){
 				// $canonical .= $params['canonical'];
-			}			
+			}
 			
 			return $this->actionListing(
 				$page 			=	$params['page'],
@@ -61,7 +65,8 @@ class ListingController extends Controller
 				$canonical 		= 	$canonical,
 				$type 			=	$slice
 			);
-		}	else {
+		}
+		else {
 
 			$item = ElasticItems::find()->query([
 				'bool' => [
@@ -80,7 +85,7 @@ class ListingController extends Controller
 		}
 	}
 
-	public function actionIndex()
+	public function actionIndex($city = "")
 	{
 		$getQuery = $_GET;
 		unset($getQuery['q']);
@@ -127,10 +132,17 @@ class ListingController extends Controller
 			'filter_model' => $this->filter_model
 		]);
 
+		// запускаю подходящий
+		//$pagination = PaginationWidgetPrevNext::widget([
+		//	'total' => $items->pages,
+		//	'current' => $page,
+		//]);
 		$pagination = PaginationWidget::widget([
 			'total' => $items->pages,
 			'current' => $page,
 		]);
+
+
 		$seo_type = $type ? $type : 'listing';
 		// echo '<pre>';
 		// print_r($items->total);
@@ -154,20 +166,28 @@ class ListingController extends Controller
 			'pagination' => $pagination,
 			'seo' => $seo,
 			'count' => $items->total,
-			'totalCount' => $totalCount,
+			'totalCount' => $totalCount
 		));	
 	}
 
+	
 	public function actionAjaxFilter(){
 		$params = $this->parseGetQuery(json_decode($_GET['filter'], true), $this->filter_model, $this->slices_model);
 
 		$elastic_model = new ElasticItems;
 		$items = new ItemsFilterElastic($params['params_filter'], $this->per_page, $params['page'], false, 'rooms', $elastic_model);
 
-		$pagination = PaginationWidget::widget([
+		// запускаю подходящий
+		$pagination = PaginationWidgetPrevNext::widget([
 			'total' => $items->pages,
-			'current' => $params['page'],
+			'current' => $page,
 		]);
+		
+		
+		// $pagination = PaginationWidget::widget([
+		// 	'total' => $items->pages,
+		// 	'current' => $params['page'],
+		// ]);
 
 		
 		$slice_url = ParamsFromQuery::isSlice(json_decode($_GET['filter'], true));

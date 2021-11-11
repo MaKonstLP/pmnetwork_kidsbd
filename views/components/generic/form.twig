@@ -1,108 +1,94 @@
 <div class="form_wrapper">
+	<svg class="bg_form_wrapper_for_desktop" width="1017" height="704" viewBox="0 0 1017 704" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M0.642054 190.281C-5.23098 112.144 37.5225 41.7348 114.639 27.8454C194.48 13.4652 319.508 0 507.782 0C708.232 0 838.083 23.633 918.045 47.4474C990.772 69.107 1023.94 141.517 1015.56 216.936L978.574 549.832C971.294 615.353 931.093 670.108 866.128 681.318C798.434 693 689.858 704 521 704C360.015 704 246.223 698.001 169.609 691.368C90.073 684.482 32.9452 620.054 26.9616 540.445L0.642054 190.281Z" fill="url(#paint0_linear_bg_form_wrapper_for_desktop)"/>
+	</svg>
 
-	<div class="form_close" data-close-popup>
-	</div>
+	<svg class="bg_form_wrapper_for_large" width="730" height="648" viewBox="0 0 730 648" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+		<path d="M1.05413 163.681C-0.863518 99.3943 30.8659 40.4723 93.445 25.6306C150.287 12.1497 236.893 0 364.428 0C507.591 0 599.965 23.7055 656.558 47.4219C710.584 70.0626 732.182 127.663 728.935 186.151L710.795 512.886C707.808 566.7 677.576 614.088 624.957 625.758C573.191 637.238 492.902 648 373.8 648C263.723 648 181.789 642.484 124.196 636.21C58.3796 629.041 13.2758 573.395 11.3018 507.219L1.05413 163.681Z" fill="url(#paint0_linear_bg_form_wrapper_for_large)"/>
+	</svg>
 
-	<div class="form_main">		
-
-		<div class="form_title">
-
-			<p class="form_title_main">Трудности <br class="mobile_only"/> с выбором зала?</p>
-			<p class="form_title_text">Наши менеджеры <span class="form_title_desc">бесплатно</span> подберут оптимальный вариант. Заполните форму, и мы свяжемся с вами.</p>
-
-		</div>
-
-		<!-- <div class="form_title">
-			<p class="form_title_main">Трудности с выбором зала?</p>
-		</div> -->
-
-		<form class="form_block" action="/ajax/form/" data-type={% if type != 'item' %}"main"{% else %}"item"{% endif %}>
-
-			<div class="form_inputs">
-
-				<div class="input_wrapper _big">
-
-					<div class="input_label">Как вас зовут?</div>
-					<input type="text" name="name" data-required/>
-
-				</div>
-
-				<div class="input_wrapper ">
-
-					<div class="input_label">Номер телефона</div>
-					<input type="text" name="phone" data-required data-dynamic-placeholder/>
-
-				</div>
-
-				<div class="input_wrapper">
-				
-					<div class="input_label">Электронная почта <span class="not-necessery_mobile"> (необязательно)</span></div>
-					<input type="email" name="count" />
-					<p class="not_necessary">необязательно</p>
-
-				</div>
-
-				<div class="input_wrapper _small" data-calendar-input-wrapper>
-
-					<div class="input_label">Желаемая дата <span class="not-necessery_mobile"> (необязательно)</span></div>
-					<input type="text" name="date" class="addCalendar" autocomplete="off" />
-					<input type="text" name="date_hidden" class="hidden_input _active" autocomplete="off" data-form-hidden-input />
-
-					<div class="calendar_wrapper">
-						<div class="open_calendar_button"></div>
-						<div class="calendar_container _hide">
-							<div class="calendar"></div>
-						</div>
-					</div>
-
-					<p class="not_necessary">необязательно</p>
-
-				</div>
-
+	<form class="form_block" action="/ajax/form/" data-type={{ type }}>
+		<h3 class="form_title_main">Помочь подобрать зал?</h3>
+		<p class="form_title_text">Мы поможем вам подобрать место для проведения детского праздника, для этого заполните данные</p>
+		<div class="form_inputs_wrapper">
+			<div class="input_wrapper">
+				<div class="input_label">Ваше имя</div>
+				<input class="form_inpyt" type="text" name="name" placeholder="Владимир" data-required/>
+				<div class="form_input_error"></div>
 			</div>
-
+			<div class="input_wrapper">
+				<div class="input_label">Номер телефона</div>
+				<input class="form_inpyt" type="text" name="phone" data-required data-dynamic-placeholder/>
+				<div class="form_input_error"></div>
+			</div>
+			<div class="input_wrapper">
+				<div class="input_label">Город</div>
+				<div class="form_inpyt_city">{{city_current}}</div>
+				<input class="form_inpyt_city_hide" type="text" name="city" value="{{city_current}}" style="display: none;"/> {# disabled #}
+ 				<svg class="form_inpyt_city_check" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M1 6L5 2L9 6" stroke="#888E9D" stroke-width="2" stroke-linecap="round"/>
+				</svg>
+				<div class="form_inpyt_city_options _hide">
+					{% for city in city_list %}
+        				<p class="options_element_city">{{ city.name }}</p>
+    				{% endfor %}
+				</div>
+			</div>
+			<div class="input_wrapper">
+				<div class="input_label">Количество гостей</div>
+				<div class="form_inpyt_guest">Любое</div>
+				<input class="form_inpyt_guest_hide" type="text" name="guest" value="Любое" style="display: none;"/>  {# disabled #}
+				<svg class="form_inpyt_guest_check" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M1 6L5 2L9 6" stroke="#888E9D" stroke-width="2" stroke-linecap="round"/>
+				</svg>
+				<div class="form_inpyt_guest_options _hide">
+					<p class="options_element_guest">Любое</p>
+    				<p class="options_element_guest">до 20 чел.</p>
+					<p class="options_element_guest">20 – 49 чел.</p>
+					<p class="options_element_guest">50 – 149 чел.</p>
+					<p class="options_element_guest">от 150 чел.</p>
+				</div>
+			</div>
+			<div class="input_wrapper">
+				<div class="input_label">Желаемая дата</div>
+				<input class="form_inpyt_date" type="date" name="date"/>
+			</div>
 			<div class="comments_textarea">
-
 				<div class="input_label">Комментарий</div>
-				<textarea name="coment_text" class="comment_form"></textarea>
-
+				<textarea name="coment_text" class="comment_form" placeholder="Напишите свои пожелания"></textarea>
 			</div>
-
 			<div class="form_submit">
-
-				<input type="submit" class="_button" value="Отправить"/>
-
-				<div class="form_policy checkbox_item _active" data-form-privacy>
-
-					<input type="checkbox" name="policy" class="personalData" checked="">
-					<p class="checkbox_pseudo">Я согласен с <span> <a class="_link" href="/privacy/" target="_blank"> политикой обработки персональных данных</a></span></p>
-
+				<button type="submit" class="btn_form_submit">
+					<svg width="205" height="56" viewBox="0 0 205 56" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+						<path d="M2.30856 9.73877C2.52097 5.94228 5.63214 2.95592 9.43414 2.89904L196.087 0.106556C200.04 0.0474159 203.311 3.16808 203.437 7.11951L204.755 48.3384C204.888 52.4981 201.497 55.9146 197.337 55.8131L7.47501 51.1823C3.38532 51.0826 0.189168 47.619 0.417696 43.5344L2.30856 9.73877Z"/>                   	
+					</svg>
+					<p>Отправить</p>
+				</button>
+				<div class="form_policy checkbox_item" data-form-privacy>
+					<div class="checkbox_wrapper">
+						<input id="check_policy_MaxForm" type="checkbox" name="policy" class="personalData _invalid" >
+						<label for="check_policy_MaxForm">Согласен с&nbsp;</label>
+					</div>
+					<a class="_link" href="/privacy/" target="_blank">политикой обработки персональных данных</a>
 				</div>
-
 			</div>
-
 			<input type="hidden" name="_csrf" value="{{Declension.csrfToken()}}" />
-
-		</form>
-
-	</div>
+		</div>
+	</form>
 
 	<div class="form_success" data-success>
-
 		<div class="form_success_title">
-
-			<p class="form_success_title_main">Заявка отправлена</p>
-
+			<p class="form_success_title_main">Заявка успешно отправлена</p>
 		</div>
-
 		<div class="form_success_text">
-
-			<p class="form_success_text_main"><span data-success-name></span>, спасибо за проявленный интерес. Наши менеджеры свяжутся с вами в течение дня.</p>
-
+			<p class="form_success_text_main"><span data-success-name></span>, спасибо за проявленный интерес. Наши менеджеры перезвонят вам в ближайшее время.</p>
 		</div>
-
-		<div class="form_success_close _link" data-success-close>Заполнить еще раз</div>
-
+		<div class="form_success_close _link" data-success-close>Закрыть</div>
 	</div>
-
 </div>
+
+<div class="img_form_big_balloon"></div>
+<div class="img_form_small_balloon"></div>
+<div class="img_form_girl_present"></div>
+<div class="img_form_boy"></div>
+<div class="img_form_girl_smile"></div>

@@ -1,0 +1,48 @@
+<div class="filter_wrapper_kidsbd" data-filter-wrapper-kidsbd>
+    <button class="btn_open_filter">
+        <svg width="192" height="48" viewBox="0 0 192 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.10504 9.28186C2.33641 5.49737 5.44643 2.5313 9.23763 2.47939L183.231 0.0971078C187.172 0.0431463 190.433 3.14964 190.571 7.08876L191.732 40.3324C191.878 44.4942 188.493 47.9217 184.33 47.8288L7.52967 43.8824C3.41918 43.7906 0.208696 40.3006 0.459587 36.1968L2.10504 9.28186Z"/>
+        </svg>
+        <p>Фильтр заведений</p>
+    </button>
+    <div class="section_filter _hide">
+        <p>Фильтр заведений</p>
+        <div class="section_filter_data">
+            <div class="group_city">
+                <p class="label">Город</p>
+                <div class="input_city_filter">{{city_current}}</div> {# пока так, может поправлю #}
+                <div class="input_city_options_filter" style="display: none;"></div>
+            </div>
+            <div class="group_price">
+                <p class="label">Средний чек на человека</p>
+                <div class="output-range-filter" 
+                    data-price-filter='["Любой", "до 2000 ₽", "от 2000 до 2999 ₽", "от 3000 до 4999 ₽", "от 5000 ₽"]'
+                >Любой</div> {# инициализация по значению с сервера + data значения пришедшие с сервера #}
+                <input type="range" min="0" max="4" value="0" class="input-range-filter" id="input_price_filter" > {# инициализация, min,max c сервера ??? #}
+                <div class="wrapper_min_max_price">
+                    <p>Любой</p>
+                    <p>{{filters["price"]["items"][5]}}</p> {# пока так, может поправлю #}
+                </div>
+            </div>
+            <div class="group_guest">
+                <p class="label">Вместимость</p>
+                <div class="output-range-filter" 
+                    data-guest-filter='["Любая", "до 20 чел.", "20 – 49 чел.", "50 – 149 чел.", "от 150 чел."]'
+                >до 20 чел.</div> {# инициализация по значению с сервера + data значения пришедшие с сервера #}
+                <input type="range" min="0" max="4" value="1" class="input-range-filter" id="input_guest_filter" > {# инициализация, min,max c сервера ??? #}
+                <div class="wrapper_min_max_price">
+                    <p>Любая</p>
+                    <p>от 150 чел.</p>
+                </div>                
+            </div>
+            
+
+
+
+
+        
+        </div>
+        <div class="section_filter_btn"></div>
+        <div class="section_filter_options"></div>
+    </div>
+</div>

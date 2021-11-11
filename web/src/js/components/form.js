@@ -1,103 +1,29 @@
-import Animation from './animation.js';
-//import modal from './modal';
-import {status, json} from './utilities';
+// import Animation from './animation.js';
+// import {status, json} from './utilities';
 import Inputmask from 'inputmask';
-
-var animation = new Animation;
 
 export default class Form {
 	constructor(form) {
-		let self = this;
 		this.$form = $(form);
 		this.$formWrap = this.$form.parents('.form_wrapper');
-		this.$submitButton = this.$form.find('input[type="submit"]');
+		this.$submitButton = this.$form.find('button[type="submit"]');
 		this.$policy = this.$form.find('[name="policy"]');
+
 		this.to = (this.$form.attr('action') == undefined || this.$form.attr('action') == '') ? this.to : this.$form.attr('action');
-		let im_phone = new Inputmask('+7 (999) 999-99-99', {
-			clearIncomplete: true,
-		});
+		
+		let im_phone = new Inputmask('+7 (999) 999-99-99', { clearIncomplete: false });
 		im_phone.mask($(this.$form).find('[name="phone"]'));
 
-		this.bind();	
-
-		// this.$form.find('[data-calendar-input-wrapper]').on('click' , function(){
-		// 	console.log(1221);
-		// 	let parent = $(this).closest('.input_wrapper');
-
-		// 	parent.find('.qs-num').on('click' , function(){
-
-		// 		setTimeout(function() {
-		// 			let valueVisible = parent.find('.addCalendar').val();
-		// 			let valueHidInp = parent.find('[data-form-hidden-input]').val();
-		// 			let valueHidInpTwo = parent.find('[data-form-hidden-input-two]').val();
-
-		// 			if (valueVisible == ''){
-		// 				parent.find('.addCalendar').val(valueHidInp);
-		// 			}	else if (valueHidInp != '' && valueHidInpTwo != '' ){
-		// 				parent.find('.addCalendar').val(valueHidInp + '-' + valueHidInpTwo);
-		// 				parent.find('[data-form-hidden-input]').addClass('_hide');
-		// 			}	else if (valueHidInp != '' && valueHidInpTwo ==''){
-		// 				parent.find('.addCalendar').val(valueHidInp);
-		// 			}	else {
-		// 				parent.find('.addCalendar').val('');
-		// 			}
-		// 		},50);
-		// 	});
-		// });
-
-		this.$form.find('[data-calendar-input-wrapper]').on('click' , function(){
-			console.log('open calendar');
-
-		});
-
-		// this.$form.find('[data-form-hidden-input]').on('click' , function(){
-		// 	let parent = $(this).closest('.input_wrapper');
-		// 	$(this).removeClass('_active');
-		// 	parent.find('[data-form-hidden-input-two]').addClass('_active');
-
-		// })
-
-		// this.$form.find('[data-form-hidden-input-two]').on('click' , function(){
-		// 	let parent = $(this).closest('.input_wrapper');
-		// 	$(this).removeClass('_active');
-		// 	parent.find('[data-form-hidden-input]').addClass('_active');
-		// 	parent.find('[data-form-hidden-input]').addClass('_hide');
-		// })
-
-
-		// this.$form.find('[data-form-hidden-input]').on('click' , function(){
-		// 	let parent = $(this).closest('.input_wrapper');
-		// 	let hiddenValue = parent.find('[data-form-hidden-input]').val();
-		// 	console.log(hiddenValue);
-		// 	let visibleValue = parent.find('.addCalendar').val();
-		// 	parent.find('.addCalendar').val(visibleValue + "-" + hiddenValue);
-
-		// 	parent.find('[data-form-hidden-input]').removeClass('_active');
-		// })	
+		this.bind();
 	}
 
 	bind() {
-
-		this.$form.find('[data-dynamic-placeholder]').each(function () {
-			$(this).on('blur',function () {
-				if ($(this).val() == '')
-					$(this).removeClass('form_input_filled');
-				else
-					$(this).addClass('form_input_filled');
-			})
-		})
-
 		this.$form.find('[data-required]').each((i, el) => {
 			$(el).on('blur', (e) => {
 				this.checkField($(e.currentTarget));
-				this.checkValid();
 			});
-
-			$(el).on('change', (e) => {
-			  // console.log('input change');
-			  this.checkValid();
-			  // this.checkField($(e.currentTarget));
-			  // this.checkValid();
+			$(el).on('input', (e) => {
+				this.cleanErrorInput($(e.currentTarget))
 			});
 		});
 
@@ -105,94 +31,106 @@ export default class Form {
 			this.sendIfValid(e);
 		});
 
-		this.$form.on('click', 'button.disabled', function(e) {
-			e.preventDefault();
-			return false;
-		})
-
 		this.$policy.on('click',(e) => {
 			var $el = $(e.currentTarget);
-
 			if ($el.prop('checked'))
-			$el.removeClass('_invalid');
-				else
-			$el.addClass('_invalid');
-
-			this.checkValid();
-		})
-
-		this.$form.find('[data-action="form_checkbox"]').on('click',(e) => {
-			let $el = $(e.currentTarget);
-			let $input = $el.siblings('input');
-
-			$input.prop("checked", !$input.prop("checked"));
-			$el.closest('.checkbox_item').toggleClass('_active');
-		})
+				$el.removeClass('_invalid');
+			else
+				$el.addClass('_invalid');
+		});		
 
 		this.$formWrap.find('[data-success] [data-success-close]').on('click', (e) => {
-			this.$formWrap.find('[data-success]').removeClass('_active');
+			this.$formWrap.find('[data-success]').removeClass('_active');			
+			this.$form.removeClass('_hide');
 		});
 
-		this.$form.find('[data-form-privacy]').on('click', (e) => {
-			let $el = $(e.currentTarget);
+		if (this.$form.data('type') === 'MaxForm') {
+			let $currentCuty = this.$form.find('.form_inpyt_city_hide').val();
+			this.searchCurrentElem('.options_element_city', $currentCuty, '_current');
+			let $currentGuest = this.$form.find('.form_inpyt_guest_hide').val();
+			this.searchCurrentElem('.options_element_guest', $currentGuest, '_current');
+		}
+		
+		this.$form.on('click', (e) => {
+			let $elForm = $(e.currentTarget);
+			if ($(e.target).hasClass('form_inpyt_city') || $(e.target).hasClass('form_inpyt_city_check')) {
+				$elForm.find('.form_inpyt_city_options').toggleClass('_hide');
+				$elForm.find('.form_inpyt_city_check').toggleClass('_hide');
+				$elForm.find('.form_inpyt_guest_options').addClass('_hide');
+				$elForm.find('.form_inpyt_guest_check').removeClass('_hide');
+				return
+			}
+			if ($(e.target).hasClass('options_element_city')) {
+				$elForm.find('.form_inpyt_city_hide').val($(e.target).text());
+				$elForm.find('.form_inpyt_city').text($(e.target).text());
+				this.searchCurrentElem('.options_element_city', $(e.target).text(), '_current');
+				$elForm.find('.form_inpyt_city_options').toggleClass('_hide');
+				$elForm.find('.form_inpyt_city_check').toggleClass('_hide');
+				return
+			}
+			if ($(e.target).hasClass('form_inpyt_guest') || $(e.target).hasClass('form_inpyt_guest_check')) {
+				$elForm.find('.form_inpyt_guest_options').toggleClass('_hide');
+				$elForm.find('.form_inpyt_guest_check').toggleClass('_hide');
+				$elForm.find('.form_inpyt_city_options').addClass('_hide');
+				$elForm.find('.form_inpyt_city_check').removeClass('_hide');
+				return
+			}
+			if ($(e.target).hasClass('options_element_guest')) {
+				$elForm.find('.form_inpyt_guest_hide').val($(e.target).text());
+				$elForm.find('.form_inpyt_guest').text($(e.target).text());
+				this.searchCurrentElem('.options_element_guest', $(e.target).text(), '_current');
+				$elForm.find('.form_inpyt_guest_options').toggleClass('_hide');
+				$elForm.find('.form_inpyt_guest_check').toggleClass('_hide');
+				return
+			}
+			$elForm.find('.form_inpyt_city_options').addClass('_hide');
+			$elForm.find('.form_inpyt_city_check').removeClass('_hide');
+			$elForm.find('.form_inpyt_guest_options').addClass('_hide');
+			$elForm.find('.form_inpyt_guest_check').removeClass('_hide');
+		});
+	}
 
-			if(!$(e.target).hasClass('_link')){
-				$el.toggleClass('_active');
-
-				if($el.hasClass('_active')){
-					this.$submitButton.removeClass('disabled');
-				}
-				else{
-					this.$submitButton.addClass('disabled');
-				}
+	searchCurrentElem(selectorElem, currentName, classCurselectorElemrent) {
+		this.$form.find(selectorElem).each((index, element) => {
+			if ($(element).text() === currentName) {
+				$(element).addClass(selectorElem);
+			} else {
+				$(element).removeClass(selectorElem);
 			}
 		});
 	}
 
-	checkValid() {
-		this.$submitButton.removeClass('disabled');
-		if (this.$form.find('.form_input_invalid').length > 0) {
-			this.$submitButton.addClass('disabled');
-		}
+	cleanErrorInput($field) {
+		$field.removeClass('_invalid');
+		$field.parent().find('.form_input_error').html('');
 	}
 
 	checkField($field) {
 			var valid = true;
 			var name = $field.attr('name');
-			var pattern_email = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i;
+			// var pattern_email = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i;
 
 			if ($field.val() == '') {
 				valid = false;
+				if (name === 'name') { var custom_error = 'Пожалуйста, укажите имя'; }
 			} else {
 				if (name === 'phone' && $field.val().indexOf('_') >= 0) {
 					valid = false;
 					var custom_error = 'Неверный формат телефона';
 				}
-
-		        if (name === 'email' && !(pattern_email.test($field.val()))) {
-					valid = false;
-					var custom_error = 'Неверный формат электронной почты';
-				}
-
-		        if (name === 'policy' && $field.prop('checked'))
-		          valid = true;
+		        // if (name === 'email' && !(pattern_email.test($field.val()))) {
+				// 	valid = false;
+				// 	var custom_error = 'Неверный формат электронной почты';
+				// }
 			}
+
 			if (valid) {
 				$field.removeClass('_invalid');
-
-        		if ($field.parent().find('.form_input_error').length > 0)
-					$field.parent().find('.form_input_error').html('');
-
+				$field.parent().find('.form_input_error').html('');
 			} else {
 				$field.addClass('_invalid');
-				var form_error = $field.data('error') || 'Заполните поле';
-				var error_message = custom_error || form_error;
-
-				if ($field.siblings('.form_input_error').length  == 0) {
-					$field.parent('.elementWrap').append('<div class="form_input_error">' + error_message + '</div>');
-				} else {
-					$field.siblings('.form_input_error').html(error_message);
-				}
+				var error_message = custom_error || 'Заполните поле';
+				$field.siblings('.form_input_error').html(error_message);
 			}
 	}
 
@@ -205,89 +143,67 @@ export default class Form {
 				valid = false;
 		});
 
-		if (valid) {
-			this.$submitButton.removeClass('disabled');
-		} else {
-			this.$form.find('._invalid')[0].focus();
-			this.$submitButton.addClass('disabled');
-		}
+		if (this.$policy.hasClass('_invalid')) valid = false;		
+
+		if (!valid) { this.$form.find('._invalid')[0].focus(); }
 
 		return valid;
 	}
-
-	reset() {
-		this.$form[0].reset();
-		this.$form.find('input').removeClass('form_input_valid form_input_filled');
-	}
-
-	beforeSend() {
-		this.$submitButton.addClass('disabled');
-	}
-
+	
 	success(data, formType) {
-		//modal.append(data);
-		//modal.show();
 		switch(formType) {
-		  case 'main':
+			case 'RequestCall':
+			break;
+
+		  	case 'ReservationHall':
 		    //ym(64598434,'reachGoal','form_main');
 		    //gtag('event', 'form');
 		    break;
 
-		  case 'item':
+		  	case 'MaxForm':
 		    //ym(64598434,'reachGoal','form_room');
 		    //gtag('event', 'form');
 		    break;
 		}
-
+	
 		this.$formWrap.find('[data-success] [data-success-name]').text(data.name);
-		this.$formWrap.find('[data-success] [data-success-phone]').text(data.phone);
 		this.$formWrap.find('[data-success]').addClass('_active');
-
-		this.reset();
-		// this.$submitButton.removeClass('button__pending');
+		this.$form.addClass('_hide');
+		this.$form[0].reset();
 	}
 
-	error() {
-		// this.$submitButton.removeClass('button__pending');
-		//modal.showError();
-	}
+	error() { /* обрабатываем ошибку */ }
 
 	sendIfValid(e) {
 		var self = this;
 	    e.preventDefault();
 	    if (!this.checkFields()) return;
-	    if (this.disabled) return;	    
+	    if (this.disabled) return;
 
 	    var formData = new FormData(this.$form[0]);
-
 	    var formType = this.$form.data('type');
 	    formData.append('type', formType);
 	    var formUrl = window.location.href;
 	    formData.append('url', formUrl);
 
 	    for (var pair of formData.entries()) {
-		    console.log(pair[0]+ ', ' + pair[1]); 
+		    console.log(pair[0]+ ', ' + pair[1]);
 		}
 
 	    $.ajax({
-            beforeSend: function() {
-            	self.disabled = true;
-                self.beforeSend();
-            },
+            beforeSend: function() { self.disabled = true; },
             type: "POST",
             url: self.to,
             data: formData,
             processData: false,
             contentType: false,
             success: function(response) {
-            	self.$submitButton.removeClass('disabled');
+				self.disabled = false;
             	self.success(response, formType);
-            	self.disabled = false;
             },
             error: function(response) {
-            	self.$submitButton.removeClass('disabled');
+				self.disabled = false;
                 self.error(response, formType);
-                self.disabled = false;
             }
         });
 	}

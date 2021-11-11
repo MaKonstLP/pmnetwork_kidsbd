@@ -1,3 +1,8 @@
+{# {{ dump(city_current) }} #}
+{# {{ city_current }} #}
+
+{{ dump(filters) }}
+
 <div class="filter" data-filter-wrapper>
 
 	<div class="filter_wrapper">
@@ -84,7 +89,7 @@
 		{% for label,filter_item in filters %}
 
 
-			{% if filter_item.type == 'select' %}	
+			{% if filter_item.type == 'select' %}
 
 				{{ this.render('filter_select_mobile.twig', {
 					'filter_item':filter_item,

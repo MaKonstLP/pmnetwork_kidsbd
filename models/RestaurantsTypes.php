@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\arenda\models;
+namespace frontend\modules\kidsbd\models;
 
 use Yii;
 

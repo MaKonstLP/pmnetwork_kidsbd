@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\arenda\models;
+namespace app\modules\kidsbd\models;
 
 use yii\base\BaseObject;
 use Yii;

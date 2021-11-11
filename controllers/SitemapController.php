@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\arenda\controllers;
+namespace app\modules\kidsbd\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\Response;
 use common\models\Slices;
 use common\models\elastic\ItemsFilterElastic;
-use frontend\modules\arenda\models\ElasticItems;
+use frontend\modules\kidsbd\models\ElasticItems;
 
 class SitemapController extends Controller
 {

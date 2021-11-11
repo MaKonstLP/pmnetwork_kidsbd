@@ -1,0 +1,65 @@
+<div class="form_wrapper popup">
+	<svg class="bg_form_popup_wrapper_for_large" width="728" height="390" viewBox="0 0 728 390" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.5425 151.773C-5.3203 81.9546 35.9037 20.1332 105.603 12.1544C163.46 5.5312 246.938 0 364.393 0C491.093 0 578.859 9.9657 637.657 21.2691C703.036 33.8375 735.822 95.699 726.249 161.583L708.505 283.694C701.395 332.623 668.521 371.806 619.47 378.021C570.16 384.269 492.599 390 373.969 390C265.224 390 186.203 387.111 131.024 383.742C66.9895 379.832 19.0046 329.422 12.7288 265.576L1.5425 151.773Z" fill="url(#paint0_linear_bg_form_popup_wrapper_for_large)"/>
+    </svg>
+
+	<svg class="bg_form_popup_wrapper_for_medium" width="296" height="566" viewBox="0 0 296 566" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0 77.3175C0 54.5462 7.9873 32.0892 28.4431 22.0846C50.6665 11.2155 87.9853 0 147.368 0C223.041 0 263.43 30.1819 282.239 50.8956C292.67 62.3836 296 78.0072 296 93.524V481.089C296 509.285 284.141 536.612 258.05 547.301C234.612 556.903 199.615 566 151.137 566C114.361 566 84.5391 562.859 61.4074 558.828C22.7441 552.089 0 516.775 0 477.529V77.3175Z" fill="url(#paint0_linear_bg_form_popup_wrapper_for_medium)"/>        
+    </svg>
+
+	<div class="form_close_popup">
+		<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M0 24C0 10.7452 10.7452 0 24 0V0C37.2548 0 48 10.7452 48 24V24C48 37.2548 37.2548 48 24 48V48C10.7452 48 0 37.2548 0 24V24Z" />
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M32.5061 36.7484C33.6777 37.9199 35.5772 37.9199 36.7488 36.7484C37.9203 35.5768 37.9203 33.6773 36.7488 32.5057L27.5566 23.3136L36.7488 14.1214C37.9203 12.9498 37.9203 11.0503 36.7488 9.87876C35.5772 8.70719 33.6777 8.70719 32.5061 9.87876L23.3139 19.0709L14.1213 9.87831C12.9498 8.70674 11.0503 8.70674 9.8787 9.87831C8.70712 11.0499 8.70712 12.9494 9.8787 14.121L19.0713 23.3136L9.8787 32.5062C8.70712 33.6778 8.70712 35.5773 9.8787 36.7488C11.0503 37.9204 12.9498 37.9204 14.1213 36.7488L23.3139 27.5562L32.5061 36.7484Z" fill="white"/>				
+		</svg>
+	</div>
+
+	<form class="form_block_popup" action="/ajax/form/" data-type={{ type }}>
+		<h3 class="form_title_main_popup">{% if type == 'RequestCall' %}Заказать звонок{% else %}Забронировать зал{% endif %}</h3>
+		<p class="form_title_text_popup">{% if type == 'RequestCall' %}Оставьте номер телефона, и мы вам перезвоним.{% else %}Оставьте свои данные, чтобы подтвердить бронирование{% endif %}</p>
+		<div class="form_inputs_popup">
+			<div class="input_wrapper">
+				<div class="input_label">Ваше имя</div>
+				<input class="form_popup_inpyt_{% if type == 'RequestCall' %}RequestCall{% else %}ReservationHall{% endif %}" type="text" name="name" placeholder="Владимир" data-required/>
+				<div class="form_input_error"></div>
+			</div>
+			<div class="input_wrapper">
+				<div class="input_label">Номер телефона</div>
+				<input class="form_popup_inpyt_{% if type == 'RequestCall' %}RequestCall{% else %}ReservationHall{% endif %}" type="text" name="phone" data-required data-dynamic-placeholder/>
+				<div class="form_input_error"></div>
+			</div>
+			{% if type == 'ReservationHall' %}
+				<div class="input_wrapper">
+					<div class="input_label">Желаемая дата</div>
+					<input class="form_popup_inpyt_ReservationHall_date" type="date" name="date"/>
+				</div>
+			{% endif %}
+		</div>
+		<div class="form_submit_popup">
+			<button type="submit" class="btn_popup">
+               	<svg width="205" height="56" viewBox="0 0 205 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M2.30856 9.73877C2.52097 5.94228 5.63214 2.95592 9.43414 2.89904L196.087 0.106556C200.04 0.0474159 203.311 3.16808 203.437 7.11951L204.755 48.3384C204.888 52.4981 201.497 55.9146 197.337 55.8131L7.47501 51.1823C3.38532 51.0826 0.189168 47.619 0.417696 43.5344L2.30856 9.73877Z"/>                   	
+               	</svg>
+               	<p>Отправить</p>
+           	</button>
+			<div class="form_policy_popup checkbox_item" data-form-privacy>
+				<div class="checkbox_wrapper">
+					<input id="check_policy_{% if type == 'RequestCall' %}RequestCall{% else %}ReservationHall{% endif %}" type="checkbox" name="policy" class="personalData _invalid" >
+					<label for="check_policy_{% if type == 'RequestCall' %}RequestCall{% else %}ReservationHall{% endif %}">Согласен с&nbsp;</label>
+				</div>
+				<a class="_link" href="/privacy/" target="_blank">политикой обработки персональных данных</a>
+			</div>
+		</div>
+		<input type="hidden" name="_csrf" value="{{Declension.csrfToken()}}" />
+	</form>
+
+	<div class="form_success_popup" data-success>
+		<div class="form_success_title">
+			<p class="form_success_title_main">Заявка успешно отправлена</p>
+		</div>
+		<div class="form_success_text">
+			<p class="form_success_text_main"><span data-success-name></span>, спасибо за проявленный интерес. Наши менеджеры перезвонят вам в ближайшее время.</p>
+		</div>
+		<div class="form_success_close _link" data-success-close>Закрыть</div>
+	</div>
+</div>

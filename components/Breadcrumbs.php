@@ -1,10 +1,10 @@
 <?php
 
-namespace frontend\modules\arenda\components;
+namespace frontend\modules\kidsbd\components;
 
 use Yii;
 use backend\models\Slices;
-use frontend\modules\arenda\models\RestaurantsTypes;
+use frontend\modules\kidsbd\models\RestaurantsTypes;
 
 class Breadcrumbs {
 	public static function get_breadcrumbs($level, $slice_alias = false, $params = false) {

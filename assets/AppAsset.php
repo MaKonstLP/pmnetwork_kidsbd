@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\arenda\assets;
+namespace frontend\modules\kidsbd\assets;
 
 use yii\web\AssetBundle;
 
@@ -9,7 +9,7 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $sourcePath = '@frontend/modules/arenda/web/dist/';
+    public $sourcePath = '@frontend/modules/kidsbd/web/dist/';
     //public $baseUrl = '@web';
     //public $basePath = '@frontend/modules/svadbanaprirode/web';
     public $css = [

@@ -1,12 +1,12 @@
 <?php
-namespace app\modules\arenda\controllers;
+namespace app\modules\kidsbd\controllers;
 
 use Yii;
 use yii\web\Controller;
 use common\controllers\ApiController as BaseApiController;
 // use common\models\api\MapAll;
-use frontend\modules\arenda\models\api\MapAll;
-use frontend\modules\arenda\models\ElasticItems;
+use frontend\modules\kidsbd\models\api\MapAll;
+use frontend\modules\kidsbd\models\ElasticItems;
 use common\models\Filter;
 use common\models\Slices;
 use frontend\components\ParamsFromQuery;

@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\arenda\controllers;
+namespace app\modules\kidsbd\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
@@ -11,25 +11,18 @@ use common\models\Rooms;
 use common\models\Seo;
 use common\models\elastic\ItemsWidgetElastic;
 use common\models\elastic\ItemsFilterElastic;
-use app\modules\arenda\models\ItemSpecials;
+use app\modules\kidsbd\models\ItemSpecials;
 use frontend\components\Declension;
-use frontend\modules\arenda\models\ElasticItems;
-use frontend\modules\arenda\components\Breadcrumbs;
+use frontend\modules\kidsbd\models\ElasticItems;
+use frontend\modules\kidsbd\components\Breadcrumbs;
 
 class ItemController extends Controller
 {
-	public function actionIndex($slug)
+	public function actionIndex($id)
 	{
 		$elastic_model = new ElasticItems;
 
-		$item = ElasticItems::find()->query([
-			'bool' => [
-				'must' => [
-					['match' => ['slug' => $slug]],
-					['match' => ['restaurant_city_id' => \Yii::$app->params['subdomen_id']]],
-				],
-			]
-		])->one();
+		$item = $elastic_model::get($id);
 
 		$seo = new Seo('item', 1, 0, $item);
 		$seo = $seo->seo;

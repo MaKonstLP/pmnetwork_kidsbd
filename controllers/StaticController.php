@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\arenda\controllers;
+namespace app\modules\kidsbd\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
@@ -30,7 +30,7 @@ class StaticController extends Controller
 	public function actionRobots()
 	{
 		return 'User-agent: *
-		Sitemap:  https://arenda.com/sitemap/  ';
+		Sitemap:  https://kidsbd.com/sitemap/  ';
 	}
 
 	private function setSeo($seo){

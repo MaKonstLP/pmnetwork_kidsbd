@@ -1,5 +1,5 @@
 <?php
-namespace app\modules\arenda\controllers;
+namespace app\modules\kidsbd\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
@@ -9,7 +9,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 // use common\models\FilterItems;
-use frontend\modules\arenda\models\ElasticItems;
+use frontend\modules\kidsbd\models\ElasticItems;
 
 class BlogController extends Controller
 {

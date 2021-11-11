@@ -1,61 +1,63 @@
 'use strict';
 import Filter from './filter';
-import Swiper from 'swiper';
-import YaMapAll from './map_all';
+// import Swiper from 'swiper';
+// import YaMapAll from './map_all';
 import 'slick-carousel';
 
 export default class Listing{
 	constructor($block){
 		self = this;
 		this.block = $block;
-		this.filter = new Filter($('[data-filter-wrapper]'));	
-		this.yaMap = new YaMapAll(this.filter);		
+		this.filter = new Filter($('[data-filter-wrapper]'));
+		// this.yaMap = new YaMapAll(this.filter);
 
 		//КЛИК ПО КНОПКЕ "ПОДОБРАТЬ"
-		$('[data-filter-button]').on('click', function(){
-			self.reloadListing();
-		});
+		// $('[data-filter-button]').on('click', function(){
+		// 	self.reloadListing();
+		// });
 
 		//КЛИК ПО ПАГИНАЦИИ
 		$('body').on('click', '[data-pagination-wrapper] [data-listing-pagitem]', function(){
+			console.log("!!!клик по шарику!!!", $(this).data('page-id'));
+
 			self.reloadListing($(this).data('page-id'));
-			self.getSwiper();
+			// self.getSwiper();
 
 		});
 
-		var galleryList = new Swiper('.listing_slider', {
-			spaceBetween: 0,
-			slidesPerView: 1,
-			navigation: {
-				nextEl: '._listing_next',
-				prevEl: '._listing_prev',
-			},
-		});
+		// var galleryList = new Swiper('.listing_slider', {
+		// 	spaceBetween: 0,
+		// 	slidesPerView: 1,
+		// 	navigation: {
+		// 		nextEl: '._listing_next',
+		// 		prevEl: '._listing_prev',
+		// 	},
+		// });
 
-		$('.btn_list._left').on('click', () => {
-			this.viewListing('left');
-		});
+		// $('.btn_list._left').on('click', () => {
+		// 	this.viewListing('left');
+		// });
 
-		$('.btn_list._right').on('click', () => {
-			this.viewListing('right');
-		});
+		// $('.btn_list._right').on('click', () => {
+		// 	this.viewListing('right');
+		// });
 
-		$('body').on('click', '.address_map', () => {
-			this.viewListing('right');
-		});
+		// $('body').on('click', '.address_map', () => {
+		// 	this.viewListing('right');
+		// });
 	}
 
-	getSwiper(){
+	// getSwiper(){
 
-		var galleryList = new Swiper('.listing_slider', {
-			spaceBetween: 0,
-			slidesPerView: 1,
-			navigation: {
-				nextEl: '._listing_next',
-				prevEl: '._listing_prev',
-			},
-		})
-	}
+	// 	var galleryList = new Swiper('.listing_slider', {
+	// 		spaceBetween: 0,
+	// 		slidesPerView: 1,
+	// 		navigation: {
+	// 			nextEl: '._listing_next',
+	// 			prevEl: '._listing_prev',
+	// 		},
+	// 	})
+	// }
 
 	viewListing(id){
 		if (id == "left") {
@@ -80,16 +82,16 @@ export default class Listing{
 		}
 	}
 
-	reloadListing(page = 1){
+	reloadListing(page = 1) {
 		let self = this;
-		self.filter.filterClose();
+		// self.filter.filterClose();
 
-		if (!self.filter.requiredDataCheck()) {
-			self.filter.blockSubmitButton();
-			return;
-		}
+		// if (!self.filter.requiredDataCheck()) {
+		// 	self.filter.blockSubmitButton();
+		// 	return;
+		// }
 
-		self.filter.unblockSubmitButton();
+		// self.filter.unblockSubmitButton();
 		self.block.addClass('_loading');
 		self.filter.filterListingSubmit(page);
 		self.filter.promise.then(
@@ -97,24 +99,36 @@ export default class Listing{
 				//ym(64598434,'reachGoal','filter');
 				//gtag('event', 'filter');
 				// console.log(response.title);
+
+
 				$('[data-listing-list]').html(response.listing);
-				let galleryList = new Swiper('.listing_slider', {
-	            spaceBetween: 0,
-	            slidesPerView: 1,
-	            navigation: {
-	                nextEl: '._listing_next',
-	                prevEl: '._listing_prev',
-	            },
-				});
+
+				console.log(response)
+				// $('[data-listing-list]').append(response.listing); // на пробу
+				
+				
+				// let galleryList = new Swiper('.listing_slider', {
+	            // spaceBetween: 0,
+	            // slidesPerView: 1,
+	            // navigation: {
+	            //     nextEl: '._listing_next',
+	            //     prevEl: '._listing_prev',
+	            // },
+				// });
+
 				$('[data-listing-title]').html(response.title);
 				$('[data-listing-breadcrumbs]').html(response.crumbs);
 				$('[data-listing-text-top]').html(response.text_top);
 				$('[data-listing-text-bottom]').html(response.text_bottom);
+
+
 				$('[data-pagination-wrapper]').html(response.pagination);
+
+
 				document.title = response.seo_title;
 				self.block.removeClass('_loading');
 				$('html,body').animate({scrollTop:0}, 400);
-				history.pushState({}, '', '/catalog/'+response.url);
+				history.pushState({}, '', '/catalog/'+ response.url);
 				self.yaMap.refresh(self.filter);
 			}
 		);
