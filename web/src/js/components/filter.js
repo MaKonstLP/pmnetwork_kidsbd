@@ -259,7 +259,7 @@ export default class Filter{
 	filterListingSubmit(page = 1){
 		let self = this;
 
-		// if (self.requiredDataCheck()) {  // мои правки пока
+		if (self.requiredDataCheck()) {
 			self.state.page = page;
 	
 			if (self.mobileMode){
@@ -276,7 +276,6 @@ export default class Filter{
 				});		
 	
 			$.ajax({
-				beforeSend: console.log(data),
 				type: 'get',
 				url: '/ajax/filter/',
 				data: data,
@@ -288,7 +287,7 @@ export default class Filter{
 				error: function(response) {
 				}
 			});
-		// }
+		}
 	}
 
 	filterMainSubmit(){

@@ -1,152 +1,65 @@
-{# {{ dump(city_current) }} #}
-{# {{ city_current }} #}
-
-{{ dump(filters) }}
-
-<div class="filter" data-filter-wrapper>
-
-	<div class="filter_wrapper">
-
-		{% for label,filter_item in filters %}
-
-			{% if filter_item.type == 'select' %}
-
-				{{ this.render('filter_select.twig', {
-					'filter_item':filter_item,
-					'label':label,
-					'filter_active': filter_active
-				}) | raw }}
-
-			{% endif %}
-
-		{% endfor %}
-
-		<div class="filter_select">
-	
-			<div class="filter_select_block" data-filter-checkbox-block>
-
-				<div class="filter_select_current" data-filter-checkbox-wrapper>
-
-					<div class="close_x" data-filter-select-current-clean></div>
-					<p class="filter_p"></p>
-					<div class="quantity _none" data-quantity>
-						<span></span>
-					</div>
-
-				</div>
-
-				<div class="filter_select_list">
-
-					<div class="filter_select_item _checkbox_item">
-
-						<div class="checkbox_item custom_item {{filters['alko']['active'][1] is defined ? '_checked':''}}" data-type="alko" data-filter-checkbox-item>
-							<input type="checkbox" name="alko">
-							<p class="checkbox_pseudo custom_pseudo">{{ filters['alko']['items'][1] }}</p>
-						</div>
-
-					</div>
-
-					<div class="filter_select_item _checkbox_item">
-
-						<div class="checkbox_item custom_item {{filters['gift']['active'][1] is defined ? '_checked':''}}" data-type="gift" data-filter-checkbox-item>
-							<input type="checkbox" name="alko">
-							<p class="checkbox_pseudo custom_pseudo">{{ filters['gift']['items'][1] }}</p>
-						</div>
-
-					</div>
-
-				</div>
-
-				<p class="filter_label">Особенности</p>
-
+{# {{ dump(filters) }} #}
+<div class="filter_wrapper_kidsbd" data-filter-wrapper-kidsbd>
+    <button class="btn_open_filter">
+        <svg width="192" height="48" viewBox="0 0 192 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.10504 9.28186C2.33641 5.49737 5.44643 2.5313 9.23763 2.47939L183.231 0.0971078C187.172 0.0431463 190.433 3.14964 190.571 7.08876L191.732 40.3324C191.878 44.4942 188.493 47.9217 184.33 47.8288L7.52967 43.8824C3.41918 43.7906 0.208696 40.3006 0.459587 36.1968L2.10504 9.28186Z"/>
+        </svg>
+        <p>Фильтр заведений</p>
+    </button>
+    <div class="section_filter{# js_open#}">
+        <div class="section_filter_data">
+        	<p class="title">Фильтр заведений</p>
+			{% set checkbox = [] %}
+			{% for label, item in filters %}
+				{% if item.type == 'hidden' %}
+					{% set value = [] %}
+					{% for key in item.active|keys %}
+						{% set value = value|merge([key]) %}
+					{% endfor %}
+					<input type="{{item.type}}" name="{{label}}" value="{{value|json_encode()}}">
+				{% elseif  item.type == 'range' %}
+					<div class="group_{{label}}">
+                		<p class="label">{{item.name}}</p>
+						{% set items = [] %}
+						{% for elem in item.items %}
+							{% set items = items|merge([elem]) %}
+						{% endfor %}
+						{% if label == 'price' %}
+							{% set items = items|merge(['Любой']) %}
+						{% endif %}
+						{% if label == 'guest' %}
+							{% set items = items|merge(['Любая']) %}
+						{% endif %}
+                		<p class="output_range_filter" data-price-filter="{{items|json_encode()}}">{{items|last}}</p>
+                		<input type="{{item.type}}" name="{{label}}" min="0" max="{{items|length - 1}}" value="{{items|length - 1}}" class="input_range_filter" id="input_{{label}}_filter" >
+                		<div class="wrapper_min_max_filter">
+                    		<p>{{items.0}}</p>
+                    		<p>{{items|last}}</p>
+                		</div>
+            		</div>
+				{% elseif  item.type == 'checkbox' %}
+					{% set checkbox = checkbox|merge({(label): item}) %}
+				{% endif %}
+			{% endfor %}
+			<div class="group_btn">
+				<button class="btn_search_filter">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 196 56" width="196" height="56">
+						<path d="M 2.20652 9.75159 C 2.4099 5.94969 5.52122 2.95378 9.3281 2.89421 L 187.151 0.111681 C 191.11 0.0497336 194.385 3.17722 194.506 7.13471 L 195.766 48.3403 C 195.893 52.4994 192.499 55.9107 188.339 55.8046 L 7.44815 51.19 C 3.36874 51.0859 0.180007 47.635 0.397988 43.5601 L 2.20652 9.75159 Z" />
+					</svg>
+					<p>Найти</p>
+				</button>
+				<button class="btn_clean_filter"><p>Сбросить фильтр</p></button>
 			</div>
-
-		</div>
-
-
-		<div class="filter_submit">
-
-			<div class="filter_submit_button _button" data-filter-button>Применить</div>
-			<div class="clean_filter" data-clean >Сбросить</div>
-
-		</div>
-
-		<div class="form_close" data-filter-close></div>
-
-	</div>
-
-</div>
-
-<script type="text/javascript">
-</script>
-
-<div class="filter_mobile" data-filter-wrapper>
-
-	<div class="filter_wrapper_mobile">
-
-		<h4>Фильтр мероприятий</h4>
-
-		{% for label,filter_item in filters %}
-
-
-			{% if filter_item.type == 'select' %}
-
-				{{ this.render('filter_select_mobile.twig', {
-					'filter_item':filter_item,
-					'label':label,
-					'filter_active': filter_active
-				}) | raw }}
-
-			{% endif %}
-
-
-		{% endfor %}
-
-		<div class="filter_select">
-	
-			<div class="filter_select_block" data-filter-checkbox-block>
-
-				<p class="filter_label">Особенности</p>
-
-				<div class="filter_select_list">
-
-					<div class="filter_select_item _checkbox_item">
-
-						<div class="checkbox_item custom_item {{filters['alko']['active'][0] is defined ? '_checked':''}}" data-type="alko" data-filter-checkbox-item>
-							<input type="checkbox" name="alko">
-							<p class="checkbox_pseudo custom_pseudo">{{ filters['alko']['items'][0] }}</p>
-						</div>
-
-					</div>
-
-					<div class="filter_select_item _checkbox_item">
-
-						<div class="checkbox_item custom_item {{filters['gift']['active'][1] is defined ? '_checked':''}}" data-type="gift" data-filter-checkbox-item>
-							<input type="checkbox" name="alko">
-							<p class="checkbox_pseudo custom_pseudo">{{ filters['gift']['items'][1] }}</p>
-						</div>
-
-					</div>
-
-				</div>
-
-				<div class="clean_this_filter" data-clean-mobile>
-					<span>Сбросить</span>
-				</div>
-
+            <div class="group_checkbox">
+				{% for label, item in checkbox %}
+					<label class="checkbox_wrapper">
+  						<input type="{{item.type}}" class="input_checkbox_filter" name="{{label}}" {% if item.active %}checked{% endif %}>
+  						<span class="checkbox_input"></span>
+						<p class="checkbox_label">{{item.name}}</p>
+					</label>
+				{% endfor %}				
 			</div>
-
-		</div>
-
-		<div class="filter_submit">
-
-		    <div class="filter_submit_button _button" data-filter-button>Показать {{count}}</div>
-		    <div class="clean_filter" data-clean ><span>Сбросить фильтр</span></div>
-
-		</div>
-
-		<div class="form_close" data-filter-close></div>
-
-	</div>
-
+        </div>
+		<button class="btn_close_filter"><p>Закрыть</p></button>
+    </div>
 </div>

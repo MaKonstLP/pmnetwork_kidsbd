@@ -1,274 +1,318 @@
 .filter_wrapper_kidsbd {
     width: 100%;
-    position: relative;
+    font-size: 18px;
+    line-height: 24px;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    color: $text_black;
 
     .btn_open_filter {
-        margin: 20px auto; // пока свои
+        // margin: 20px auto; // пока свои
         display: none;
-        width: 192px;
-        height: 48px;
-        position: relative;        
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
+        // width: 192px;
+        // height: 48px;
+        // position: relative;        
+        // align-items: center;
+        // justify-content: center;
+        // cursor: pointer;
         
-        @include medium {
-            display: flex;
+        // @include medium {
+        //     // display: flex;
 
-            &._hide {
-                display: none;                
-            }
-        }
+        //     &._hide {
+        //         display: none;                
+        //     }
+        // }
 
-        svg {
-            position: absolute;
-            width: 192px;
-            height: 48px;
-            top: 0;
-            left: 0;
+        // svg {
+        //     position: absolute;
+        //     width: 192px;
+        //     height: 48px;
+        //     top: 0;
+        //     left: 0;
 
-            path {
-                fill: #5FBCFF;
-            }
-        }
+        //     path {
+        //         fill: #5FBCFF;
+        //     }
+        // }
 
-        p {
-            color: $color_btn_font;
-            font-weight: bold;
-            font-size: 16px;
-            line-height: 24px;
-            letter-spacing: 0.01em;
-            z-index: 1;
-        }
+        // p {
+        //     color: $color_btn_font;
+        //     font-weight: bold;
+        //     font-size: 16px;
+        //     line-height: 24px;
+        //     letter-spacing: 0.01em;
+        //     z-index: 1;
+        // }
 
-        &:hover {
-            svg path {
-                fill: #77C6FF;
-            }
-        }
+        // &:hover {
+        //     svg path {
+        //         fill: #77C6FF;
+        //     }
+        // }
 
-        &:active {
-            svg path {
-                fill: #3CA1EA;
-            }
-        }
+        // &:active {
+        //     svg path {
+        //         fill: #3CA1EA;
+        //     }
+        // }
     }
 
     .section_filter {
-        margin: 20px auto; // пока свои
-        padding: 16px 24px 0 24px;
+        margin: 100px auto 20px auto; // пока свои
+        padding: 16px 0 0 24px;
         width: 1022px;
         height: 186px;
         box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.1);
         background: linear-gradient(180deg, rgba(196, 234, 255, 0) -16.67%, rgba(164, 222, 254, 0.5) 140.86%), #EAF6FF;
         border-radius: 16px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: start;
-        justify-content: start;
-        color: $header_text;
-        overflow: auto;
-        &::-webkit-scrollbar {
-            width: 0;
+        @include laptop-to-1440 {
+            width: 948px;
+            height: 186px;
         }
-        &::-moz-scrollbar {
-            width: 0;
-        }
-        
-        & > p {
-            display: none;
-            margin: 0 auto;
-            width: 296px;
-            font-weight: normal;
-            font-size: 28px;
-            line-height: 38px;
-        }
-
-        @include small-desktop {
+        @include pad-to-1280 {
             width: 736px;
             height: 277px;
-            padding: 16px 16px 0 16px;
+            padding: 16px 0 0 16px;
         }
-
-        @include medium {
+        @include phone-to-768 {
+            // display: none;
+            position: fixed;
+            z-index: 90;
             top: 64px;
             width: 100%;
-            height: auto;
-            max-height: calc(100vh - 64px);
+            height: calc(100vh - 64px);
             box-shadow: none;
             border-radius: 0;
-            margin: 0;
-            z-index: 90;
-            position: fixed;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            padding: 8px 0 0 0;
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+            overflow: hidden;
+            overflow-y: auto;
+            &.js_open {
+                display: block;
+            }
+        }
 
-            & > p {
-                display: block;                
+        .section_filter_data {
+            display: flex;
+            align-items: start;
+            justify-content: start;
+            flex-wrap: wrap;
+            @include medium {
+                width: 296px;
+                margin: 8px auto 0 auto;
+                flex-direction: column;
+            }
+    
+            .title {
+                display: none;
+                // margin: 0 auto;
+                // width: 296px;
+                // font-weight: normal;
+                // font-size: 28px;
+                // line-height: 38px;
             }
             
-            &._hide {
-                display: none;                
-            }
-        }
-    }
-
-    .section_filter_data {
-        display: flex;
-        align-items: start;
-        justify-content: start;
-
-        @include medium {
-            width: 296px;
-            margin: 8px auto 0 auto;
-            flex-direction: column;
-        }
-
-        .label {
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 24px;
-
-            @include small-desktop {
-                font-size: 16px;
-                line-height: 24px;
-                letter-spacing: 0.01em;
-            }
-        }
-        
-        .group_city {
-            width: 171px;
-            height: 65px;
-
-            @include small-desktop {
-                width: 157px;
-                height: 60px;
-            }
-
-            .input_city_filter {
-                width: 100%;
-                font-size: 18px;
-                line-height: 24px;
-                padding-bottom: 4px;
-                border-bottom: 1px solid #5fbcff7c;
-                position: relative;
-
-                &::after {
-                    content: "";
-                    width: 10px;
-                    height: 7px;
-                    position: absolute;
-                    top: 10px;
-                    right: 6px;
-                    background: center / contain no-repeat;
-                    background-image: url("/images/main/filter/icon_check.svg");
-                }
-
+            .group_price,
+            .group_guest {
+                width: 344px;
+                height: 106px;
+                margin: 0 45px 0 0;    
                 @include small-desktop {
+                    width: 230px;
+                    height: 101px;
+                }    
+                @include medium {
+                    width: 296px;
+                    height: 101px;
+                }
+    
+                .label {
+                    font-weight: bold;
+        
+                    @include small-desktop {
+                        font-size: 16px;
+                        line-height: 24px;
+                        letter-spacing: 0.01em;
+                    }
+                }
+    
+                .output_range_filter {
+                    margin: 13px 0 2px 0;
+        
+                    @include small-desktop {
+                        font-size: 16px;
+                        line-height: 24px;
+                        letter-spacing: 0.01em;
+                    }
+                }
+    
+                .input_range_filter {
+                    appearance: none;
+                    width: 100%;
+                    height: 9px;            
+                    border-radius: 4px;    
+                    &::-webkit-slider-thumb {
+                        appearance: none;
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        background-image: url("/images/main/filter/slider_knob.svg");
+                        box-shadow: 0px 1px 6px rgba(2, 65, 109, 0.15);
+                    }    
+                    &::-moz-range-thumb {
+                        appearance: none;
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        background-image: url("/images/main/filter/slider_knob.svg");
+                        border: none;
+                        outline: none;
+                    }
+                }
+    
+                .wrapper_min_max_filter {
+                    margin: 2px 0 0 0;
+                    font-size: 14px;
+                    line-height: 20px;
+                    // letter-spacing: 0.01em;
+                    color: $text_blue;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+            #input_price_filter {
+                background: linear-gradient(to right, #FF685F 0%, #FF855F 100%, #5FBCFF 100%, #5FBCFF 100%);
+            }
+            #input_guest_filter {
+                background: linear-gradient(to right, #FF685F 0%, #FF855F 100%, #5FBCFF 100%, #5FBCFF 100%);
+            }
+            
+            .group_btn {
+                display: flex;
+                flex-direction: column;
+                .btn_search_filter {
+                    margin: 23px 0 0 0;
+                    width: 196px;
+                    height: 56px;
+                    font-weight: bold;
+                    color: $text_white;
+                    text-align: center;
+                    position: relative;
+                    z-index: 1;
+                    cursor: pointer;
+                    svg {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: -1;
+                        fill: url(#paint0_linear_btn_search_filter);
+                    }
+                    &:hover {
+                        svg {
+                            fill: url(#paint1_linear_btn_search_filter);
+                        }
+                    }
+                    &:active {
+                        svg {
+                            fill: url(#paint2_linear_btn_search_filter);
+                        }
+                    }
+                }
+                .btn_clean_filter {
+                    margin: 8px 0 0 calc(842px - 802px);
+                    width: fit-content;
+                    font-size: 14px;
+                    line-height: 20px;
+                    border-bottom: 1px dashed $btn_tupe_text_dashed;
+                    cursor: pointer;
+                    &:hover {
+                        color: $btn_tupe_text_hover;
+                        border-bottom: 1px dashed $btn_tupe_text_hover_dashed;
+                    }
+                    &:active {
+                        color: $btn_tupe_text_active;
+                        border-bottom: 1px dashed $btn_tupe_text_active_dashed;
+                    }
+                }
+            }
+
+            .group_checkbox {
+                user-select: none;
+                flex-basis: 100%;
+                display: flex;
+                .checkbox_wrapper {
+                    margin: 16px 33.5px 0 0;
+                    display: flex;
+                    box-shadow: none;
+                    border: none;                    
+                }
+                .checkbox_input {
+                    display: inline-block;
+                    margin: 3px 3px 0 0;
+                    box-shadow: none;
+                    border: none;
+                    width: 17px;
+                    height: 16px;
+                    background-image: url("data:image/svg+xml,%3Csvg width='17' height='16' viewBox='0 0 17 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.11475 3.66411C3.48137 2.19764 4.88177 1.23299 6.38261 1.41309L12.3845 2.13331C13.7146 2.29293 14.7777 3.31511 14.9894 4.63797L15.8475 10.0016C16.1188 11.6969 14.9146 13.2737 13.2077 13.4582L4.59385 14.3894C2.51909 14.6137 0.85484 12.7037 1.36098 10.6792L3.11475 3.66411Z' fill='white' stroke='%235FBCFF' stroke-width='2'/%3E%3C/svg%3E%0A");
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    &::after {
+                        content: '';
+                        display: none;
+                        margin: 0px 0 0 2px;
+                        width: 14px;
+                        height: 12px;
+                        background-image: url("data:image/svg+xml,%3Csvg width='14' height='12' viewBox='0 0 14 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.5 1.5L5.78091 10.5L1.5 6' stroke='%232C689B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+                    }
+                }
+                .checkbox_label {
+                    display: inline-block;
                     font-size: 16px;
                     line-height: 24px;
                     letter-spacing: 0.01em;
+                    color: $btn_tupe_text;
+                }
+                input {
+                    opacity: 0;
+                    &:checked + .checkbox_input::after {
+                        display: block;
+                    }
                 }
             }
+    
+    
+            // .group_price {
+            //     margin: 0 0 0 26px;
+    
+            //     @include small-desktop {
+            //         margin: 0 0 0 46px;
+            //     }
+    
+            //     @include medium {
+            //         margin: 16px 0 0 0;
+            //     }
+            // }
+            // .group_guest {
+            //     margin: 0 0 0 37px;
+    
+            //     @include small-desktop {
+            //         margin: 0 0 0 32px;
+            //     }
+    
+            //     @include medium {
+            //         margin: 16px 0 0 0;
+    
+            //         margin-bottom: 16px; // временка
+            //     }
+            // }
         }
-
-        .group_price,
-        .group_guest {
-            width: 254px;
-            height: 106px;
-
-            @include small-desktop {
-                width: 230px;
-                height: 101px;
-            }
-
-            @include medium {
-                width: 296px;
-                height: 101px;
-            }
-        }
-
-        .output-range-filter {
-            margin: 13px 0 2px 0;
-            font-size: 18px;
-            line-height: 24px;
-
-            @include small-desktop {
-                font-size: 16px;
-                line-height: 24px;
-                letter-spacing: 0.01em;
-            }
-        }
-
-        .input-range-filter {
-            appearance: none;
-            width: 100%;
-            height: 9px;            
-            border-radius: 4px;
-
-            &::-webkit-slider-thumb {
-                appearance: none;
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                cursor: pointer;
-                background-image: url("/images/main/filter/slider_knob.svg");
-            }
-
-            &::-moz-range-thumb {
-                appearance: none;
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                cursor: pointer;
-                background-image: url("/images/main/filter/slider_knob.svg");
-                border: none;
-                outline: none;
-            }
-        }
-
-        #input_price_filter {
-            background: linear-gradient(to right, #FF685F 0%, #FF855F 0%, #5FBCFF 0%, #5FBCFF 100%);
-        }
-
-        #input_guest_filter {
-            background: linear-gradient(to right, #FF685F 0%, #FF855F 25%, #5FBCFF 25%, #5FBCFF 100%);
-        }
-
-        .wrapper_min_max_price {
-            margin: 2px 0 0 0;
-            font-size: 14px;
-            line-height: 20px;
-            letter-spacing: 0.01em;
-            color: #5FBCFF;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .group_price {
-            margin: 0 0 0 26px;
-
-            @include small-desktop {
-                margin: 0 0 0 46px;
-            }
-
-            @include medium {
-                margin: 16px 0 0 0;
-            }
-        }
-        .group_guest {
-            margin: 0 0 0 37px;
-
-            @include small-desktop {
-                margin: 0 0 0 32px;
-            }
-
-            @include medium {
-                margin: 16px 0 0 0;
-
-                margin-bottom: 16px; // временка
-            }
+        
+        .btn_close_filter {
+            display: none;
         }
     }
 }

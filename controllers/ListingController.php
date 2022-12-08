@@ -22,14 +22,13 @@ use backend\models\Slices;
 use common\models\GorkoApi;
 use common\models\GorkoApiTest;
 use common\models\Seo;
+use common\models\Pages;
 
-class ListingController extends Controller
-{
-	protected $per_page = 30;
-
-	public $filter_model,
-				 $slices_model,
-				 $url;
+class ListingController extends Controller {
+	protected 	$per_page = 30;
+	public 		$filter_model,
+				$slices_model,
+				$url;
 
 	public function beforeAction($action)
 	{
@@ -39,24 +38,17 @@ class ListingController extends Controller
 	    return parent::beforeAction($action);
 	}
 
-	public function actionSlice($city = "", $slice)
-	{
-
-		// echo "$city / $slice"; exit;
-
+	public function actionSlice($city = '', $slice) {
 		$slice_obj = new QueryFromSlice($slice);
-		if ($slice_obj->flag){
-			$this->view->params['menu'] = $slice;
+
+		if ($slice_obj->flag) {
+			$this->view->params['menu'] = $slice; //текущий slice можно смотреть во view
 			$params = $this->parseGetQuery($slice_obj->params, $this->filter_model, $this->slices_model);
-			
-			isset($_GET['page']) ? $params['page'] = $_GET['page'] : $params['page'];
-			
+			isset($_GET['page']) ? $params['page'] = $_GET['page'] : $params['page'];			
 			$canonical = $_SERVER['REQUEST_SCHEME'] .'://'. $_SERVER['HTTP_HOST'] . explode('?', $_SERVER['REQUEST_URI'], 2)[0];
-			
-			if($params['page'] > 1){
-				// $canonical .= $params['canonical'];
-			}
-			
+			// if($params['page'] > 1){
+			// 	$canonical .= $params['canonical'];
+			// }
 			return $this->actionListing(
 				$page 			=	$params['page'],
 				$per_page		=	$this->per_page,
@@ -87,6 +79,9 @@ class ListingController extends Controller
 
 	public function actionIndex($city = "")
 	{
+		//echo 1; 
+		//exit;
+		//Pages::createSiteObjects();
 		$getQuery = $_GET;
 		unset($getQuery['q']);
 		
@@ -125,6 +120,9 @@ class ListingController extends Controller
 	public function actionListing($page, $per_page, $params_filter, $breadcrumbs, $canonical, $type = false)
 	{
 		$elastic_model = new ElasticItems;
+		// if ($_SERVER['HTTP_HOST'] === 'kidsbd.ru') {
+		// 	var_dump(); die();
+		// };
 		$items = new ItemsFilterElastic($params_filter, $per_page, $page, false, 'rooms', $elastic_model);
 
 		$filter = FilterWidget::widget([
@@ -177,17 +175,17 @@ class ListingController extends Controller
 		$elastic_model = new ElasticItems;
 		$items = new ItemsFilterElastic($params['params_filter'], $this->per_page, $params['page'], false, 'rooms', $elastic_model);
 
-		// запускаю подходящий
-		$pagination = PaginationWidgetPrevNext::widget([
-			'total' => $items->pages,
-			'current' => $page,
-		]);
-		
-		
-		// $pagination = PaginationWidget::widget([
+		// // запускаю подходящий
+		// $pagination = PaginationWidgetPrevNext::widget([
 		// 	'total' => $items->pages,
-		// 	'current' => $params['page'],
+		// 	// 'current' => $page,
 		// ]);
+		
+		
+		$pagination = PaginationWidget::widget([
+			'total' => $items->pages,
+			'current' => $params['page'],
+		]);
 
 		
 		$slice_url = ParamsFromQuery::isSlice(json_decode($_GET['filter'], true));

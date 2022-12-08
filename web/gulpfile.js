@@ -11,8 +11,9 @@ var gulp = require('gulp'),
   merge = require('merge-stream'),
   concat = require('gulp-concat'),
   bulkSass = require('gulp-sass-bulk-import'),
-  sourcemaps = require('gulp-sourcemaps');
-  touch = require('gulp-touch-fd');
+  sourcemaps = require('gulp-sourcemaps'),
+  touch = require('gulp-touch-fd'),
+  plumber = require('gulp-plumber');
 
 const sourcesPath = './src';
 const assetsPath = './dist';
@@ -20,6 +21,7 @@ const assetsPath = './dist';
 gulp.task('scripts', function() {
   return gulp
     .src(sourcesPath + '/js/app.js')
+    .pipe(plumber())
     .pipe(
       webpackStream({
         output: {

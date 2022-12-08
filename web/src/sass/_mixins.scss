@@ -38,3 +38,16 @@
 @mixin medium {
 	@media (max-width: 766px) { @content; }
 }
+
+
+
+@mixin laptop-to-1440 {
+	@media (max-width: 1439px) { @content; }
+}
+@mixin pad-to-1280 {
+	@media (max-width: 1279px) { @content; }
+}
+@mixin phone-to-768 {
+	@media (max-width: 767px) { @content; }
+}
+

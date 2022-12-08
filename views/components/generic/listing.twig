@@ -17,32 +17,3 @@
         <button class="item_btn_popup_form">Забронировать</button>
     </div>
 {% endfor %}
-
-
-
-{# {% set i = 0 %}
-{% for item in items %} 
-
-<div class="swiper-slide">
-
-<a href="/catalog/{{item.id}}/" class="item_card">
-    <div class="img_conteiner">
-        <img src="{{item.images[0].subpath}}=w384-h302-n-l95" alt="Фото №{{loop.index}} зала {{item.name}}" class="img_on" data-images/>
-        <div class="gift_for_harrowing">
-            <p class="gift_for_harrowing_text">Подарок за бронирование</p>
-        </div>
-    </div>
-    <div class="info_card">
-        <p class="item_name">{{item.name}} в {{item.restaurant_name}}</p>
-        <p class="item_address">{{item.restaurant_address}}</p>
-        <p class="item_capacity_label">Вместимость: <span class="item_capacity _text">{{item.capacity}} чел.</span></p>
-        <p class="item_cost_label">Стоимость: <span class="item_cost_text">от {{item.price}} ₽/чел.</span></p>
-    </div>
-</a>
-<button class="item_btn_popup_form">Забронировать</button>
-
-{% set i = i+1 %}
-</div>
-{% endfor %} #}
-
-{# <a data-latitude="{{item.restaurant_latitude}}" data-longitude="{{item.restaurant_longitude}}" data-name="{{item.name}}" data-address="{{item.restaurant_address}}" data-url="/catalog/{{item.id}}/" class="address_map"><p class="item_address"><span>{{item.restaurant_address}}</span></p></a> #}

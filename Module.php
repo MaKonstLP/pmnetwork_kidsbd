@@ -29,6 +29,8 @@ class Module extends \yii\base\Module
             $firstLevel == "stati" || 
             $firstLevel == "kontakty" || 
             $firstLevel == "politika-konfidentsialnosti" ||
+            $firstLevel == "ajax" || //прокидываю фильтр
+            $firstLevel == "debug" || //прокидываю debug
             
             $firstLevel == "catalog") {
             $subdomen = "";

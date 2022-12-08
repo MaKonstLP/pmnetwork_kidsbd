@@ -134,7 +134,7 @@ frontend\modules\kidsbd\assets\AppAsset::register($this);
                 <div class="city_select_list">
                     <?php
                         $subdomen_list = Subdomen::find()
-                            ->where(['active' => 1])
+                            ->where(['active' => 0])
                             ->orderBy(['name' => SORT_ASC])
                             ->all();
                         function createCityNameLine($city){
@@ -177,7 +177,7 @@ frontend\modules\kidsbd\assets\AppAsset::register($this);
     </header>
 
     <div class="page_content">
-        <? echo $content ?>
+        <?=$content?>
     </div>
 
     <section class="form_max_for_page">

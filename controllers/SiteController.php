@@ -82,6 +82,10 @@ class SiteController extends Controller
         // print_r(Yii::$app->params['subdomen_id']);
         // exit;
 
+        // echo '<pre>';
+        // print_r(Yii::$app->params['subdomen_id']);
+        // exit;
+
         return $this->render('index.twig', [
             'filter' => $filter,
             //'widgets' => $apiMain['widgets'],
