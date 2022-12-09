@@ -125,6 +125,9 @@ class ListingController extends Controller {
 		// };
 		$items = new ItemsFilterElastic($params_filter, $per_page, $page, false, 'rooms', $elastic_model);
 
+//		echo '<pre>';
+//		die(print_r($items->items));
+
 		$filter = FilterWidget::widget([
 			'filter_active' => $params_filter,
 			'filter_model' => $this->filter_model

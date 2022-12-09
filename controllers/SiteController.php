@@ -1,4 +1,5 @@
 <?php
+
 namespace app\modules\kidsbd\controllers;
 
 use Yii;
@@ -34,7 +35,7 @@ class SiteController extends Controller
 
         $aggs = ElasticItems::find()->limit(0)->query(
             ['bool' => ['must' => ['match' => ['restaurant_city_id' => Yii::$app->params['subdomen_id']]]]]
-          )
+        )
             ->addAggregate('specs', [
                 'nested' => [
                     'path' => 'restaurant_spec',
@@ -48,43 +49,43 @@ class SiteController extends Controller
                     ]
                 ]
             ])->search();
-      
-          $slicesForTag = array_reduce($aggs['aggregations']['specs']['ids']['buckets'], function ($acc, $item){
+
+        $slicesForTag = array_reduce($aggs['aggregations']['specs']['ids']['buckets'], function ($acc, $item) {
             if (
-              $item['doc_count'] > 3/* && count($acc) < 5*/
-              && ($restTypeSlice = RestaurantsSpec::find()->with('slice')->where(['id' => intval($item['key'])])->one())
-              && ($sliceObj = $restTypeSlice->slice)
-          ) {
-              $acc[] = [
-                  'alias' => $sliceObj->alias,
-                  'text' => $sliceObj->h1,
-                  'count' => $item['doc_count']
-              ];
-          }
-          return $acc;
-          }, []);
-      
+                $item['doc_count'] > 3/* && count($acc) < 5*/
+                && ($restTypeSlice = RestaurantsSpec::find()->with('slice')->where(['id' => intval($item['key'])])->one())
+                && ($sliceObj = $restTypeSlice->slice)
+            ) {
+                $acc[] = [
+                    'alias' => $sliceObj->alias,
+                    'text' => $sliceObj->h1,
+                    'count' => $item['doc_count']
+                ];
+            }
+            return $acc;
+        }, []);
+
 
         $slicesForListing = SlicesExtended::find()
             ->where(['alias' => [
-                                'banketnyy-zal', 
-                                'konferenc-zal', 
-                                'tancevalnyy-zal', 
-                                'den-rojdeniya', 
-                                'vypusknoy', 
-                                'aktovye-zaly', 
-                                'svadba', 
-                                'veranda'
-                                ]
+                'banketnyy-zal',
+                'konferenc-zal',
+                'tancevalnyy-zal',
+                'den-rojdeniya',
+                'vypusknoy',
+                'aktovye-zaly',
+                'svadba',
+                'veranda'
+            ]
             ])->all();
 
         // echo '<pre>';
         // print_r(Yii::$app->params['subdomen_id']);
         // exit;
 
-        // echo '<pre>';
-        // print_r(Yii::$app->params['subdomen_id']);
-        // exit;
+//         echo '<pre>';
+//         print_r(Yii::$app->params['subdomen_id']);
+//         exit;
 
         return $this->render('index.twig', [
             'filter' => $filter,
@@ -100,15 +101,15 @@ class SiteController extends Controller
     {
         $slicesForListing = SlicesExtended::find()
             ->where(['alias' => [
-                                'banketnyy-zal', 
-                                'konferenc-zal', 
-                                'tancevalnyy-zal', 
-                                'den-rojdeniya', 
-                                'vypusknoy', 
-                                'aktovye-zaly', 
-                                'svadba', 
-                                'veranda'
-                                ]
+                'banketnyy-zal',
+                'konferenc-zal',
+                'tancevalnyy-zal',
+                'den-rojdeniya',
+                'vypusknoy',
+                'aktovye-zaly',
+                'svadba',
+                'veranda'
+            ]
             ])->all();
 
         return $this->render('404.twig', [
@@ -116,7 +117,8 @@ class SiteController extends Controller
         ]);
     }
 
-    private function setSeo($seo){
+    private function setSeo($seo)
+    {
         $this->view->title = $seo['title'];
         $this->view->params['desc'] = $seo['description'];
         $this->view->params['kw'] = $seo['keywords'];

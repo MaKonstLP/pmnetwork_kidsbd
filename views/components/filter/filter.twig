@@ -15,7 +15,7 @@
 					{% set value = [] %}
 					{% for key in item.active|keys %}
 						{% set value = value|merge([key]) %}
-					{% endfor %}
+					{% endfor %} 
 					<input type="{{item.type}}" name="{{label}}" value="{{value|json_encode()}}">
 				{% elseif  item.type == 'range' %}
 					<div class="group_{{label}}">

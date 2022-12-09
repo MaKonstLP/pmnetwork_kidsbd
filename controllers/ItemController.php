@@ -22,12 +22,29 @@ class ItemController extends Controller
 	{
 		$elastic_model = new ElasticItems;
 
-		$item = $elastic_model::get($id);
+        $item = ElasticItems::find()->query([
+            'bool' => [
+                'must' => [
+                    ['match' => ['id' => $id]],
+                ],
+            ]
+        ])->one();
+
+//        if (empty($item)) {
+//            throw new NotFoundHttpException();
+//        }
+
+//		$item = $elastic_model::get($id);
 
 		$seo = new Seo('item', 1, 0, $item);
 		$seo = $seo->seo;
 		$this->setSeo($seo);
-		
+
+//		echo '<pre>';
+//        print_r($item);
+//		die();
+
+
 		$seo['h1'] = [0 => $item->name, 1 => $item->restaurant_name];
 		$seo['breadcrumbs'] = Breadcrumbs::getItemCrumb($item);
 		$seo['address'] = $item->restaurant_address;
@@ -37,7 +54,7 @@ class ItemController extends Controller
 		
 		$special_obj = new ItemSpecials($item->restaurant_special);
 		$item->restaurant_special = $special_obj->special_arr;
-		$parking = $item->restaurant_parking . ' ' . Declension::get_num_ending($item->restaurant_parking, array('машина', 'машины', 'машин'));
+//		$parking = $item->restaurant_parking . ' ' . Declension::get_num_ending($item->restaurant_parking, array('машина', 'машины', 'машин'));
 		
 		$itemsWidget = new ItemsWidgetElastic;
 		$other_rooms = $itemsWidget->getOther($item->restaurant_id, $item->id, $elastic_model);
@@ -64,7 +81,7 @@ class ItemController extends Controller
 			'queue_id' => $item->id,
 			'seo' => $seo,
 			'changedStrings' => $changedStrings,
-			'parking' => $parking,
+			'parking' => '',
 			'other_rooms' => $other_rooms,
 			'similar_rooms' => $similar_rooms
 		));

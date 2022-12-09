@@ -14,7 +14,7 @@ export default class Animation {
 
     fadeOut(target, options = {from,to,duration},callback) {
         options.direction = 'out';
-        this.fade(target,options,callback);
+        this.fade(target,options,callback); 
     }
 
     fade(target, options, callback ) {

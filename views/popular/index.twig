@@ -17,7 +17,7 @@
 
     <div class="popular_all"> 
 
-      {% for key, popularBlock in popularBlocks %}
+      {% for key, popularBlock in popularBlocks %} 
 
         {{ this.render('//popular/block.twig', {'key': key, 'popularBlock': popularBlock.block, 'isMoreSlices': popularBlock.isMoreSlices}) | raw }}
 
